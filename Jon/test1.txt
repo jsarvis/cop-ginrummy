@@ -1,0 +1,467 @@
+
+
+
+
+
+
+
+Use Case Model
+for the
+Game of Gin Rummy
+
+Submitted by
+
+Andrea Kosta
+COP 4331
+
+March 23, 2009
+ 
+Table of Contents
+
+
+Title	Page
+
+1.0       System Summary	1
+1.1	Document Scope	1
+1.2	Motivation and Business Case	1
+1.3	Concept of Operation	1
+1.4	Game of Gin Rummy Architecture and Interfaces	5
+1.4.1	Physical Design and Actor Interfaces	5
+1.4.2	Operational States	6
+
+2.0      Use Case Specifications	8
+2.1	Initialize Game	8
+2.2	Shuffle	8
+2.3	Deal	9
+2.4	Play Game	9
+2.5	Make a Move	10
+2.6	Evaluate Consequences	10
+2.7	Tally Score	11
+2.8	End Hand	11
+2.9	End Game	12
+
+3.0      System Requirements	13
+3.1	Functional Requirements	13
+3.2	Non-functional Requirements	14
+3.2.1	Game Requirements	14
+3.2.2	Deck Requirements	14
+3.2.3	Dealer Requirements	14
+3.3	Requirements Traceability	15
+
+4.0	Glossary	17
+
+5.0	Document Resources	18
+
+
+ 
+Table of Figures
+
+
+
+Title	Page
+
+Figure 1.3  	Use Case Diagram for the Game of Gin Rummy	2
+Figure 1.4-1.  	Game of Gin Rummy System Physical Design	5
+Figure 1.4-2 	Control Console	6
+Figure 1.4-3  	Transitions Controlling the game state.	6
+Figure 1.4-4  	Transitions Controlling the player state.	7
+Figure 3.3-1 	Functional Requirements Traceability Matrix	15
+Figure 3.3-2 	Non-Functional Requirements Traceability Matrix	16
+
+ 
+1.0	System Summary
+1.1	Document Scope
+
+This document describes the functional requirements (use cases) and design constraints (non-functional requirements) of the Game of Gin Rummy as viewed from the perspective of the game observer, and the system’s typical end user, the game player.  Its purpose is to formally capture and present an operational view of the Game of Gin Rummy and to enumerate the system requirements as understood by the developer.
+1.2	Motivation and Business Case
+
+Our client owns a chain of casinos in the Las Vegas strip.  Over the last few months, he has been receiving complaints as to the lack of variety in the cards section of his casinos.  Currently, the casinos only have poker and blackjack tables.  The owner has decided another card game must be added to his repertoire to keep customers interested.  After sleuthing around in competitor’s casinos, he has discovered that almost every casino has tables allocated to Gin Rummy in addition to poker and blackjack.  In order to keep up business, Gin Rummy is going to be added to the casino’s card floor.  After a bit of research the owner has discovered that there are two main play styles attributed to Gin Rummy, a beginner strategy and an advanced strategy.  
+
+	The main objective of the beginner strategy is to reduce deadwood count and knock as quickly as possible.  The beginning player accomplishes this by three main rules.  First, the player tries to make as many sets and runs as possible by melding cards.  Second, the player discards the highest un-melded card.  Third the beginning player knocks as soon as possible.
+
+	The advanced strategy involves more complexity and takes into account more than just short term strategies.  The first rule observed by an advanced player is that middle cards are more valuable than high or low cards.  This is because they can be used in more runs that any other cards.  The second rule is to weigh the possibilities of the opponent undercutting.  The chances of this increase towards the end of the deck and the decision to knock should be weighted against the probability to get Gin on the next turn.  The third rule uses knock value to determine when to knock.  If a player has a high knock value, the player should knock quickly and not give the opponent a chance to get a lower ¬knock value than him.  Alternately, if a low knock value is achieved, the player can afford to wait to knock and go for gin as it is unlikely that the opponent can beat him. A Fourth rule is to hold onto high cards at the beginning of the game.  This is beneficial because your opponent may try and get rid of all high cards at the beginning of the game, allowing easy runs or sets.
+  
+
+In Order to maximize profit, the owner has contracted a third party to figure out which strategy is more profitable. Using live tables to figure out which strategy is more profitable may take months. It could also end up costing the casino money at the tables with inferior strategies, as the casino dealer is an actual player in the game and is expected to play using the appropriate strategy to win money for the casino. With the results of this simulation available in minutes, the casino is free to plan on adding Gin Rummy to the card floor by the next fiscal year.
+
+The remainder of this section and the next present a functional description and external design of the Game of Gin Rummy.
+
+1.3	Concept of Operation
+
+Figure 1.3 presents a functional model of the envisioned Game of Gin Rummy.  User-oriented functions (use cases) are identified by round bubbles appearing inside the box denoting the physical and logical boundary of the new system. All entities shown outside the system box represent actors, that is, independent agents that must interact with the system to accomplish all use cases defined by the diagram.  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 1.3  Use Case Diagram for the Game of Gin Rummy
+[Para.1]	The Player denotes a player who can be the dealer or a regular player, and plays a vital role in the initialization of the game.  
+a)	If the player assumes the role of ‘dealer’, then he/she is responsible for preparing for playing the Game of Gin Rummy by shuffling and dealing the deck. When in the ‘dealer’ role, this action is the most important thing that this actor is responsible for, because before the dealer completes the task of shuffling and dealing, the game state is ‘Initializing’. Once the dealer has properly completed both the task of shuffling and dealing, the dealer sets the game state to ‘executing’, allowing the game to begin/commence. The dealer then allows the opponent to begin playing (there are only two players in Gin Rummy). 
+b)	If the player assumes the role of ‘player’, then this actor is only responsible for playing the game by making moves after the dealer has dealt the cards. 
+	
+[Para.2]	The Deal use-case is used only by the Dealer, and is a vital step in the initialization of the game. When a dealer chooses to Deal, he/she must shuffle the cards and distribute them to the players, the face-down draw pile, then put a single card face-up next to the draw pile. After the cards are successfully dealt, the game state is set to ‘Executing’.
+
+[Para.3]	The Shuffle is also used only by the Dealer, and is a vital step in the initialization of the game, as it is used to deal the cards. This is when the card order and placement is changed.  
+
+[Para.4]	The Initialize Game  is required in order for game play to take place. This use case is expected to do several things:
+
+1.	set the game state to ‘Initializing’
+2.	read from an input file to provide a deck that has 52 cards, 13 cards of each 4 suits, and no identical cards
+3.	read from an input file to choose a player to designate as the dealer by setting their player state to “Dealer”. The player dealing is then expected to shuffle and deal the deck. 
+4.	and read from an input file to determine various delay times of decisions made in the game
+
+[Para.5]	Playing the game involves making moves and alternating which player makes the moves, moving in a clockwise motion. When it is a players turn to Make a Move, they will have many different choices based off of the cards of the deck that they currently hold in their hand, but there are several moves they will make regarding whichever cards they choose. The player can:
+1.	draw either the (face-up) top card of the discard pile, or one card from the draw pile
+2.	"knock", ending the round, under certain conditions
+a)	A player may not knock unless he/she has 10 or fewer points of deadwood. 
+b)	A player must knock if he/she has 0 points of deadwood.
+c)	To knock, the knocking player ends his turn by discarding as usual, announces that he is knocking (generally by simply placing his discard face down), and lays his hand out with the melds clearly indicated and deadwood separated. The opponent is then entitled to lay off any of his deadwood cards that fit into the knocking player's melds.
+d)	If the knocking player has gone gin, however, the opponent is not allowed to lay off.
+3.	discard one card from his or her hand onto the discard pile
+
+Play continues, in alternating turns, until one player knocks or only 2 cards remain in the draw pile. In that case, the hand would end in a draw.
+
+[Para.6]	Each move will have it’s own consequences. Therefore, it is necessary to Evaluate Consequences of each move. One particular consequence happens every time any move is made, and this is a change in score. Another possible major consequence of the players move could be that the round/hand is ended. A third possible major consequence is that the chosen move ends the game, and a winner/loser is declared. 
+1.	In tallying the score, points must be added of subtracted from that players point total. If the player has made a move that makes them deserving of points, then the corresponding number of points are added to that player’s point total. If a player ends the round/hand or game, then the point value of whatever cards their opponent is holding at that time is subtracted from that opponents point total. However, this is only done AFTER that opponent has been allowed to play any possible deadwood on the melds of the player who is ending the round. The resulting score is vital for determining a winner/loser at the end of each round/hand, but most importantly, at the end of the game. In updating the player score, the following rules are utilized: 	
+(please refer to the glossary if some of these terms are confusing)
+a)	aces are scored at 1 point 
+b)	face cards are scored at 10 points
+c)	all number cards are scored at their numerical values 
+d)	points are awarded for bonuses for the following:
+a)	Knock Points - after a player knocks, and the lay offs are made, the knocking player receives a score equal to the difference between the two hands. For example, if a player knocks with 8, and the defender has 10 deadwood points in his or her hand after laying off, the knocking player receives 2 points for the hand.
+b)	Gin Bonus - after going Gin, a player receives a bonus of 25 points plus the entire count of deadwood in their opponent's hand. There is no chance to lay off when a player goes Gin.
+c)	UnderCut - (sometimes called underknocking) occurs when the defending player has a deadwood count lower than or equal to that of the knocking player (this can occur either naturally or by laying off after a knock). In this case, the defender scores an undercut bonus of 25 points plus the difference between the two hands. (In some rule sets, the bonus is only 10 or 20 points, or is not awarded in case of a tie.)
+d)	Game Bonus - once a player has acquired 100 points (or some other agreed upon number) the match is over, and that player receives a Game Bonus of 100 points.
+e)	Line Bonus - (also known as a box bonus) is added at the end of the match. For every hand a player won during the match, 25 points is added to their score.
+f)	Big Gin - prior to knocking, if all 11 cards in a player's hand form a legal gin, the player can retain the extra card as part of their hand, and is awarded an extra 6 points per the "Big Gin" bonus.
+g)	Shutout Bonus - if a match is completed with the winner having won every hand, the points for each hand are doubled before adding the Line Bonus.
+2.	If the players move results in ending the round/hand, then if there are still more rounds/hands to be played, the next one begins. If a player has made a move that leave only two cards in the draw pile, the round/hand would end in a draw. If there are no more rounds to be played, the game state is set to “Ending”, and the End Game use case executes.
+3.	When a player ends a round or hand, it is possible that they just ended the last expected round or hand, and therefore ended the game. The ‘Initialize Game’ specified when initializing the game with data from an input file, exactly how many rounds would be played. If the player did indeed just end the game, the last record of the tallied score is used to determine a winner and a loser.
+‘Evaluate Consequences’ is responsible for something very important in addition to those consequences previously mentioned. It is responsible for updating the hand of the player who made the move, the pile of cards being drawn from, and the pile of cards on the table that have been played. 
+
+
+
+
+.
+.
+.
+.
+.
+.
+.
+
+1.4	Game of Gin Rummy Architecture and Interfaces
+1.4.1	Physical Design and Actor Interfaces
+
+Figure 1.4-1 illustrates the physical design of the proposed Game of Gin Rummy system.  
+ 
+Figure 1.4-1.  Game of Gin Rummy System Physical Design
+
+
+Figure 1.4-2 illustrates a refinement of the Deck, showing that it is composed of 52 individual playing cards. All 52 correct cards must be present in order have a deck. The players control the game via the deck, and the specific cards of the deck that they each hold, so the deck is the control console. 
+
+ 
+                          Figure 1.4-2 Control Console
+
+Via the deck, players can make a move, end a hand, or end the game. All events in the game depend on the deck, it’s distribution, and how the players choose to interact with it.  
+
+
+
+1.4.2	Operational States
+
+The behavior of the Game of Gin Rummy is determined by the state of the game. The game itself has several operational states. It is either ‘Initializing’, ‘Executing’, or the game is ‘Ending’. When the game state is ‘Initializing’, the game cannot be played. The ‘Initializing’ state must be changed by completing the game initialization in order for the game to changed to ‘Executing’, a requirement for game play. When the game playing is over, the ‘Executing’ state is changed to the ‘Ending’ state, at which point the score is tallied and a winner and a loser of the game is declared, or more rounds are played. Several interaction events and conditions trigger changes in the behavior state.  These states and the events that trigger transitions between states are defined in this section. 
+
+ 
+Figure 1.4-3  Transitions Controlling the game state.
+
+Initializing: When the simulation program begins, the program state is set by default to ‘initializing’. In this state, the dealer is shuffling and dealing the cards, giving cards to the players and the remaining cards to the draw pile, then finishes by turning one over next to the draw pile. If he/she succeeds in shuffling and dealing the cards, the game state transitions to ‘Executing’. Otherwise, the game state remains in the ‘initializing’ state. 
+
+Executing: The players are alternating turns, each making a move when it is their turn. This state continues until a player finishes a round/hand, at which point the state is changed to ‘Ending’.
+
+Ending: The number of played rounds is being compared to the number of necessary rounds/hands that the ‘Initialize Game’ specified would be played via data from the input file. If all of the necessary rounds/hands have indeed been played, a winner and a loser is declared based off of the current point tally. However, if there are more rounds to be played, the state is transitioned back to ‘Initializing’, so that the cards may be shuffled and dealt again for another round.
+
+One of the most important things about the player is the player state. Each player has a state that defines whether that particular player is the dealer or not. If that player’s state is set to the ‘Dealer’ state, then that player is the dealer, and they are responsible for shuffling and dealing the cards in order for the game to be initialized, thereby allowing the players to actually play the game. After the dealer has fulfilled his responsibilities, the player state is transformed from ‘Dealer’ to ‘Player’, and the state of the game is changed from ‘Initializing’ to ‘Executing’. If the player’s state is set to the ‘Player’ state, then they are only expected to wait for the dealer to shuffle and deal, then play the game. In a casino, the role of the dealer is assigned to the same player every time. 
+ 
+Figure 1.4-4  Transitions Controlling the player state.
+
+Figure 1.4-3 describes the events and conditions that determine whether the game is in ‘initiating’, ‘executing’, or ‘ending’.  
+
+2.0	Use Case Specifications
+
+This section gives the detailed specifications for a subset of the use cases described above.  In the Use Case Model, use case specifications should document the interaction scenarios between the Dealer, the Player, the Deck, and the Game of Gin Rummy system, they should not describe the interaction between internal components of the Game of Gin Rummy system.  Pre-conditions and Post-conditions should be expressed in terms of interaction events with one or more actors and/or the system states defined in Section 1.4.  Collaboration diagrams should depict interactions between actors and the system boundary – that is, system interface features.  Collaboration diagrams, like scenarios, should not describe interactions between internal system components that might be precipitated as a result of actor interactions.  Only in the Analysis and Design Models should use case specifications document internal system behavior.
+
+2.1	Initialize Game  
+
+ID:  UC1
+
+Purpose
+The purpose of the Initialize Game use case is to provide a deck, determine game delay times, choose a dealer, and allow the game state to be changed from ‘Initializing’ to ‘Executing’ if the dealer has properly shuffled and dealt the cards of the deck. 
+
+Pre-conditions
+The Game of Gin Rummy system is not currently in the ‘Executing’ state. 
+
+Scenario (Connect)
+1.	The people decide to play a game of gin rummy.
+2.	The people get a deck.
+3.	The people choose a dealer.
+
+Post-condition
+The dealer can now choose to Deal the cards. 
+
+2.2	Shuffle 
+
+ID:  UC2
+
+Purpose
+The purpose of the Shuffle use case is to reset the order of the cards for the sake of dealing them to the players. 
+
+Pre-conditions
+The Game of Gin Rummy system is in the ‘Initializing’ state. 
+
+Scenario (Connect)
+1.	The dealer collects all cards if it is not the beginning of the first game.
+2.	The dealer changes the order of the cards in the deck, so that they are not the same as they were before he/she began shuffling.
+
+Post-condition
+The dealer can now Deal the cards.
+
+2.3	Deal
+
+ID:  UC3
+
+Purpose
+The purpose of the Deal use case is to distribute cards to the players of the card game. 
+
+Pre-conditions
+The game is in the ‘Initializing’ state, and deck has been shuffled.
+
+Scenario (Connect)
+1.	The dealer distributes 10 cards to each player sitting at the table, alternating who is given a card, so the same player is not given two cards in sequence.
+2.	The dealer places the remaining cards face-down in a pile on the table 
+(the draw pile) 
+3.	The dealer takes the top card of that pile, and places it face-up next to the draw pile
+
+Post-condition
+The state of the game is changed to ‘Executing’, and players are now allowed to   begin making moves, beginning with the player to the immediate left of the dealer.
+
+2.5	Make a Move
+
+ID:  UC5
+
+Purpose
+The purpose of the Make a Move use case is to alternate between players, allowing each player to make a choice that will affect the game card and point distribution. 
+
+Pre-conditions
+The game is in the ‘Executing’ state.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Scenario (Connect)
+1.	The player will make one of the following moves:
+a)	draw a card
+i.	either from the top card of the discard pile, 
+ii.	or one card from the stock pile 
+b)	discard one card from his or her hand onto the discard pile
+c)	"knock", ending the round, under certain conditions 
+i.	Note:  if player has 0 deadwood points, they are obligated to knock
+d)	play deadwood cards onto the opponents meld
+i.	Note:  this can only happen when the other player has put their cards down onto the table because they have decided to end the round
+e)	end current turn 
+2.	The move is checked to see whether it is a valid move
+a)	The move will be rejected if it is not a valid move
+b)	If it is a valid move, the consequences will be evaluated
+3.	The option of making a move is given to the other player.
+4.	This continues until the game state changes to ‘Ending’. 
+
+Post-condition
+The consequences of the chosen move are now being evaluated.
+
+2.6	Evaluate Consequences
+
+ID:  UC6
+
+Purpose
+The purpose of the Evaluate Consequences use case is to update the card distribution as a result of the chosen move, tally the resulting points, and determine if the chosen move results in the ending of the current round/hand or the game itself. 
+
+Pre-conditions
+A move has been made.
+ 
+Scenario (Connect)
+1.	A move is accepted.
+2.	The points are tallied.
+3.	The card distribution is updated: 
+a.	the cards in the players hand,
+b.	the cards in the draw pile
+4.	The points are tallied.
+5.	It is determined if another move is made, if new round begins, or if the game is over. 
+
+Post-condition
+Point totals and card distributions are updated, and the game state is either:
+a)	still  in ‘Executing’, and control is passed to the player who has the next turn
+b)	changed to ‘Initializing’, and a new round begins
+c)	or the game is over in which case:
+i.	 the state of the game is changed to ‘Ending’
+ii.	a winner and loser is declared
+iii.	the game statistics are returned
+
+3.0	System Requirements
+
+The requirements, both functional and non-functional requirements, for the Game of Gin Rummy system are summarized in this section.  These requirements have been elicited from this document, sections 1.0 and 2.0.
+
+3.1	Functional Requirements
+
+Req ID	Description	Section/Para.
+F1	The Game of Gin Rummy system shall initialize a game of gin rummy, that is, set the game state to ‘Initializing’, provide a deck, and choose a dealer, all for the sake of creating a timeline of events identical to those that would take place during a game of gin rummy.	[1],1.3,[Para.4]
+[2],2.1
+F2	The Game of Gin Rummy system shall provide a dealer who is responsible for shuffling and dealing the cards, and setting the game state to ‘Executing’.	[1],1.3,[Para.1]
+[2],2.2,2.3
+F3	The Game of Gin Rummy system shall provide a player who is responsible for playing the game with the other player after the dealing duties have been completed.	[1],1.3,[Para.5], [2],2.4
+F4	The Game of Gin Rummy system shall allow a dealer to shuffle a provided deck of cards.	[1],1.3,[Para.1], [Para.3]
+[2] 2.2
+F5	The Game of Gin Rummy system shall allow a dealer to deal a provided deck of cards that has been shuffled.	[1],1.3,[Para.1],
+[Para.2]
+[2],2.3
+F6	The Game of Gin Rummy system shall allow two players, a dealer and a player, to take turns making moves (Play Game).	[1],1.3,[Para.6], [2],2.4
+F7	The Game of Gin Rummy system shall allow a player to make a move.	[1],1.3,[Para.7],
+[2],2.5
+F8	The Game of Gin Rummy system shall evaluate the consequences of any move chosen by a player.	[1],1.3,[Para.8],
+[2],2.6
+F9	The Game of Gin Rummy system shall tally the score of each move, as part of evaluating the consequences of that move.	[1],1.3,[Para.9], [2],2.7
+F10	The Game of Gin Rummy system shall determine when the current round/hand is finished, and end the current round/hand by making the game state ‘Ending’.	[1],1.3,[Para.10] [2],2.8
+F11	The Game of Gin Rummy system shall determine if the game is over when the current round/hand is finished, and make the current game state ‘Initializing’ if more rounds are to be played, or announce the final winner/loser if no more rounds are to be played.	[1],1.3,[Para.11]
+[2],2.9
+
+
+3.2	Non-functional Requirements
+
+The design constraints fall into three categories:  game, deck, and dealer.  The requirements for each of these categories are enumerated in this section as they are currently understood at the date of publication of this document.
+
+3.2.1	Game Requirements
+
+Req ID	Description	Source
+C1	There must be at least 2 players. 	[1],1.3,
+[para1],[para5]
+C2	One of those players must be a dealer.	[1],1.3,[para1]
+C3	One of those players must not be a dealer.	[1],1.3,[para5]
+C3	The game state must be initially set to ‘Initializing’.	[1],1.4.2
+3.2.2	Deck Requirements
+
+Req ID	Description	Source
+C4	The Deck must have 52 cards.	[2],2.1
+C5	Those 52 cards must be composed of 4 sets of 13, each a separate suit. (13 Spades 13 Hearts 13 Diamonds 13 Cloves)	[2],2.1
+C6	There must not be any two identical cards. 
+Ex: 2 of Hearts, and 2 of Hearts	[2],2.1
+3.2.3	Dealer Requirements
+
+Req ID	Description	Source
+C7	Dealer must have two hands…	[1],1.3,[para1]
+C8	Dealer must be provided a Deck that meets the Deck Requirements	[1],1.3,[para1],
+[2],2.1
+
+
+
+ 
+3.3	Requirements Traceability
+
+Use Cases
+Requirements		UC1	UC2	UC3	UC4	UC5	UC6	UC7	UC8	UC9
+	F1	X								
+	F2		X	X						
+	F3				X					
+	F4		X							
+	F5			X						
+	F6				X					
+	F7					X				
+	F8						X			
+	F9							X		
+	F10								X	
+	F11									X
+
+Figure 3.3-1 Functional Requirements Traceability Matrix
+
+
+
+ 
+
+Use Cases
+Requirements		UC1	UC2	UC3	UC4	UC5	UC6	UC7	UC8	UC9
+	C1	X								
+	C2	X								
+	C3	X								
+	C4	X								
+	C5	X								
+	C6	X								
+	C7	X								
+	C8	X								
+
+Figure 3.3-2 Non-Functional Requirements Traceability Matrix
+                   
+4.0	Glossary
+
+Control Console:  This refers to the cards, the players means of interacting with the Game of Gin Rummy system. See figure 1.4-2
+
+Deadwood/ Deadwood Cards: A player's deadwood cards are those not in any meld. These cards are not good to have, and a player is constantly trying to get rid of them by either turning them into a meld or laying the cards off when the opponent knocks.
+	
+Deadwood Count: A player’s deadwood count is the sum of the point values of the deadwood cards
+
+Dealer:	This refers to the actor who is a player that interacts with the Game of Gin Rummy system, and has the responsibility of shuffling and dealing the deck to the players, the draw pile, and the single card next to the draw pile. 
+
+Discard Pile: This refers to the pile of cards on the table that have been discarded.
+
+Draw Pile: This refers to the pile of face-down cards that the dealer placed on the table for the sake of players drawing when it is their turn. 
+	Going Down: when a player knock with deadwood points presently in their hand
+Going Gin/Gin hand: when a player knocks with 0 points of deadwood presently in their hand
+Knocking:	 This refers to when a player is ending the round, under certain conditions.	
+
+Lay-Off: This refers to when a player removes deadwood from their hand by playing the card off of the knocking opponent’s melds that have been placed face up on the table. This makes it so that fewer points are deducted from the player who is not knocking, because they have less deadwood.
+Example: the knocking player has a meld of three Kings. The opponent has a King as part of his/her deadwood. He/she can lay off that King, reducing his deadwood count by ten.
+
+Meld:	A specific combination of cards that a player aims to collect because of the impact that the cards, when together, can have on that players point total. Two types of meld exist:
+1.	Sets of 3 or 4 cards sharing the same rank. 
+a.	Example, 8?-8?-8?.
+2.	Runs of 3 or more cards in sequence, of the same suit. 
+a.	Example, 3?-4?-5?-6?.
+	Player:	This refers to the actor who interacts with the Game of Gin Rummy system, and this player is not expected to do anything other than wait for the dealer to shuffle and deal, then engage in game play.
+
+5.0	Document Resources
+
+1.	For general questions and guidance
+a.	Dr. David Workman, Miss Rochelle Elva, Mr. Adeel Bhutta
+2.	For guidance on the traceability matrix
+a.	http://www.onestoptesting.com/traceability-matrix/sample.asp
+3.	For guidance on functional requirements
+a.	http://www.bredemeyer.com/pdf_files/functreq.pdf
+4.	For guidance on document format and section introductions
+a.	Use Case Model for the Coffee Maker II System, submitted by Dr. David Workman, revised by Jennifer Cardona
+5.	For guidance on use case relationships
+a.	UML2 for Dummies, by Michael Jesse Chonoles and James A. Schardt
+6.	For guidance on rules of the game of gin rummy
+a.	http://en.wikipedia.org/wiki/Gin_rummy
+
