@@ -108,7 +108,7 @@ Figure 1.3  Use Case Diagram for the Game of Gin Rummy
 a)	If the player assumes the role of ‘dealer’, then he/she is responsible for preparing for playing the Game of Gin Rummy by shuffling and dealing the deck. When in the ‘dealer’ role, this action is the most important thing that this actor is responsible for, because before the dealer completes the task of shuffling and dealing, the game state is ‘Initializing’. Once the dealer has properly completed both the task of shuffling and dealing, the dealer sets the game state to ‘executing’, allowing the game to begin/commence. The dealer then allows the opponent to begin playing (there are only two players in Gin Rummy). 
 b)	If the player assumes the role of ‘player’, then this actor is only responsible for playing the game by making moves after the dealer has dealt the cards. 
 	
-[Para.2]	The Deal use-case is used only by the Dealer, and is a vital step in the initialization of the game. When a dealer chooses to Deal, he/she must shuffle the cards and distribute them to the players, the face-down draw pile, then put a single card face-up next to the draw pile. After the cards are successfully dealt, the game state is set to ‘Executing’.
+[Para.2]	The Deal use-case is used only by the Dealer, and is a vital step in the initialization of the game. When a dealer chooses to Deal, he/she must shuffle the cards and distribute them to the players, the face-down draw pile, then put a single card face-up on top of the discard pile. After the cards are successfully dealt, the game state is set to ‘Executing’.
 
 [Para.3]	The Shuffle is also used only by the Dealer, and is a vital step in the initialization of the game, as it is used to deal the cards. This is when the card order and placement is changed.  
 
@@ -130,22 +130,14 @@ d)	If the knocking player has gone gin, however, the opponent is not allowed to 
 
 Play continues, in alternating turns, until one player knocks or only 2 cards remain in the draw pile. In that case, the hand would end in a draw.
 
-[Para.6]	Each move will have it’s own consequences. Therefore, it is necessary to Evaluate Consequences of each move. One particular consequence happens every time any move is made, and this is a change in score. Another possible major consequence of the players move could be that the round/hand is ended. A third possible major consequence is that the chosen move ends the game, and a winner/loser is declared. 
-1.	In tallying the score, points must be added of subtracted from that players point total. If the player has made a move that makes them deserving of points, then the corresponding number of points are added to that player’s point total. If a player ends the round/hand or game, then the point value of whatever cards their opponent is holding at that time is subtracted from that opponents point total. However, this is only done AFTER that opponent has been allowed to play any possible deadwood on the melds of the player who is ending the round. The resulting score is vital for determining a winner/loser at the end of each round/hand, but most importantly, at the end of the game. In updating the player score, the following rules are utilized: 	
+[Para.6]	Each move will have it’s own consequences. Therefore, it is necessary to Evaluate Consequences of each move. One particular consequence happens every time any move is made, and this is a change in deadwood. Another possible major consequence of the players move could be that the round/hand is ended, and a winner/loser is declared. 
+1.	In tallying the deadwood, points must be updated for the individual player based on the best set of melds available with the particular hand. The combination of melds resulting in the lowest deadwood is determined and updated for each the current player during the evaluate consequences use case. In updating the player deadwood, the following rules are utilized: 	
 (please refer to the glossary if some of these terms are confusing)
 a)	aces are scored at 1 point 
 b)	face cards are scored at 10 points
 c)	all number cards are scored at their numerical values 
-d)	points are awarded for bonuses for the following:
-a)	Knock Points - after a player knocks, and the lay offs are made, the knocking player receives a score equal to the difference between the two hands. For example, if a player knocks with 8, and the defender has 10 deadwood points in his or her hand after laying off, the knocking player receives 2 points for the hand.
-b)	Gin Bonus - after going Gin, a player receives a bonus of 25 points plus the entire count of deadwood in their opponent's hand. There is no chance to lay off when a player goes Gin.
-c)	UnderCut - (sometimes called underknocking) occurs when the defending player has a deadwood count lower than or equal to that of the knocking player (this can occur either naturally or by laying off after a knock). In this case, the defender scores an undercut bonus of 25 points plus the difference between the two hands. (In some rule sets, the bonus is only 10 or 20 points, or is not awarded in case of a tie.)
-d)	Game Bonus - once a player has acquired 100 points (or some other agreed upon number) the match is over, and that player receives a Game Bonus of 100 points.
-e)	Line Bonus - (also known as a box bonus) is added at the end of the match. For every hand a player won during the match, 25 points is added to their score.
-f)	Big Gin - prior to knocking, if all 11 cards in a player's hand form a legal gin, the player can retain the extra card as part of their hand, and is awarded an extra 6 points per the "Big Gin" bonus.
-g)	Shutout Bonus - if a match is completed with the winner having won every hand, the points for each hand are doubled before adding the Line Bonus.
-2.	If the players move results in ending the round/hand, then if there are still more rounds/hands to be played, the next one begins. If a player has made a move that leave only two cards in the draw pile, the round/hand would end in a draw. If there are no more rounds to be played, the game state is set to “Ending”, and the End Game use case executes.
-3.	When a player ends a round or hand, it is possible that they just ended the last expected round or hand, and therefore ended the game. The ‘Initialize Game’ specified when initializing the game with data from an input file, exactly how many rounds would be played. If the player did indeed just end the game, the last record of the tallied score is used to determine a winner and a loser.
+2.	If the players move results in ending the round/hand, the winner/loser is determined based on the player with the lowest deadwood. If a player has made a move that leave only two cards in the draw pile, the round/hand would end in a draw. The game state is set to “Ending”, and the End Game use case executes. 
+3.	When a player ends a round or hand, it is possible that the simulation will continue to simulate another round, or the simulation will end entirely.
 ‘Evaluate Consequences’ is responsible for something very important in addition to those consequences previously mentioned. It is responsible for updating the hand of the player who made the move, the pile of cards being drawn from, and the pile of cards on the table that have been played. 
 
 
@@ -187,13 +179,9 @@ Initializing: When the simulation program begins, the program state is set by de
 
 Executing: The players are alternating turns, each making a move when it is their turn. This state continues until a player finishes a round/hand, at which point the state is changed to ‘Ending’.
 
-Ending: The number of played rounds is being compared to the number of necessary rounds/hands that the ‘Initialize Game’ specified would be played via data from the input file. If all of the necessary rounds/hands have indeed been played, a winner and a loser is declared based off of the current point tally. However, if there are more rounds to be played, the state is transitioned back to ‘Initializing’, so that the cards may be shuffled and dealt again for another round.
+Ending: The current round is ending and a winner/loser are determined and declared. The number of played games is compared to the number of rounds/hands specified by the input file. If all of the necessary rounds have been played the simulation ends. However, if there are more rounds to be played, the state is transitioned back to ‘Initializing’, so that the cards may be shuffled and dealt again for another round.
 
-One of the most important things about the player is the player state. Each player has a state that defines whether that particular player is the dealer or not. If that player’s state is set to the ‘Dealer’ state, then that player is the dealer, and they are responsible for shuffling and dealing the cards in order for the game to be initialized, thereby allowing the players to actually play the game. After the dealer has fulfilled his responsibilities, the player state is transformed from ‘Dealer’ to ‘Player’, and the state of the game is changed from ‘Initializing’ to ‘Executing’. If the player’s state is set to the ‘Player’ state, then they are only expected to wait for the dealer to shuffle and deal, then play the game. In a casino, the role of the dealer is assigned to the same player every time. 
- 
-Figure 1.4-4  Transitions Controlling the player state.
-
-Figure 1.4-3 describes the events and conditions that determine whether the game is in ‘initiating’, ‘executing’, or ‘ending’.  
+One important detail about the simulation states are the active objects involved in each state. While in the 'Initializing' state only the dealer will be an active agent in order to guarantee that nothing obstructs with the dealers setup procedures for the game. When the game state is transitioned into 'Executing' the players will become the active agents, while the dealer acts as a more passive agent. During this state the players will request and offer cards to the dealer, to which the dealer will respond, but the dealer will not take the initiative in any actions performed in this state. When then simulation eventually reaches the 'Ending' state the players will communicate with one another to determine a winner, and afterwards the dealer will request the hands of each player. 
 
 2.0	Use Case Specifications
 
@@ -211,9 +199,7 @@ The Game of Gin Rummy system is not currently in the ‘Executing’ state.
 
 Scenario (Connect)
 1.	The people decide to play a game of gin rummy.
-2.	The people get a deck.
-3.	The people choose a dealer.
-
+2.	The dealer gets a deck.
 Post-condition
 The dealer can now choose to Deal the cards. 
 
@@ -228,8 +214,8 @@ Pre-conditions
 The Game of Gin Rummy system is in the ‘Initializing’ state. 
 
 Scenario (Connect)
-1.	The dealer collects all cards if it is not the beginning of the first game.
-2.	The dealer changes the order of the cards in the deck, so that they are not the same as they were before he/she began shuffling.
+1.	The dealer collects all cards.
+2.	The dealer randomly orders the cards in the deck.
 
 Post-condition
 The dealer can now Deal the cards.
@@ -248,7 +234,7 @@ Scenario (Connect)
 1.	The dealer distributes 10 cards to each player sitting at the table, alternating who is given a card, so the same player is not given two cards in sequence.
 2.	The dealer places the remaining cards face-down in a pile on the table 
 (the draw pile) 
-3.	The dealer takes the top card of that pile, and places it face-up next to the draw pile
+3.	The dealer takes the top card of that pile, and places it face-up creating the discard pile.
 
 Post-condition
 The state of the game is changed to ‘Executing’, and players are now allowed to   begin making moves, beginning with the player to the immediate left of the dealer.
@@ -315,21 +301,18 @@ A move has been made.
  
 Scenario (Connect)
 1.	A move is accepted.
-2.	The points are tallied.
+2.	The deadwood is tallied.
 3.	The card distribution is updated: 
 a.	the cards in the players hand,
 b.	the cards in the draw pile
-4.	The points are tallied.
-5.	It is determined if another move is made, if new round begins, or if the game is over. 
+4.	It is determined if another move is made, if new round begins, or if the game is over. 
 
 Post-condition
 Point totals and card distributions are updated, and the game state is either:
 a)	still  in ‘Executing’, and control is passed to the player who has the next turn
-b)	changed to ‘Initializing’, and a new round begins
-c)	or the game is over in which case:
-i.	 the state of the game is changed to ‘Ending’
-ii.	a winner and loser is declared
-iii.	the game statistics are returned
+b)	or the game is over in which case a winner/loser is determined and one of the following then occurs:
+i.	the state of the game is set to 'Initializing' in order to start a new game
+ii.	the simulation statistics are recorded and the simulation ends.
 
 3.0	System Requirements
 
