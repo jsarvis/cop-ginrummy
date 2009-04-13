@@ -1,0 +1,3 @@
+Document Purpose
+
+This document was prepared for our client NAME, the casino owner.  It proposes the development of a simulation system for modeling the game of Gin Rummy at a casino table by detailing the external interface, internal architecture, and implementation of the simulation.  While this document also describes many of the rules of Gin Rummy, this document should not be consulted as an official rulebook.  
