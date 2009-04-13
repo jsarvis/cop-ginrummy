@@ -1,0 +1,35 @@
+This document details the convention we all should use:
+
+Prefixes:
+a array
+v vector
+l list
+p pointer
+ 
+Type:
+i_ integer
+c_ char
+s_ string
+d_ double
+f_ float
+C_ Card
+M_ Meld
+CP_ CardPile
+SP_ StockPile
+DP_ DiscardPile
+D_ Dealer
+P_ Player
+G_ GinRummy
+CM_ CardMsg
+PM_ PlayersMsg
+MM_ MeldsMsg
+A_ Agent
+
+(Optional Prefix)Type_Name
+ 
+Example:
+Agent pointer array: AGENT* apA_VariableName[];
+Integer: int i_Index;
+Card vector: Vector<Card> vC_CardVector;
+Card: Card C_TopCard;
+String: string s_Name;
