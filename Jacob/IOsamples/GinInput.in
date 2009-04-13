@@ -1,0 +1,27 @@
+GinRummy{
+	SecondsPerTick: 1
+	Rounds: 20
+	Player:
+		Player{
+			Speed_InitialSort: 20
+			Speed_Draw: 2
+			Speed_Discard: 2
+			Speed_DecisionPickup: 4
+			Speed_DecisionDiscard: 4
+			StrategyChoice: Beginner
+			StrategyConstants: ...
+		}Player
+	Dealer:
+		Dealer{
+			Speed_Shuffle: 40
+			Speed_Deal: 34
+			Speed_InitialSort: 20
+			Speed_Draw: 2
+			Speed_Discard: 2
+			Speed_DecisionPickup: 4
+			Speed_DecisionDiscard: 4
+			StrategyChoice: Advanced
+			StrategyConstants: ...
+		}Dealer
+}GinRummy
+	
