@@ -61,122 +61,122 @@ GinRummy{
 }GinRummy
 
 Game1{
-	TIME: 1 SENDER: Dealer  RECVR: Dealer  	Message{	Handler: 14
+	TIME: 1 SENDER: Dealer  RECVR: Dealer  	Message{	Handler: 15
 	        							Description:  Shuffle the stock pile
 						}Message 
 
-	TIME: 41 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 15
+	TIME: 41 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 16
 	        							Description:  The stock pile is shuffled
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Player  	Message{	Handler: 3
-	       	 						Description:  Card to hand
+	       	 						Description:  Card Dealt
 								Content: Spade 1
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 3
-		        						Description:  Card to hand
+		        						Description:  Card Dealt
 								Content: Spade 7
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Player  	Message{	Handler: 3
-	        							Description:  Card to hand
+	        							Description:  Card Dealt
 								Content: Spade 5
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 3
-	        							Description:  Card to hand
+	        							Description:  Card Dealt
 								Content: Heart 1
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Player  	Message{	Handler: 3
-	        							Description:  Card to hand
+	        							Description:  Card Dealt
 								Content: Diamond 4
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 3
-	        							Description:  Card to hand
+	        							Description:  Card Dealt
 								Content: Club 7
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Player  	Message{	Handler: 3
-	        							Description:  Card to hand
+	        							Description:  Card Dealt
 								Content: Club 8
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 3
-	        							Description:  Card to hand
+	        							Description:  Card Dealt
 								Content: Spade 6
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Player  	Message{	Handler: 3
-	        							Description:  Card to hand
+	        							Description:  Card Dealt
 								Content: Heart 4
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 3
-	        							Description:  Card to hand
+	        							Description:  Card Dealt
 								Content: Diamond 6
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Player  	Message{	Handler: 3
-	        							Description:  Card to hand
+	        							Description:  Card Dealt
 								Content: Spade Q
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 3
-	        							Description:  Card to hand
+	        							Description:  Card Dealt
 								Content: Spade 2
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Player  	Message{	Handler: 3
-	        							Description:  Card to hand
+	        							Description:  Card Dealt
 								Content: Spade 9
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 3
-	        							Description:  Card to hand
+	        							Description:  Card Dealt
 								Content: Heart 2
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Player  	Message{	Handler: 3
-	        							Description:  Card to hand
+	        							Description:  Card Dealt
 								Content: Diamond J
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 3
-	        							Description:  Card to hand
+	        							Description:  Card Dealt
 								Content: Club 9
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Player  	Message{	Handler: 3
-	        							Description:  Card to hand
+	        							Description:  Card Dealt
 								Content: Club 4
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 3
-	        							Description:  Card to hand
+	        							Description:  Card Dealt
 								Content: Spade 3
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Player  	Message{	Handler: 3
-	        							Description:  Card to hand
+	        							Description:  Card Dealt
 								Content: Heart 8
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 3
-	        							Description:  Card to hand
+	        							Description:  Card Dealt
 								Content: Diamond 7
 						}Message
 
-	TIME: 75 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 4
+	TIME: 75 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 5
 	        							Description:  The hands are dealt
 						}Message 
 
 Dealer: Resetting score
 Dealer: Unsorted hand: S 7, H 1, C 7, S 6, D 6, S 2, H 2, C 9, S 3, D 7
 
-	TIME: 75 SENDER: Dealer RECVR: Player  	Message{	Handler: 4
+	TIME: 75 SENDER: Dealer RECVR: Player  	Message{	Handler: 5
 	        							Description:  The hands are dealt
 						}Message 
 
@@ -199,24 +199,25 @@ Player: Sorted hand: S 1, C 4, D 4, H 4, S 5, H 8, C 8, S 9, D J, S Q
 	        							Description:  Your turn
 						}Message 
 
-	TIME: 99 SENDER: Player RECVR: Player  	Message{	Handler: 6
-	        							Description:  Decided on pickup
+	TIME: 99 SENDER: Player RECVR: Dealer	Message{	Handler: 14
+	        							Description:  Query Top Card
+						}Message 
+
+	TIME: 99 SENDER: Dealer RECVR: Player  	Message{	Handler: 7
+	        							Description:  Top Card
+								Content: Diamond 8
 						}Message 
 
 	TIME: 101 SENDER: Player RECVR: Dealer 	Message{	Handler: 8
 	        							Description:  Draw stock pile
 						}Message 
 
-	TIME: 101 SENDER: Dealer RECVR: Player 	Message{	Handler: 3
-	        							Description:  Card to hand
+	TIME: 101 SENDER: Dealer RECVR: Player 	Message{	Handler: 4
+	        							Description:  Card Drawn
 								Content: Heart 9
 						}Message
 
 Player: Sorted hand: S 1, C 4, D 4, H 4, S 5, C 8, H 8, H 9, S 9, D J, S Q
-
-	TIME: 105 SENDER: Player RECVR: Player 	Message{	Handler: 7
-	        							Description:  Decided on discard
-						}Message 
 
 Player: Sorted hand: C 4, D 4, H 4, S 5, C 8, H 8, H 9, S 9, D J, S Q
 
@@ -229,24 +230,25 @@ Player: Sorted hand: C 4, D 4, H 4, S 5, C 8, H 8, H 9, S 9, D J, S Q
 	        							Description:  Your turn
 						}Message 
 
-	TIME: 111 SENDER: Dealer RECVR: Dealer 	Message{	Handler: 6
-	        							Description:  Decided on pickup
+	TIME: 111 SENDER: Dealer RECVR: Dealer	Message{	Handler: 14
+	        							Description:  Query Top Card
+						}Message 
+
+	TIME: 111 SENDER: Dealer RECVR: Dealer	Message{	Handler: 7
+	        							Description:  Top Card
+								Content: Spade 1
 						}Message 
 
 	TIME: 113 SENDER: Dealer RECVR: Dealer 	Message{	Handler: 9
 	        							Description:  Draw discard
 						}Message 
 
-	TIME: 113 SENDER: Dealer RECVR: Dealer 	Message{	Handler: 3
-	        							Description:  Card to hand
+	TIME: 113 SENDER: Dealer RECVR: Dealer 	Message{	Handler: 4
+	        							Description:  Card Drawn
 								Content: Spade 1
 						}Message
 
 Dealer: Sorted hand: S 1, H 1, H 2, S 2, S 3, S 6, D 6, D 7, S 7, C 7, C 9
-
-	TIME: 117 SENDER: Dealer RECVR: Dealer 	Message{	Handler: 7
-	        							Description:  Decided on discard
-						}Message 
 
 Dealer: Sorted hand: S 1, H 1, H 2, S 2, S 3, S 6, D 6, D 7, S 7, C 7
 
@@ -263,10 +265,6 @@ Dealer: Sorted hand: S 1, H 1, H 2, S 2, S 3, S 6, D 6, D 7, S 7, C 7
 
 Player: Sorted hand: C 4, D 4, H 4, S 8, C 8, H 8, H 9, H 10, H J, H Q, S Q
 
-	TIME: 2000 SENDER: Player RECVR: Player 	Message{	Handler: 7
-	        							Description:  Decided on discard
-						}Message 
-
 Player: Knocking with hand: C 4, D 4, H 4, S 8, C 8, H 8, H 9, H 10, H J, H Q
 
 	TIME: 2000 SENDER: Player  RECVR: Dealer 	Message{	Handler: 11
@@ -277,7 +275,7 @@ Player: Knocking with hand: C 4, D 4, H 4, S 8, C 8, H 8, H 9, H 10, H J, H Q
 Player: Setting deadwood score to: 0
 
 	TIME: 2000 SENDER: Player  RECVR: Dealer   	Message{	Handler: 2
-	        							Description:  Melds
+	        							Description:  Knock
 								Content: *** Melds ***
 						}Message 
 
@@ -285,11 +283,11 @@ Dealer: Sorted hand: S 1, H 1, H 2, S 2, S 3, H 3, D 6, D 7, S 7, C 7
 Dealer: Recieved Gin Melds, no lay off
 Dealer: Setting deadwood score to: 6
 
-	TIME: 2000 SENDER: Dealer RECVR: Dealer 	Message{	Handler: 5
+	TIME: 2000 SENDER: Dealer RECVR: Dealer 	Message{	Handler: 6
 	        							Description:  Return hand
 						}Message
 
-	TIME: 2000 SENDER: Dealer RECVR: Player 	Message{	Handler: 5
+	TIME: 2000 SENDER: Dealer RECVR: Player 	Message{	Handler: 6
 	        							Description:  Return hand
 						}Message 
 
@@ -321,21 +319,17 @@ Dealer: Game over
 Game20{
 ...
 
-	TIME: 2710 SENDER: Player RECVR: Player  	Message{	Handler: 6
-	        							Description:  Decided on pickup
-						}Message 
-
 	TIME: 2712 SENDER: Player RECVR: Dealer 	Message{	Handler: 8
 	        							Description:  Draw stock pile
 						}Message 
 
 Dealer: Stock Pile too low, game is a draw
 
-	TIME: 2000 SENDER: Dealer RECVR: Dealer 	Message{	Handler: 5
+	TIME: 2000 SENDER: Dealer RECVR: Dealer 	Message{	Handler: 6
 	        							Description:  Return hand
 						}Message
 
-	TIME: 2000 SENDER: Dealer RECVR: Player 	Message{	Handler: 5
+	TIME: 2000 SENDER: Dealer RECVR: Player 	Message{	Handler: 6
 	        							Description:  Return hand
 						}Message 
 ...
