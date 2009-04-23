@@ -16,7 +16,7 @@ protected:
 	virtual void Put(ostream& fout);
 
 public:
-	Player * pP_Requester
+	Player * pP_Requester;
 	RecipientMsg(int Handler, string Description, Player * pP_Requester);
 	virtual void Insert(ostream& fout);
 };
