@@ -6,6 +6,7 @@ GinRummy{
 	Rounds: 20
 	Player:
 		Player{
+			name: Fred
 			Speed_InitialSort: 20
 			Speed_Draw: 2
 			Speed_Discard: 2
@@ -16,6 +17,7 @@ GinRummy{
 		}Player
 	Dealer:
 		Dealer{
+			name: Devin
 			Speed_Shuffle: 40
 			Speed_Deal: 34
 			Speed_InitialSort: 20
@@ -29,8 +31,8 @@ GinRummy{
 }GinRummy
 
 Players{
-	agent[ 0 ] = Player
-	agent[ 1 ] = Dealer         
+	agent[ 0 ] = Player: Fred
+	agent[ 1 ] = Dealer: Devin
 }Players 
 
 GinRummy{
@@ -38,6 +40,7 @@ GinRummy{
 	Rounds: 20
 	Player:
 		Player{
+			name: Fred
 			Speed_InitialSort: 20
 			Speed_Draw: 2
 			Speed_Discard: 2
@@ -48,6 +51,7 @@ GinRummy{
 		}Player
 	Dealer:
 		Dealer{
+			name: Devin
 			Speed_Shuffle: 40
 			Speed_Deal: 34
 			Speed_InitialSort: 20
@@ -69,243 +73,241 @@ Game1{
 	        							Description:  The stock pile is shuffled
 						}Message
 
-	TIME: 75 SENDER: Dealer RECVR: Player  	Message{	Handler: 3
+	TIME: 75 SENDER: Dealer RECVR: Fred  	Message{	Handler: 3
 	       	 						Description:  Card Dealt
 								Content: Spade 1
 						}Message
 
-	TIME: 75 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 3
+	TIME: 75 SENDER: Dealer RECVR: Devin  	Message{	Handler: 3
 		        						Description:  Card Dealt
 								Content: Spade 7
 						}Message
 
-	TIME: 75 SENDER: Dealer RECVR: Player  	Message{	Handler: 3
+	TIME: 75 SENDER: Dealer RECVR: Fred  	Message{	Handler: 3
 	        							Description:  Card Dealt
 								Content: Spade 5
 						}Message
 
-	TIME: 75 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 3
+	TIME: 75 SENDER: Dealer RECVR: Devin  	Message{	Handler: 3
 	        							Description:  Card Dealt
 								Content: Heart 1
 						}Message
 
-	TIME: 75 SENDER: Dealer RECVR: Player  	Message{	Handler: 3
+	TIME: 75 SENDER: Dealer RECVR: Fred  	Message{	Handler: 3
 	        							Description:  Card Dealt
 								Content: Diamond 4
 						}Message
 
-	TIME: 75 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 3
+	TIME: 75 SENDER: Dealer RECVR: Devin  	Message{	Handler: 3
 	        							Description:  Card Dealt
 								Content: Club 7
 						}Message
 
-	TIME: 75 SENDER: Dealer RECVR: Player  	Message{	Handler: 3
+	TIME: 75 SENDER: Dealer RECVR: Fred  	Message{	Handler: 3
 	        							Description:  Card Dealt
 								Content: Club 8
 						}Message
 
-	TIME: 75 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 3
+	TIME: 75 SENDER: Dealer RECVR: Devin  	Message{	Handler: 3
 	        							Description:  Card Dealt
 								Content: Spade 6
 						}Message
 
-	TIME: 75 SENDER: Dealer RECVR: Player  	Message{	Handler: 3
+	TIME: 75 SENDER: Dealer RECVR: Fred  	Message{	Handler: 3
 	        							Description:  Card Dealt
 								Content: Heart 4
 						}Message
 
-	TIME: 75 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 3
+	TIME: 75 SENDER: Dealer RECVR: Devin  	Message{	Handler: 3
 	        							Description:  Card Dealt
 								Content: Diamond 6
 						}Message
 
-	TIME: 75 SENDER: Dealer RECVR: Player  	Message{	Handler: 3
+	TIME: 75 SENDER: Dealer RECVR: Fred  	Message{	Handler: 3
 	        							Description:  Card Dealt
 								Content: Spade Q
 						}Message
 
-	TIME: 75 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 3
+	TIME: 75 SENDER: Dealer RECVR: Devin  	Message{	Handler: 3
 	        							Description:  Card Dealt
 								Content: Spade 2
 						}Message
 
-	TIME: 75 SENDER: Dealer RECVR: Player  	Message{	Handler: 3
+	TIME: 75 SENDER: Dealer RECVR: Fred  	Message{	Handler: 3
 	        							Description:  Card Dealt
 								Content: Spade 9
 						}Message
 
-	TIME: 75 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 3
+	TIME: 75 SENDER: Dealer RECVR: Devin  	Message{	Handler: 3
 	        							Description:  Card Dealt
 								Content: Heart 2
 						}Message
 
-	TIME: 75 SENDER: Dealer RECVR: Player  	Message{	Handler: 3
+	TIME: 75 SENDER: Dealer RECVR: Fred  	Message{	Handler: 3
 	        							Description:  Card Dealt
 								Content: Diamond J
 						}Message
 
-	TIME: 75 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 3
+	TIME: 75 SENDER: Dealer RECVR: Devin  	Message{	Handler: 3
 	        							Description:  Card Dealt
 								Content: Club 9
 						}Message
 
-	TIME: 75 SENDER: Dealer RECVR: Player  	Message{	Handler: 3
+	TIME: 75 SENDER: Dealer RECVR: Fred  	Message{	Handler: 3
 	        							Description:  Card Dealt
 								Content: Club 4
 						}Message
 
-	TIME: 75 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 3
+	TIME: 75 SENDER: Dealer RECVR: Devin  	Message{	Handler: 3
 	        							Description:  Card Dealt
 								Content: Spade 3
 						}Message
 
-	TIME: 75 SENDER: Dealer RECVR: Player  	Message{	Handler: 3
+	TIME: 75 SENDER: Dealer RECVR: Fred  	Message{	Handler: 3
 	        							Description:  Card Dealt
 								Content: Heart 8
 						}Message
 
-	TIME: 75 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 3
+	TIME: 75 SENDER: Dealer RECVR: Devin  	Message{	Handler: 3
 	        							Description:  Card Dealt
 								Content: Diamond 7
 						}Message
 
-	TIME: 75 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 5
+	TIME: 75 SENDER: Dealer RECVR: Devin  	Message{	Handler: 5
 	        							Description:  The hands are dealt
 						}Message 
 
-Dealer: Resetting score
-Dealer: Unsorted hand: S 7, H 1, C 7, S 6, D 6, S 2, H 2, C 9, S 3, D 7
+Devin: Resetting score
+Devin: Unsorted hand: S 7, H 1, C 7, S 6, D 6, S 2, H 2, C 9, S 3, D 7
+Devin: Sorted hand: H 1, H 2, S 2, S 3, S 6, D 6, D 7, S 7, C 7, C 9
 
-	TIME: 75 SENDER: Dealer RECVR: Player  	Message{	Handler: 5
+	TIME: 75 SENDER: Dealer RECVR: Fred  	Message{	Handler: 5
 	        							Description:  The hands are dealt
 						}Message 
 
-Player: Resetting score
-Player: Unsorted hand: S 1, S 5, D 4, C 8, H 4, S Q, S 9, D J, C 4, H 8
+Fred: Resetting score
+Fred: Unsorted hand: S 1, S 5, D 4, C 8, H 4, S Q, S 9, D J, C 4, H 8
+Fred: Sorted hand: S 1, C 4, D 4, H 4, S 5, H 8, C 8, S 9, D J, S Q
 
-	TIME: 95 SENDER: Dealer RECVR: Dealer  	Message{	Handler: 10
+	TIME: 95 SENDER: Devin RECVR: Dealer  	Message{	Handler: 10
 	        							Description:  The cards are sorted
 						}Message 
 
-Dealer: Sorted hand: H 1, H 2, S 2, S 3, S 6, D 6, D 7, S 7, C 7, C 9
 
-	TIME: 95 SENDER: Player RECVR: Dealer  	Message{	Handler: 10
+	TIME: 95 SENDER: Fred RECVR: Dealer  	Message{	Handler: 10
 	        							Description:  The cards are sorted
 						}Message 
 
-Player: Sorted hand: S 1, C 4, D 4, H 4, S 5, H 8, C 8, S 9, D J, S Q
 
-	TIME: 95 SENDER: Dealer RECVR: Player  	Message{	Handler: 1
+
+	TIME: 95 SENDER: Dealer RECVR: Fred  	Message{	Handler: 1
 	        							Description:  Your turn
 						}Message 
 
-	TIME: 99 SENDER: Player RECVR: Dealer	Message{	Handler: 14
+	TIME: 99 SENDER: Fred RECVR: Dealer	Message{	Handler: 14
 	        							Description:  Query Top Card
 						}Message 
 
-	TIME: 99 SENDER: Dealer RECVR: Player  	Message{	Handler: 7
+	TIME: 99 SENDER: Dealer RECVR: Fred  	Message{	Handler: 7
 	        							Description:  Top Card
 								Content: Diamond 8
 						}Message 
 
-	TIME: 101 SENDER: Player RECVR: Dealer 	Message{	Handler: 8
+	TIME: 101 SENDER: Fred RECVR: Dealer 	Message{	Handler: 8
 	        							Description:  Draw stock pile
 						}Message 
 
-	TIME: 101 SENDER: Dealer RECVR: Player 	Message{	Handler: 4
+	TIME: 101 SENDER: Dealer RECVR: Fred 	Message{	Handler: 4
 	        							Description:  Card Drawn
 								Content: Heart 9
 						}Message
 
-Player: Sorted hand: S 1, C 4, D 4, H 4, S 5, C 8, H 8, H 9, S 9, D J, S Q
+Fred: Sorted hand: S 1, C 4, D 4, H 4, S 5, C 8, H 8, H 9, S 9, D J, S Q
+Fred: Sorted hand: C 4, D 4, H 4, S 5, C 8, H 8, H 9, S 9, D J, S Q
 
-Player: Sorted hand: C 4, D 4, H 4, S 5, C 8, H 8, H 9, S 9, D J, S Q
-
-	TIME: 107 SENDER: Player  RECVR: Dealer 	Message{	Handler: 11
+	TIME: 107 SENDER: Fred  RECVR: Dealer 	Message{	Handler: 11
 	        							Description:  Card to discard
 								Content: Spade 1
 						}Message
 
-	TIME: 107 SENDER: Player RECVR: Dealer 	Message{	Handler: 1
+	TIME: 107 SENDER: Fred RECVR: Devin 	Message{	Handler: 1
 	        							Description:  Your turn
 						}Message 
 
-	TIME: 111 SENDER: Dealer RECVR: Dealer	Message{	Handler: 14
+	TIME: 111 SENDER: Devin RECVR: Dealer	Message{	Handler: 14
 	        							Description:  Query Top Card
 						}Message 
 
-	TIME: 111 SENDER: Dealer RECVR: Dealer	Message{	Handler: 7
+	TIME: 111 SENDER: Dealer RECVR: Devin	Message{	Handler: 7
 	        							Description:  Top Card
 								Content: Spade 1
 						}Message 
 
-	TIME: 113 SENDER: Dealer RECVR: Dealer 	Message{	Handler: 9
+	TIME: 113 SENDER: Devin RECVR: Dealer 	Message{	Handler: 9
 	        							Description:  Draw discard
 						}Message 
 
-	TIME: 113 SENDER: Dealer RECVR: Dealer 	Message{	Handler: 4
+	TIME: 113 SENDER: Dealer RECVR: Devin 	Message{	Handler: 4
 	        							Description:  Card Drawn
 								Content: Spade 1
 						}Message
 
-Dealer: Sorted hand: S 1, H 1, H 2, S 2, S 3, S 6, D 6, D 7, S 7, C 7, C 9
+Devin: Sorted hand: S 1, H 1, H 2, S 2, S 3, S 6, D 6, D 7, S 7, C 7, C 9
+Devin: Sorted hand: S 1, H 1, H 2, S 2, S 3, S 6, D 6, D 7, S 7, C 7
 
-Dealer: Sorted hand: S 1, H 1, H 2, S 2, S 3, S 6, D 6, D 7, S 7, C 7
-
-	TIME: 121 SENDER: Dealer RECVR: Dealer 	Message{	Handler: 11
+	TIME: 121 SENDER: Devin RECVR: Dealer 	Message{	Handler: 11
 	        							Description:  Card to discard
 								Content: Club 9
 						}Message
 
-	TIME: 121 SENDER: Dealer RECVR: Player 	Message{	Handler: 1
+	TIME: 121 SENDER: Devin RECVR: Fred 	Message{	Handler: 1
 	        							Description:  Your turn
 						}Message 
 
 *** Game contents omitted ***
 
-Player: Sorted hand: C 4, D 4, H 4, S 8, C 8, H 8, H 9, H 10, H J, H Q, S Q
+Fred: Sorted hand: C 4, D 4, H 4, S 8, C 8, H 8, H 9, H 10, H J, H Q, S Q
+Fred: Knocking with hand: C 4, D 4, H 4, S 8, C 8, H 8, H 9, H 10, H J, H Q
 
-Player: Knocking with hand: C 4, D 4, H 4, S 8, C 8, H 8, H 9, H 10, H J, H Q
-
-	TIME: 2000 SENDER: Player  RECVR: Dealer 	Message{	Handler: 11
+	TIME: 2000 SENDER: Fred  RECVR: Dealer 	Message{	Handler: 11
 	        							Description:  Card to discard
 								Content: Spade Q
 						}Message
 
-Player: Setting deadwood score to: 0
+Fred: Setting deadwood score to: 0
 
-	TIME: 2000 SENDER: Player  RECVR: Dealer   	Message{	Handler: 2
+	TIME: 2000 SENDER: Fred  RECVR: Devin   	Message{	Handler: 2
 	        							Description:  Knock
 								Content: *** Melds ***
 						}Message 
 
-Dealer: Sorted hand: S 1, H 1, H 2, S 2, S 3, H 3, D 6, D 7, S 7, C 7
-Dealer: Recieved Gin Melds, no lay off
-Dealer: Setting deadwood score to: 6
+Devin: Sorted hand: S 1, H 1, H 2, S 2, S 3, H 3, D 6, D 7, S 7, C 7
+Devin: Recieved Gin Melds, no lay off
+Devin: Setting deadwood score to: 6
 
-	TIME: 2000 SENDER: Dealer RECVR: Dealer 	Message{	Handler: 6
+	TIME: 2000 SENDER: Devin RECVR: Devin 	Message{	Handler: 6
 	        							Description:  Return hand
 						}Message
 
-	TIME: 2000 SENDER: Dealer RECVR: Player 	Message{	Handler: 6
+	TIME: 2000 SENDER: Devin RECVR: Fred 	Message{	Handler: 6
 	        							Description:  Return hand
 						}Message 
 
-	TIME: 2000 SENDER: Dealer RECVR: Dealer 	Message{	Handler: 12
+	TIME: 2000 SENDER: Devin RECVR: Dealer 	Message{	Handler: 12
 	        							Description:  Card to return
 								Content: Spade 1
 						}Message
 *** For all cards ***
-	TIME: 2000 SENDER: Dealer RECVR: Dealer 	Message{	Handler: 13
+	TIME: 2000 SENDER: Devin RECVR: Dealer 	Message{	Handler: 13
 	        							Description:  Hand empty
 						}Message
 
-	TIME: 2000 SENDER: Player RECVR: Dealer 	Message{	Handler: 12
+	TIME: 2000 SENDER: Fred RECVR: Dealer 	Message{	Handler: 12
 	        							Description:  Card to return
 								Content: Club 4
 						}Message
 *** For all cards ***
-	TIME: 2000 SENDER: Player RECVR: Dealer 	Message{	Handler: 13
+	TIME: 2000 SENDER: Fred RECVR: Dealer 	Message{	Handler: 13
 	        							Description:  Hand empty
 						}Message
 
@@ -319,17 +321,17 @@ Dealer: Game over
 Game20{
 ...
 
-	TIME: 2712 SENDER: Player RECVR: Dealer 	Message{	Handler: 8
+	TIME: 2712 SENDER: Fred RECVR: Dealer 	Message{	Handler: 8
 	        							Description:  Draw stock pile
 						}Message 
 
 Dealer: Stock Pile too low, game is a draw
 
-	TIME: 2000 SENDER: Dealer RECVR: Dealer 	Message{	Handler: 6
+	TIME: 2000 SENDER: Dealer RECVR: Devin 	Message{	Handler: 6
 	        							Description:  Return hand
 						}Message
 
-	TIME: 2000 SENDER: Dealer RECVR: Player 	Message{	Handler: 6
+	TIME: 2000 SENDER: Dealer RECVR: Fred 	Message{	Handler: 6
 	        							Description:  Return hand
 						}Message 
 ...
@@ -341,6 +343,7 @@ GinRummy{
 	Rounds: 20
 	Player:
 		Player{
+			name: Fred
 			Speed_InitialSort: 20
 			Speed_Draw: 2
 			Speed_Discard: 2
@@ -351,6 +354,7 @@ GinRummy{
 		}Player
 	Dealer:
 		Dealer{
+			name: Devin
 			Speed_Shuffle: 40
 			Speed_Deal: 34
 			Speed_InitialSort: 20
