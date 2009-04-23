@@ -20,6 +20,8 @@ using namespace SimMgmt;
 
 namespace SimModels {
 
+    enum SpeedSettingIndex { Speed_Shuffle =0, Speed_Deal};
+
 class Dealer: public Player {
 private:
 	GinRummy * GameControl;
@@ -30,7 +32,7 @@ private:
 
 	int State;
 
-	void * SpeedSettings;
+	int SpeedSettings[2];
 
 protected:
 	virtual void Get(ifstream& fin) throw (TokenError);

@@ -17,6 +17,8 @@ using namespace SimMgmt;
 
 namespace SimModels {
 
+    enum SpeedSettingIndex { Speed_InitialSort =0, Speed_Draw, Speed_Discard, Speed_DecisionPickup, Speed_DecisionDiscard};
+
 class Player: public Agent {
 private:
 
@@ -26,7 +28,7 @@ private:
 
 	vector<Card> vC_Hand;
 
-	void * SpeedSettings;
+	int SpeedSettings[5];
 
 	void * Strategy;
 
@@ -35,6 +37,8 @@ private:
 	Melds * M_Melds;
 
 	vector<Card> vC_DeadWood;
+
+    int i_score;
 
 protected:
 	virtual void Get(ifstream& fin) throw (TokenError);
@@ -52,7 +56,7 @@ public:
 
 	virtual void Insert(ostream& fout);
 
-	int GetScore();
+	int GetScore() { return i_score; }
 
 	Message * AcceptYourTurn();
 
