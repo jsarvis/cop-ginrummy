@@ -18,6 +18,8 @@ public:
 
 	DiscardPile();
 
+    void Add(const Card & inserted);
+
 	bool isEmpty();
 
 };

@@ -14,7 +14,8 @@ namespace SimModels {
 class CardPile {
 public:
 	CardPile();
-    void Add(const Card & inserted);
+
+    virtual void Add(const Card & inserted);
 
 	Card Draw();
 
