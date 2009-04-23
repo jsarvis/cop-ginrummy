@@ -29,7 +29,7 @@ private:
 
 	StockPile * pSP_StockPile;
 
-	DiscardPile * DP_Discard;
+	DiscardPile DP_Discard;
 
 	int State;
 

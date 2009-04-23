@@ -14,7 +14,9 @@ namespace SimModels {
 
 class StockPile: public CardPile {
 public:
-	StockPile();Shuffle();
+	StockPile();
+
+    void Shuffle();
 
 	bool hasTwo();
 
