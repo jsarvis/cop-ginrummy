@@ -192,7 +192,7 @@ namespace SimModels {
         int time = theEventMgr.clock();
 		
 		// Construct new message
-        RecipientMsg *queryMsg = pD_Dealer->AcceptQueryTopCard(this);
+        Message *queryMsg = pD_Dealer->AcceptQueryTopCard();
 
 		// Construct new Event
 		Event e( time , this , pD_Dealer , queryMsg );

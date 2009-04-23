@@ -79,11 +79,11 @@ namespace SimModels {
                     break;
                 }
         case 8: {
-					doAcceptDrawStockPile( ((RecipientMsg *)IncomingMsg)->pP_Requester );
+					doAcceptDrawStockPile( (Player*)theEventMgr.getSendr() );
 					break;
 				}
 		case 9: {
-					doAcceptDrawDiscardPile( ((RecipientMsg *)IncomingMsg)->pP_Requester );
+					doAcceptDrawDiscardPile( (Player*)theEventMgr.getSendr() );
 					break;
 				}
         case 10: doAcceptSorted(); break;
@@ -97,7 +97,7 @@ namespace SimModels {
                  }
         case 13: doAcceptHandEmpty(); break;
         case 14: {
-					doAcceptQueryTopCard( ((RecipientMsg *)IncomingMsg)->pP_Requester );
+					doAcceptQueryTopCard( ((Player*)theEventMgr.getSendr() );
 					break;
 				 }
         case 15: doAcceptShuffle(); break;
@@ -157,12 +157,12 @@ namespace SimModels {
 
     }
 
-	RecipientMsg * Dealer::AcceptDrawStockPile(Player * pP_Requester) {
-        return new RecipientMsg(8,"Draw stock pile",pP_Requester);
+	Message * Dealer::AcceptDrawStockPile() {
+        return new Message(8,"Draw stock pile");
     }
 
-	RecipientMsg * Dealer::AcceptDrawDiscardPile(Player * pP_Requester) {
-        return new RecipientMsg(9,"Draw discard",pP_Requester);
+	Message * Dealer::AcceptDrawDiscardPile() {
+        return new Message(9,"Draw discard");
     }
 
 	Message * Dealer::AcceptSorted() {
@@ -189,8 +189,8 @@ namespace SimModels {
         return new Message(16,"The stock pile is shuffled");
     }
 
-	RecipientMsg * Dealer::AcceptQueryTopCard(Player * pP_Requester) {
-        return new RecipientMsg(14,"Query Top Card",pP_Requester);
+	Message * Dealer::AcceptQueryTopCard() {
+        return new Message(14,"Query Top Card");
     }
 
     //private
