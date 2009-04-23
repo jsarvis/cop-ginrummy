@@ -60,32 +60,32 @@ public:
 
 	Message * AcceptYourTurn();
 
-	MeldsMsg * AcceptKnock(Melds inputMelds);
+	MeldsMsg * AcceptKnock(Melds * inputMelds);
 
-	CardMsg * AcceptDrawnCard(Card inputCard);
+	CardMsg * AcceptDrawnCard(Card * inputCard);
 
-	CardMsg * AcceptDealtCard(Card inputCard);
+	CardMsg * AcceptDealtCard(Card * inputCard);
 
 	Message * AcceptDealComplete();
 
 	Message * AcceptReturnHand();
 
-	CardMsg * AcceptTopCard(Card inputCard);
+	CardMsg * AcceptTopCard(Card * inputCard);
 
 private:
 	void doAcceptYourTurn();
 
-	void doAcceptKnock(Melds inputMelds);
+	void doAcceptKnock(Melds * inputMelds);
 
-	void doAcceptDrawnCard(Card inputCard);
+	void doAcceptDrawnCard(Card * inputCard);
 
-	void doAcceptDealtCard(Card inputCard);
+	void doAcceptDealtCard(Card * inputCard);
 
 	void doAcceptDealComplete();
 
 	void doAcceptReturnHand();
 
-	void doAcceptTopCard(Card inputCard);
+	void doAcceptTopCard(Card * inputCard);
 
 };
 

@@ -59,9 +59,9 @@ public:
 
 	Message * AcceptSorted();
 
-	CardMsg * AcceptReceiveDiscard(Card inputCard);
+	CardMsg * AcceptReceiveDiscard(Card * inputCard);
 
-	CardMsg * AcceptReceiveReturnedCard(Card inputCard);
+	CardMsg * AcceptReceiveReturnedCard(Card * inputCard);
 
 	Message * AcceptHandEmpty();
 
@@ -78,9 +78,9 @@ private:
 
 	void doAcceptSorted();
 
-	void doAcceptReceiveDiscard(Card inputCard);
+	void doAcceptReceiveDiscard(Card * inputCard);
 
-	void doAcceptReceiveReturnedHand(Card inputCard);
+	void doAcceptReceiveReturnedHand(Card * inputCard);
 
 	void doAcceptHandEmpty();
 
