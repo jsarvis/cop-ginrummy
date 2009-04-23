@@ -18,7 +18,7 @@ protected:
 
 public:
 	Card * pC_Contents;
-	CardMsg(int Handler, string Description, Card inputCard);
+	CardMsg(int Handler, string Description, Card * inputCard);
 	virtual void Insert(ostream& fout);
 };
 

@@ -18,7 +18,7 @@ protected:
 
 public:
 	Melds * pM_Contents;
-	MeldsMsg(int Handler, string Description, Melds inputMelds);
+	MeldsMsg(int Handler, string Description, Melds * inputMelds);
 	virtual void Insert(ostream& fout);
 };
 
