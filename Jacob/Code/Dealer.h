@@ -14,6 +14,7 @@
 #include "Player.h"
 #include "StockPile.h"
 #include "DiscardPile.h"
+#include "RecipientMsg.h"
 
 using namespace std;
 using namespace SimMgmt;
@@ -52,9 +53,9 @@ public:
 
 	void StartGame();
 
-	Message * AcceptDrawStockPile();
+	RecipientMsg * AcceptDrawStockPile(Player * pP_Requester);
 
-	Message * AcceptDrawDiscardPile();
+	RecipientMsg * AcceptDrawDiscardPile(Player * pP_Requester);
 
 	Message * AcceptSorted();
 
@@ -68,12 +69,12 @@ public:
 
 	Message * AcceptShuffleComplete();
 
-	Message * AcceptQueryTopCard();
+	RecipientMsg * AcceptQueryTopCard(Player * pP_Requester);
 
 private:
-	void doAcceptDrawStockPile();
+	void doAcceptDrawStockPile(Player * pP_Requester);
 
-	void doAcceptDrawDiscardPile();
+	void doAcceptDrawDiscardPile(Player * pP_Requester);
 
 	void doAcceptSorted();
 
@@ -87,7 +88,7 @@ private:
 
 	void doAcceptShuffleComplete();
 
-	void doAcceptQueryTopCard();
+	void doAcceptQueryTopCard(Player * pP_Requester);
 
 };
 

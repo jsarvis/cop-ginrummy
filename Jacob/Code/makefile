@@ -39,7 +39,7 @@ IOMgmt.o : IOMgmt.h AppError.h
 GinRummySim.o : GinRummySim.h GinRummy.h SimMgmt.h
 GinRummy.o : GinRummy.h Player.h Dealer.h StockPile.h SimMgmt.h
 Player.o : Player.h Dealer.h Card.h CardMsg.h Melds.h MeldsMsg.h SimMgmt.h
-Dealer.o : Dealer.h Player.h GinRummy.h Card.h CardMsg.h Melds.h MeldsMsg.h StockPile.h DiscardPile.h SimMgmt.h
+Dealer.o : Dealer.h Player.h GinRummy.h Card.h CardMsg.h Melds.h MeldsMsg.h StockPile.h DiscardPile.h RecipientMsg.h SimMgmt.h
 DiscardPile.o : DiscardPile.h Card.h CardPile.h SimMgmt.h
 StockPile.o : StockPile.h Card.h CardPile.h SimMgmt.h
 CardPile.o : CardPile.h Card.h SimMgmt.h
@@ -48,6 +48,7 @@ Melds.o : Melds.h Card.h SimMgmt.h
 MeldsMsg.o : MeldsMsg.h Melds.h SimMgmt.h
 CardMsg.o : CardMsg.h Card.h SimMgmt.h
 PlayersMsg.o : PlayersMsg.h SimMgmt.h
+RecipientMsg.o : RecipientMsg.h Player.h SimMgmt.h
 
 #Alt:
 #A.o B.o : A.h B.h
