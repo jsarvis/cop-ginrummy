@@ -3,7 +3,7 @@
 
 #include <algorithm>
 #include <cstdlib> 
-#include<vector>
+#include <vector>
 #include <iostream>
 
 #include "Card.h"
