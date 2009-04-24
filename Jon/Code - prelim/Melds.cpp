@@ -132,62 +132,20 @@ vector<Card> Melds::updateMelds(vector<Card> a){
 	
 	bestMelds = recGetMelds(bestMelds);
 	
-		
+	v_vC_individualMelds = bestMelds;
+	v_vC_individualMelds.pop_back();
 	
 	return bestMelds.back();
 }
 
+vector<Card> Melds::layOff(vector<Card> a){
+	vector<vector<Card> > bestMelds;
+	
+	bestMelds = v_vC_individualMelds;
+	bestMelds.push_back(a);
+	
+	bestMelds = recGetMelds(bestMelds);
 
-
-
-
-				
-				/*newMeldsSoFar = a;
-				vector<Card> tempMeld;
-				
-				tempMeld.push_back(leftoverCards[i]);
-				tempMeld.push_back(leftoverCards[j]);
-				tempMeld.push_back(leftoverCards[k]);
-				
-				
-				if(isMeld(tempMeld)) {
-					
-					newMeldsSoFar.back().erase(newMeldsSoFar.back().begin() + k);
-					newMeldsSoFar.back().erase(newMeldsSoFar.back().begin() + j);
-					newMeldsSoFar.back().erase(newMeldsSoFar.back().begin() + i);			
-					
-					vector<Card> b = newMeldsSoFar.back();
-					for(int z = 0; z < b.size(); z++) {
-						cout << "a: " << b[z].getFaceValue() << " " << b[z].getSuitIndex();
-					}
-					cout << endl;
-					newMeldsSoFar.pop_back();
-					
-					newMeldsSoFar.push_back(tempMeld);
-					
-					newMeldsSoFar.push_back(b);
-
-					
-					testDeadwood = recGetMelds(newMeldsSoFar); // recursive test w/ new melds
-					
-					//test the new deadwood with the current deadwood
-					vector<Card> testLeftoverCards = testDeadwood.back(); // get the list of leftover cards
-					toCompareValue = 0; // reset toCompareValue
-					
-					for(int z = 0; z < testLeftoverCards.size(); z++) {
-						toCompareValue += testLeftoverCards[z].getFaceValue();
-					}
-					if(toCompareValue < minValue) { // if test is better, copy the values
-						minDeadwood = testDeadwood;
-						minValue = toCompareValue;
-					} else if(toCompareValue == minValue) {
-						//do something about ==
-					}
-					
-				} // end of if isMeld()	
-				*/		
-
-
-
-
+	return bestMelds.back();
+}
 
