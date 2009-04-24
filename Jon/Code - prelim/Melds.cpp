@@ -132,8 +132,8 @@ vector<Card> Melds::updateMelds(vector<Card> a){
 	
 	bestMelds = recGetMelds(bestMelds);
 	
-	v_vC_individualMelds = bestMelds;
-	v_vC_individualMelds.pop_back();
+	this.v_vC_individualMelds = bestMelds;
+	this.v_vC_individualMelds.pop_back();
 	
 	return bestMelds.back();
 }
@@ -141,7 +141,7 @@ vector<Card> Melds::updateMelds(vector<Card> a){
 vector<Card> Melds::layOff(vector<Card> a){
 	vector<vector<Card> > bestMelds;
 	
-	bestMelds = v_vC_individualMelds;
+	bestMelds = this.v_vC_individualMelds;
 	bestMelds.push_back(a);
 	
 	bestMelds = recGetMelds(bestMelds);
