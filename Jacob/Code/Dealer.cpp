@@ -12,7 +12,7 @@ namespace SimModels {
         // parse token "Speed_Shuffle"
         fin >> token;
         if ( token != "Speed_Shuffle:" ) 
-           throw TokenError(string("Incorrect Token '" + token + "', excpected 'Speed_Shuffle:' !"),
+           throw TokenError(string("Incorrect Token '" + token + "', expected 'Speed_Shuffle:' !"),
                             string("Dealer::Get(@1)"));
 
         // Parse Speed_Shuffle
@@ -22,7 +22,7 @@ namespace SimModels {
         // parse token "Speed_Deal"
         fin >> token;
         if ( token != "Speed_Deal:" ) 
-           throw TokenError(string("Incorrect Token '" + token + "', excpected 'Speed_Deal:' !"),
+           throw TokenError(string("Incorrect Token '" + token + "', expected 'Speed_Deal:' !"),
                             string("Dealer::Get(@2)"));
 
         // Parse Speed_Deal
@@ -114,7 +114,7 @@ namespace SimModels {
         // Parse opening token
         fin >> token;
         if ( token != "Dealer{" ) 
-            throw TokenError(string("Incorrect Token, '" + token + "', excpected 'Dealer{' !"),
+            throw TokenError(string("Incorrect Token, '" + token + "', expected 'Dealer{' !"),
                              string("Dealer::Extract(@1)"));
 
         // Parse data members
@@ -123,7 +123,7 @@ namespace SimModels {
         // Parse closing token
         fin >> token; 
         if ( token != "}Dealer" ) 
-            throw TokenError(string("Incorrect Token '" + token + "', excpected token '}Dealer' !"),
+            throw TokenError(string("Incorrect Token '" + token + "', expected token '}Dealer' !"),
                              string("Dealer::Extract(@2)"));
 
     }

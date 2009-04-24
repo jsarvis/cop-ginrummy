@@ -18,6 +18,8 @@ using namespace SimMgmt;
 namespace SimModels {
 
     enum SpeedSettingIndex { Speed_InitialSort =0, Speed_Draw, Speed_Discard, Speed_DecisionPickup, Speed_DecisionDiscard};
+    enum StrategyIndex { Type =0};
+    enum StrategyType { Beginner =0, Advanced};
 
 class Player: public Agent {
 private:
@@ -30,11 +32,11 @@ private:
 
 	int SpeedSettings[5];
 
-	void * Strategy;
+	int Strategy[1];
 
 	vector<Card> vC_CardMemory;
 
-	Melds * M_Melds;
+	Melds M_Melds;
 
 	vector<Card> vC_DeadWood;
 
@@ -86,6 +88,11 @@ private:
 	void doAcceptReturnHand();
 
 	void doAcceptTopCard(Card * inputCard);
+
+    bool ascending(Card const& a, Card const& b) { 
+        return (a.getFaceValue() < b.getFaceValue());
+    }
+
 
 };
 

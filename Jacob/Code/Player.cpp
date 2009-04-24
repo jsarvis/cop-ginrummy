@@ -12,7 +12,7 @@ namespace SimModels {
 		// parse token "Speed_InitialSort"
 		fin >> token;
 		if ( token != "Speed_InitialSort:" ) 
-		   throw TokenError(string("Incorrect Token '" + token + "', excpected 'Speed_InitialSort:' !"),
+		   throw TokenError(string("Incorrect Token '" + token + "', expected 'Speed_InitialSort:' !"),
                             string("Player::Get(@1)"));
 
 		// Parse Speed_InitialSort
@@ -22,7 +22,7 @@ namespace SimModels {
         // parse token "Speed_Draw"
 		fin >> token;
 		if ( token != "Speed_Draw:" ) 
-		   throw TokenError(string("Incorrect Token '" + token + "', excpected 'Speed_Draw:' !"),
+		   throw TokenError(string("Incorrect Token '" + token + "', expected 'Speed_Draw:' !"),
                             string("Player::Get(@2)"));
 
 		// Parse Speed_Draw
@@ -32,7 +32,7 @@ namespace SimModels {
         // parse token "Speed_Discard"
 		fin >> token;
 		if ( token != "Speed_Discard:" ) 
-		   throw TokenError(string("Incorrect Token '" + token + "', excpected 'Speed_Discard:' !"),
+		   throw TokenError(string("Incorrect Token '" + token + "', expected 'Speed_Discard:' !"),
                             string("Player::Get(@3)"));
 
 		// Parse Speed_Discard
@@ -42,7 +42,7 @@ namespace SimModels {
         // parse token "Speed_DecisionPickup"
 		fin >> token;
 		if ( token != "Speed_DecisionPickup:" ) 
-		   throw TokenError(string("Incorrect Token '" + token + "', excpected 'Speed_DecisionPickup:' !"),
+		   throw TokenError(string("Incorrect Token '" + token + "', expected 'Speed_DecisionPickup:' !"),
                             string("Player::Get(@4)"));
 
 		// Parse Speed_DecisionPickup
@@ -52,12 +52,29 @@ namespace SimModels {
         // parse token "Speed_DecisionDiscard"
 		fin >> token;
 		if ( token != "Speed_DecisionDiscard:" ) 
-		   throw TokenError(string("Incorrect Token '" + token + "', excpected 'Speed_DecisionDiscard:' !"),
+		   throw TokenError(string("Incorrect Token '" + token + "', expected 'Speed_DecisionDiscard:' !"),
                             string("Player::Get(@5)"));
 
 		// Parse Speed_DecisionDiscard
 		fin >> token;
 		SpeedSettings[SpeedSettingIndex::Speed_DecisionDiscard] = atoi(token.c_str());  
+
+
+        // parse token "StrategyChoice"
+		fin >> token;
+		if ( token != "StrategyChoice:" ) 
+		   throw TokenError(string("Incorrect Token '" + token + "', expected 'StrategyChoice:' !"),
+                            string("Player::Get(@6)"));
+
+		// Parse StrategyChoice
+		fin >> token;
+        if ( token == "Beginner" ) {
+            Strategy[StrategyIndex::Type] = StrategyType::Beginner;
+        } else if ( token == "Advanced" ) {
+            Strategy[StrategyIndex::Type] = StrategyType::Advanced;
+        } else throw TokenError(string("Incorrect Token '" + token + "', expected 'Advanced' or 'Beginner' !"),
+                            string("Player::Get(@7)"));
+
 		
     }
 
@@ -75,7 +92,17 @@ namespace SimModels {
 		fout << " Speed_DecisionPickup: " << SpeedSettings[SpeedSettingIndex::Speed_DecisionPickup];
         simOutMgr.advToMargin();
 		fout << " Speed_DecisionDiscard: " << SpeedSettings[SpeedSettingIndex::Speed_DecisionDiscard];
+        simOutMgr.advToMargin();
+        fout << " StrategyChoice: ";
+        if ( Strategy[StrategyIndex::Type] == StrategyType::Advanced ) {
+            fout << "Advanced";
+        } else {
+            fout << "Beginner";
+        }
+		 
 		simOutMgr.popMargin();
+
+
 
     }
 
@@ -83,6 +110,8 @@ namespace SimModels {
 	void Player::Player(ifstream& fin):Agent() {
         
         Extract(fin);
+
+
 
     }
 
@@ -133,7 +162,7 @@ namespace SimModels {
         // Parse opening token
         fin >> token;
         if ( token != "Player{" ) 
-            throw TokenError(string("Incorrect Token, '" + token + "', excpected 'Player{' !"),
+            throw TokenError(string("Incorrect Token, '" + token + "', expected 'Player{' !"),
                              string("Player::Extract(@1)"));
         
         // Parse data members
@@ -142,7 +171,7 @@ namespace SimModels {
         // Parse closing token
         fin >> token; 
         if ( token != "}Player" ) 
-            throw TokenError(string("Incorrect Token '" + token + "', excpected token '}Player' !"),
+            throw TokenError(string("Incorrect Token '" + token + "', expected token '}Player' !"),
                              string("Player::Extract(@2)"));
 
     }
@@ -203,9 +232,19 @@ namespace SimModels {
     }
 
 	void Player::doAcceptKnock(Melds * inputMelds) {
-        
-        //TODO: Play deadwood and set score
 
+        //Play deadwood and set score
+        vector<Card> finalDeadwood = inputMelds->layOff(vC_DeadWood);
+        
+        vector<Card>::iterator iter;
+
+        i_score = 0;
+        //TODO / TEST: should this be (*iter).toString() instead of iter->toString() ??
+        for( iter = finalDeadwood.begin(); iter != finalDeadwood.end(); iter++ ) {
+
+            i_score += iter.getPointValue();
+
+        }
 
         int time = theEventMgr.clock();
 		
@@ -228,32 +267,96 @@ namespace SimModels {
         ostream& simlog = simOutMgr.getStream();
         vector<Card>::iterator iter;
 
-        //TODO: Insert card in sorted position
+        vC_Hand.push_back(*inputCard);
+        sort(vC_Hand.begin(),vC_Hand.end(),ascending);
 
         simlog << NameOf() << ": Sorted hand:";
 
         //TODO / TEST: should this be (*iter).toString() instead of iter->toString() ??
         for( iter = vC_Hand.begin(); iter != vC_Hand.end(); iter++ ) {
 
-            simlog << " " << iter->toString();
+            simlog << " " << iter.toString();
 
         }
         simlog << endl;
 
 
-        //TODO: Select card to discard and/or knock
+        //TODO: Select card to discard and/or knock / set score
+
+        vector<Card> currentDeadwood = M_Melds.updateMelds(vC_Hand);
+
+        int tempScoreCurrent = 0;
+
+        for( iter = currentDeadwood.begin(); iter != currentDeadwood.end(); iter++ ) {
+
+            tempScoreCurrent += iter.getPointValue();
+
+        }
+
+        bool Knock;
+        bool Discard;
+
+        if (currentDeadwood.size() == 1) {
+            Knock = true;
+            Discard = true;
+        } else if ( currentDeadwood.size() == 0 ) {
+            Knock = true;
+            Discard = false;
+        } else if ( tempScoreCurrent <= 10 ) {
+            Knock = true;
+            Discard = true;
+        } else {
+            Knock = false;
+            Discard = true;
+        }
 
         //IF discarding
-        { 
+        if (Discard == true) { 
+
+            sort(currentDeadwood.begin(),currentDeadwood.end(),ascending);
+            
+            CardMsg *tempCardMsg;
+        
+            for( iter = vC_Hand.begin(); iter != vC_Hand.end(); iter++ ) {
+     
+                if ( ( iter.getFaceValue() == currentDeadwood.back().getFaceValue() ) && ( iter.getSuitIndex() == currentDeadwood.back().getSuitIndex() ) ) {
+
+                    //TODO / TEST: replace iter with  (Card *)&(*iter)   ??
+                    tempCardMsg = pD_Dealer->AcceptReceiveDiscard(&iter);
+        
+                    // Construct new Event
+            		Event e( time , this , pD_Dealer , tempCardMsg );
+            
+            		// Post Event
+            		theEventMgr.postEvent(e);
+
+                    break;
+                }
+                
+    
+            }
+
+
             simlog << NameOf() << ": Sorted hand:";
     
             //TODO / TEST: should this be (*iter).toString() instead of iter->toString() ??
             for( iter = vC_Hand.begin(); iter != vC_Hand.end(); iter++ ) {
     
-                simlog << " " << iter->toString();
+                simlog << " " << iter.toString();
     
             }
             simlog << endl << endl;
+        }
+        if ( Knock == true ) {
+
+            MeldsMsg *knockMelds = pP_OtherPlayer->AcceptKnock(&M_Melds);
+
+            // Construct new Event
+    		Event e( time , this , pP_OtherPlayer , knockMelds );
+    
+    		// Post Event
+    		theEventMgr.postEvent(e);
+
         }
 
     }
@@ -277,13 +380,13 @@ namespace SimModels {
         
         for( iter = vC_Hand.begin(); iter != vC_Hand.end(); iter++ ) {
  
-            simlog << " " << iter->toString();
+            simlog << " " << iter.toString();
 
         }
         simlog << endl;
         
 
-        //TODO: Sort hand
+        sort(vC_Hand.begin(),vC_Hand.end(),ascending);
 
 
         int time = theEventMgr.clock();
@@ -303,7 +406,7 @@ namespace SimModels {
         //TODO / TEST: should this be (*iter).toString() instead of iter->toString() ??
         for( iter = vC_Hand.begin(); iter != vC_Hand.end(); iter++ ) {
 
-            simlog << " " << iter->toString();
+            simlog << " " << iter.toString();
 
         }
         simlog << endl << endl;
@@ -321,7 +424,7 @@ namespace SimModels {
         for( iter = vC_Hand.begin(); iter != vC_Hand.end(); iter++ ) {
  
             //TODO / TEST: replace iter with  (Card *)&(*iter)   ??
-            tempCardMsg = pD_Dealer->AcceptReceiveReturnedCard(iter);
+            tempCardMsg = pD_Dealer->AcceptReceiveReturnedCard(&iter);
 
             // Construct new Event
     		Event e( time , this , pD_Dealer , tempCardMsg );
@@ -345,7 +448,56 @@ namespace SimModels {
 
 	void Player::doAcceptTopCard(Card * inputCard) {
 
-        //TODO: Select card to draw
+        int tempScoreCurrent = 0;
+        int tempScoreHypothetical = 0;
+
+        
+        vector<Card> currentDeadwood = M_Melds.updateMelds(vC_Hand);
+        
+        vC_Hand.push_back(*inputCard);
+        
+        vector<Card> hypotheticalDeadwood = M_Melds.updateMelds(vC_Hand);
+        
+        vC_Hand.pop_back();
+        
+        vector<Card>::iterator iter;
+
+        //TODO / TEST: should this be (*iter).toString() instead of iter->toString() ??
+        for( iter = currentDeadwood.begin(); iter != currentDeadwood.end(); iter++ ) {
+
+            tempScoreCurrent += iter.getPointValue();
+
+        }
+        
+        for( iter = hypotheticalDeadwood.begin(); iter != hypotheticalDeadwood.end(); iter++ ) {
+
+            tempScoreHypothetical += iter.getPointValue();
+
+        }
+        
+        if ( tempScoreHypothetical >= tempScoreCurrent ) {
+             
+            Message *selectDiscardPile = pD_Dealer->AcceptDrawDiscardPile();
+
+            // Construct new Event
+    		Event e( time , this , pD_Dealer , selectDiscardPile );
+    
+    		// Post Event
+    		theEventMgr.postEvent(e);
+             
+             
+        } else {
+
+            Message *selectStockPile = pD_Dealer->AcceptDrawStockPile();
+
+            // Construct new Event
+    		Event e( time , this , pD_Dealer , selectStockPile );
+    
+    		// Post Event
+    		theEventMgr.postEvent(e);
+                    
+        }
+        
     }
 }
 

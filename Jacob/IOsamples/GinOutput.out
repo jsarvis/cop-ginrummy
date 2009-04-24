@@ -18,8 +18,6 @@ GinRummy{
 	Dealer:
 		Dealer{
 			name: Devin
-			Speed_Shuffle: 40
-			Speed_Deal: 34
 			Speed_InitialSort: 20
 			Speed_Draw: 2
 			Speed_Discard: 2
@@ -27,6 +25,8 @@ GinRummy{
 			Speed_DecisionDiscard: 4
 			StrategyChoice: Advanced
 			StrategyConstants: ...
+			Speed_Shuffle: 40
+			Speed_Deal: 34
 		}Dealer
 }GinRummy
 
@@ -52,8 +52,6 @@ GinRummy{
 	Dealer:
 		Dealer{
 			name: Devin
-			Speed_Shuffle: 40
-			Speed_Deal: 34
 			Speed_InitialSort: 20
 			Speed_Draw: 2
 			Speed_Discard: 2
@@ -61,6 +59,8 @@ GinRummy{
 			Speed_DecisionDiscard: 4
 			StrategyChoice: Advanced
 			StrategyConstants: ...
+			Speed_Shuffle: 40
+			Speed_Deal: 34
 		}Dealer
 }GinRummy
 
@@ -355,8 +355,6 @@ GinRummy{
 	Dealer:
 		Dealer{
 			name: Devin
-			Speed_Shuffle: 40
-			Speed_Deal: 34
 			Speed_InitialSort: 20
 			Speed_Draw: 2
 			Speed_Discard: 2
@@ -364,6 +362,8 @@ GinRummy{
 			Speed_DecisionDiscard: 4
 			StrategyChoice: Advanced
 			StrategyConstants: ...
+			Speed_Shuffle: 40
+			Speed_Deal: 34
 		}Dealer
 }GinRummy
 
