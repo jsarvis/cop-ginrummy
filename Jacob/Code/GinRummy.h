@@ -33,6 +33,8 @@ public:
 private:
 	int i_NumberOfRounds;
 
+    int i_SecondsPerTick;
+
 	//dynamic array of Agent*
 	AGENTPTR * apP_Players;
 
