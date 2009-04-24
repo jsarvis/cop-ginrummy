@@ -11,18 +11,19 @@ using namespace SimMgmt;
 
 namespace SimModels {
 
-class PlayersMsg : public Message {
-  public:
-    AGENTPTR * apP_Contents;
+class PlayersMsg: public Message {
+protected:
+	virtual void Put(ostream& fout);
 
-    PlayersMsg(AGENTPTR * inputplayers);
+public:
+	AGENTPTR * apP_Contents;
 
-	protected:
-  //Inherited as virtual and must be redefined:
-	virtual void Insert(); //Must write to the default program output stream
-    virtual void Put();    //Must write to the default program output stream
+	PlayersMsg(AGENTPTR * inputplayers);
+
+	virtual void Insert(ostream& fout);
 
 };
-  
+
 }
 #endif
+

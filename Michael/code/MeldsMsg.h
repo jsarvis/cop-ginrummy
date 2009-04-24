@@ -11,20 +11,17 @@ using namespace std;
 using namespace SimMgmt;
 
 namespace SimModels {
-          
 
+class MeldsMsg: public Message {
+protected:
+	virtual void Put(ostream& fout);
 
-class MeldsMsg : public Message {
-  public:
-    Melds* pM_Contents;
-    MeldsMsg(int handler, string description, Melds* meldstarget);
-
-  protected:
-  //Inherited as virtual and must be redefined:
-	virtual void Insert(); //Must write to the default program output stream
-    virtual void Put();    //Must write to the default program output stream
-
+public:
+	Melds * pM_Contents;
+	MeldsMsg(int Handler, string Description, Melds * inputMelds);
+	virtual void Insert(ostream& fout);
 };
 
-}  
+}
 #endif
+

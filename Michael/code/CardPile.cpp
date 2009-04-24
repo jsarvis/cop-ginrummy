@@ -15,7 +15,7 @@ void CardPile::Add(const card & inserted)
 }
 
 // draw a card from the pile
-Card CardPile::Draw()
+Card * CardPile::Draw()
 {
 	Card* temp;
 	temp = vC_Pile.back();

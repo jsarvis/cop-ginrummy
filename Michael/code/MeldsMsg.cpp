@@ -3,10 +3,10 @@
 // MeldsMsg Methods
 
 // constructor
-MeldsMsg::MeldsMsg(int handler, string description, Melds* targetmelds)
+MeldsMsg::MeldsMsg(int handler, string description, Melds* inputMelds)
 			:Message(handler, description)
 {
-	pM_Contents = targetmelds;
+	pM_Contents = inputMelds;
 }
 
 void MeldsMsg::Insert()
@@ -33,6 +33,6 @@ void MeldsMsg::Put()
 	simOutMgr.pushMargin();
 	Message::Put();
 	simOutMgr.advToMargin();
-	simlog << " pM_Contents: " << pM_Contents;
+	simlog << " **Melds** ";
 	simOutMgr.popMargin();
 }

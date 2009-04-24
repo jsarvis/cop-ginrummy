@@ -11,19 +11,17 @@ using namespace std;
 using namespace SimMgmt;
 
 namespace SimModels {
-          
-class CardMsg : public Message {
-  public:
-    Card* pC_Contents;
-    CardMsg(int handler, string description, Card* targetcard);
 
-  protected:
-  //Inherited as virtual and must be redefined:
-	virtual void Insert(); //Must write to the default program output stream
-    virtual void Put();    //Must write to the default program output stream
+class CardMsg: public Message {
+protected:
+	virtual void Put(ostream& fout);
 
-
+public:
+	Card * pC_Contents;
+	CardMsg(int Handler, string Description, Card * inputCard);
+	virtual void Insert(ostream& fout);
 };
-  
+
 }
 #endif
+

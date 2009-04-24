@@ -3,10 +3,10 @@
 // CardMsg Methods
 
 // constructor
-CardMsg::CardMsg(int handler, string description, Card* targetcard)
+CardMsg::CardMsg(int handler, string description, Card* inputCard)
 			:Message(handler, description)
 {
-	pC_Contents = targetcard;
+	pC_Contents = inputCard;
 }
 
 void CardMsg::Insert()
@@ -33,6 +33,6 @@ void CardMsg::Put()
 	simOutMgr.pushMargin();
 	Message::Put();
 	simOutMgr.advToMargin();
-	simlog << " pC_Contents: " << pC_Contents;
+	simlog << " Card: " << pC_Contents->toString();
 	simOutMgr.popMargin();
 }

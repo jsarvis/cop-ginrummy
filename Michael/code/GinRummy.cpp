@@ -20,7 +20,7 @@ GinRummy::GinRummy()
 		if ( token != "SecondsPerTick:" ) 
 		   throw AppError(string("Incorrect Token '" + token + "', excpected token 'SecondsPerTick:' !"),
 				string("GinRummy::GinRummy())"));
-		fin >> SecPerTick;
+		fin >> i_SecondsPerTick;
 
 		// Parse numberofrounds
 		fin >> token;
@@ -125,7 +125,7 @@ void GinRummy::Insert()
     simOutMgr.pushMargin();
 
 	// insert SecondsPerTick
-	simlog << "SecondsPerTick: " << SecPerTick;
+	simlog << "SecondsPerTick: " << i_SecondsPerTick;
 	simOutMgr.advToMargin();
 
 	// insert Rounds

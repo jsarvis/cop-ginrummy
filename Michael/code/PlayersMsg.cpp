@@ -33,6 +33,12 @@ void PlayersMsg::Put()
 	simOutMgr.pushMargin();
 	Message::Put();
 	simOutMgr.advToMargin();
-	simlog << " apP_Contents: " << apP_Contents;
+	simlog << " Players: ";
+    simOutMgr.pushMargin();
+    simOutMgr.advToMargin();
+    simlog << " agent[ 0 ] = Player: " << apP_Contents[0]->NameOf();
+    simOutMgr.advToMargin();
+    simlog << " agent[ 0 ] = Dealer: " << apP_Contents[1]->NameOf();
 	simOutMgr.popMargin();
+    simOutMgr.popMargin();
 }

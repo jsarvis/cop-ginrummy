@@ -6,22 +6,23 @@
 #include "SimMgmt.h"
 #include "Card.h"
 
-
 using namespace std;
 using namespace SimMgmt;
 
 namespace SimModels {
-          
-  class CardPile {
-  public:
-     CardPile();
-     void Add(const Card & inserted);
-     Card Draw();
 
+class CardPile {
+public:
+	CardPile();
 
-  protected:
-    vector<Card> vC_Pile;
+    virtual void Add(const Card & inserted);
+
+	Card * Draw();
+
+protected:
+	vector<Card> vC_Pile;
 
 };
 }
 #endif
+
