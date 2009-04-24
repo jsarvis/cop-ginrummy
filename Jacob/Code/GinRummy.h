@@ -28,6 +28,8 @@ public:
 	//Writes to the default program output stream
 	void Insert();
 
+    void signalGameOver();
+
 private:
 	int i_NumberOfRounds;
 
@@ -37,6 +39,8 @@ private:
 	void * StatisticalData;
 
 	StockPile SP_Deck;
+
+    bool b_onGoingGame;
 
 };
 

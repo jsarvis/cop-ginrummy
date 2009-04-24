@@ -292,7 +292,7 @@ namespace SimModels {
             }
 
             //TODO: signal GinRummy that game is over
-            //GameControl->
+            //GameControl->signalGameOver();
 
         } else if ( State == 2 ) {
             State = 3; //Waiting for second hand empty
