@@ -3,40 +3,38 @@
 
 #include<string>
 
+#include "SimMgmt.h"
+
+
 using namespace std;
+using namespace SimMgmt;
 
-class Card {
-public:
-	//Constructors
-	Card();
-	Card(int a);
-	Card(int a, int b);
+namespace SimModels {
 
-	//setCard(int a);
-	//setCard(int a, int b);
-	int getFaceValue() const;
-	int getPointValue() const;
-	int getSuitIndex() const;
-	string toString() const;
+	class Card {
+	public:
+		//Constructors
+		Card();
+		Card(int a);
+		Card(int a, int b);
 
-	//Overloaded operators - used for sort()
-	friend bool operator< (Card const& a, Card const& b);
-	friend bool operator> (Card const& a, Card const& b);
-	friend bool operator<= (Card const& a, Card const& b);
-	friend bool operator>= (Card const& a, Card const& b);
+		int getFaceValue() const;
+		int getPointValue() const;
+		int getSuitIndex() const;
+		string toString() const;
 
-	//Overloaded operators - used for meld comparisons.
-	friend bool operator== (Card const& a, Card const& b);
-	friend bool operator!= (Card const& a, Card const& b);
-	friend int operator- (Card const& a, Card const& b);
+		//Overloaded operators - used for sort()
+		friend bool operator< (Card const& a, Card const& b);
 
-protected:
-	int setPointValue();
+	protected:
+		int setPointValue();
 
-private:
-	int faceValue;
-	int pointValue;
-	int suitIndex; //0 = Hearts, 1 = Diamonds, 2 = Clubs, 3 = Spades
+	private:
+		int faceValue;
+		int pointValue;
+		int suitIndex; //0 = Hearts, 1 = Diamonds, 2 = Clubs, 3 = Spades
 
-};//Card
+	};//Card
+
+}
 #endif
