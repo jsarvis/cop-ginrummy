@@ -1,8 +1,10 @@
 #ifndef _MELDS
 #define _MELDS
 
-//#include <cstdlib> 
+#include <algorithm>
+#include <cstdlib> 
 #include<vector>
+#include <iostream>
 
 #include "Card.h"
 
@@ -18,7 +20,7 @@ protected:
 	
 
 private:
-	extern vector< vector<Card> > v_vC_individualMelds;
+	vector< vector<Card> > v_vC_individualMelds;
 	
 	vector< vector<Card> > recGetMelds(vector< vector<Card> > a); 
 	bool isMeld(vector<Card> a);
