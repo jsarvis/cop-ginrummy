@@ -7,57 +7,68 @@
 
 
 #include "Card.h"
+#include "Melds.h"
 
 using namespace std;
 
 bool reverse(Card const& a, Card const& b);
-bool shuffle(Card const& a, Card const& b);
-
+vector<Card> shuffle(vector<Card> a);
 int main()
 {
-	int i;
+	srand((unsigned)time(0));
 	string symbols[4] = {"H", "D", "C", "S"};
 	vector<Card> deck;
-	vector<Card>::iterator it;
-	Card a(1,0);
-	Card d(13, 3);
-	srand((unsigned)time(0));
-
-
-	for(int k = 13; k >= 1; k--) {
-		for(int j = 0; j <= 3; j++) {
-			Card temp(k, j);
-			deck.push_back(temp);
-		}
+	vector<Card> hand;
+	vector<Card> toDiscard;
+	
+	Melds testMeld;
+	
+	for(int k = 1; k < 53; k++) {
+		deck.push_back(Card(k));
 	}
 	
-	sort(deck.begin(), deck.end(), shuffle);
-
-	//iterator through deck and print cards.
-	i = 0;
-	for(it = deck.begin(); it != deck.end(); ++it) {
-		cout << it->getFaceValue() << "\t" 
-			<< symbols[it->getSuitIndex()] << endl;
+	deck = shuffle(deck);
+	
+	for(int k = 0; k < 11; k++) {
+		hand.push_back(deck[k]);
+		cout << "   D" << k << ": " << deck[k].getFaceValue();
+		cout << symbols[deck[k].getSuitIndex()] << endl;
+	
 	}
-
-
-	//Card 1 - Card 52 = -51 dif
-	cout << endl << "1 H - K S = " << a - d << endl;
-
-	cin >> i;
+	
+	sort(hand.begin(), hand.end());
+	cout << "Hand: " << endl;
+	for(int k = 0; k < hand.size(); k++) {
+		cout << "   C" << k << ": " << hand[k].getFaceValue();
+		cout << symbols[hand[k].getSuitIndex()] << endl;
+	}
+	
+	toDiscard = testMeld.updateMelds(hand);
+	
+	sort(toDiscard.begin(), toDiscard.end());
+	cout << "Discards: " << endl;
+	for(int k = 0; k < toDiscard.size(); k++) {
+		cout << "   C" << k << ": " << toDiscard[k].getFaceValue();
+		cout << symbols[toDiscard[k].getSuitIndex()] << endl;
+	}
+	
 	return 0;
 }
 
 // Modify this function and then use it to sort however you want. 
 // to sort w/ it use sort(deck.begin(), deck.end(), reverse);
 bool reverse(Card const& a, Card const& b) { 
-	int aTotal = a.getFaceValue() + (a.getSuitIndex() * 13);
-	int bTotal = b.getFaceValue() + (b.getSuitIndex() * 13);
 	
-	return (aTotal > bTotal);
+	return (a.getFaceValue() < b.getFaceValue());
 }
 
-bool shuffle(Card const& a, Card const& b) {  
-	if( (rand() % 2) == 0 ) return true;
-	else return false;
+vector<Card> shuffle(vector<Card> a){
+	srand(time(0));
+	for(int k = (a.size() - 1); k > 0; k--) {
+		int swapIndex = (rand() % k);
+		Card temp = a[k];
+		a[k] = a[swapIndex];
+		a[swapIndex] = temp;
+	}
+	return a;
 }
