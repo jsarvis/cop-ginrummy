@@ -8,6 +8,13 @@ GinRummy::GinRummy()
 {
 	ifstream& fin = simInMgr.getStream();
 
+		
+		for(int k = 1; k < 53; k++) {
+                SP_Deck.Add(Card(k));
+        }
+
+
+
 		string token;
 
 		// Parse opening token
@@ -43,7 +50,7 @@ GinRummy::GinRummy()
 		if ( token != "Dealer:" ) 
 		   throw AppError(string("Incorrect Token '" + token + "', excpected token 'Dealer:' !"),
 				string("GinRummy::GinRummy())"));
-		apP_Players[1] = new Dealer(fin, ,this);
+		apP_Players[1] = new Dealer(fin, &SP_Deck, this);
 		//apP_Players[1]->Extract();
 
 		// Parse closing token
