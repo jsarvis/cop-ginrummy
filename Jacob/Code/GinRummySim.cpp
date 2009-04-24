@@ -1,6 +1,5 @@
-#include "SimModels.h"
+#include "GinRummy.h"
 using namespace SimModels;
-
 
 int main() {
 

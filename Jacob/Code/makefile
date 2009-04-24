@@ -36,7 +36,7 @@ $(PROJECTNAME): $(OBJS)
 SimMgmt.o : SimMgmt.h IOMgmt.h AppError.h
 AppError.o : AppError.h
 IOMgmt.o : IOMgmt.h AppError.h
-GinRummySim.o : GinRummySim.h GinRummy.h SimMgmt.h
+GinRummySim.o : GinRummy.h SimMgmt.h
 GinRummy.o : GinRummy.h Player.h Dealer.h StockPile.h SimMgmt.h
 Player.o : Player.h Dealer.h Card.h CardMsg.h Melds.h MeldsMsg.h SimMgmt.h
 Dealer.o : Dealer.h Player.h GinRummy.h Card.h CardMsg.h Melds.h MeldsMsg.h StockPile.h DiscardPile.h SimMgmt.h

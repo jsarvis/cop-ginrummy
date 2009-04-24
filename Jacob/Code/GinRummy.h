@@ -1,13 +1,13 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef GINRUMMY_H
+#define GINRUMMY_H
 
 #include <string>
 #include <vector>
 
 #include "SimMgmt.h"
 
-#include "Player.h"
-#include "Dealer.h"
+//#include "Player.h"
+//#include "Dealer.h"
 #include "StockPile.h"
 
 using namespace std;
