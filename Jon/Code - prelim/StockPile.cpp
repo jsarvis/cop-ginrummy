@@ -1,11 +1,12 @@
 #include "StockPile.h"
 
+
 namespace SimModels {
 	//Stockpile Methods
 
 	//Constructor
 	StockPile::StockPile() :CardPile() {
-	
+		srand(time(0));
 	}
 
 	/*
@@ -13,15 +14,17 @@ namespace SimModels {
 
 	}
 	*/
+	bool StockPile::hasTwo() {
+		return (vC_Pile.size() > 1 );
+	}
 
-	vector<Card> StockPile::shuffle(vector<Card> a){
-		srand(time(0));
-		for(int k = (a.size() - 1); k > 0; k--) {
+	vector<Card> StockPile::Shuffle(){
+		
+		for(int k = (vC_Pile.size() - 1); k > 0; k--) {
 			int swapIndex = (rand() % k);
-			Card temp = a[k];
-			a[k] = a[swapIndex];
-			a[swapIndex] = temp;
+			Card temp = vC_Pile[k];
+			vC_Pile[k] =vC_Pile a[swapIndex];
+			vC_Pile[swapIndex] = temp;
 		}
-		return a;
 	}
 }

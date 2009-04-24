@@ -3,8 +3,10 @@
 
 #include <string>
 #include <vector>
+#include <ctime>
 
 #include "SimMgmt.h"
+#include "CardPile.h"
 #include "Card.h"
 
 using namespace std;
@@ -16,9 +18,11 @@ namespace SimModels {
 
 	public:
 		StockPile();
+
+        bool hasTwo();
 		//~StockPile();
 		
-		vector<Card> shuffle(vector<Card> a);
+		vector<Card> Shuffle();
 		
 	protected:
 	
