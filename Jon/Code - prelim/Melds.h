@@ -18,7 +18,7 @@ protected:
 	
 
 private:
-	vector< vector<Card> > v_vC_individualMelds = vector< vector<Card> >;
+	extern vector< vector<Card> > v_vC_individualMelds;
 	
 	vector< vector<Card> > recGetMelds(vector< vector<Card> > a); 
 	bool isMeld(vector<Card> a);
