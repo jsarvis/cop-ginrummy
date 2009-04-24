@@ -3,6 +3,8 @@
 
 #include<string>
 
+using namespace std;
+
 class Card {
 public:
 	//Constructors
@@ -15,6 +17,7 @@ public:
 	int getFaceValue() const;
 	int getPointValue() const;
 	int getSuitIndex() const;
+	string toString() const;
 
 	//Overloaded operators - used for sort()
 	friend bool operator< (Card const& a, Card const& b);

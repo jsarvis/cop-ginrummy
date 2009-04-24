@@ -36,6 +36,15 @@ int Card::setPointValue() {
 	else return faceValue;
 }
 
+string Card::toString() const {
+	string retValue;
+	string symbols[4] = {"H", "D", "C", "S"};
+	string values[13] = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+	retValue = symbols[suitIndex] + " " + values[faceValue-1];
+	
+	return retValue;
+}
+
 //Overloaded Operations
 bool operator< (Card const& a, Card const& b) {
 	int aTotal = (a.getFaceValue() + (a.getSuitIndex() * 13));

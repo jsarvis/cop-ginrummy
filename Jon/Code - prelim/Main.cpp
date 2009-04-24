@@ -31,8 +31,7 @@ int main()
 	
 	for(int k = 0; k < 11; k++) {
 		hand.push_back(deck[k]);
-		cout << "   D" << k << ": " << deck[k].getFaceValue();
-		cout << symbols[deck[k].getSuitIndex()] << endl;
+		cout << "   D" << k << ": " << deck[k].toString() << endl;
 	
 	}
 	
