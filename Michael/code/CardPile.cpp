@@ -10,16 +10,16 @@ CardPile::CardPile()
 }
 
 // Add a card to the pile
-void CardPile::Add(const card & inserted)
+void CardPile::Add(const Card & inserted)
 {
-	vC_pile.push_back(Card);
+	vC_Pile.push_back(inserted);
 }
 
 // draw a card from the pile
 Card * CardPile::Draw()
 {
 	Card* temp;
-	temp = vC_Pile.back();
+	temp = (Card *)&(vC_Pile.back());
 	vC_Pile.pop_back();
 	return temp;
 }

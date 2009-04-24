@@ -2,6 +2,7 @@
 #define CARDPILE_H
 
 #include <string>
+#include <vector>
 
 #include "SimMgmt.h"
 #include "Card.h"

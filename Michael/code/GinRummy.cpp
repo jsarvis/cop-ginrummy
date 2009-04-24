@@ -35,16 +35,16 @@ GinRummy::GinRummy()
 		if ( token != "Player:" ) 
 		   throw AppError(string("Incorrect Token '" + token + "', excpected token 'Player:' !"),
 				string("GinRummy::GinRummy())"));
-		apP_Players[0] = new Player();
-		apP_Players[0]->Extract();
+		apP_Players[0] = new Player(fin);
+		//apP_Players[0]->Extract();
 
 		// Parse dealer
 		fin >> token;
 		if ( token != "Dealer:" ) 
 		   throw AppError(string("Incorrect Token '" + token + "', excpected token 'Dealer:' !"),
 				string("GinRummy::GinRummy())"));
-		apP_Players[1] = new Dealer();
-		apP_Players[1]->Extract();
+		apP_Players[1] = new Dealer(fin, ,this);
+		//apP_Players[1]->Extract();
 
 		// Parse closing token
 		fin >> token;

@@ -13,14 +13,14 @@ namespace SimModels {
 
 class PlayersMsg: public Message {
 protected:
-	virtual void Put(ostream& fout);
+	virtual void Put();//ostream& fout);
 
 public:
 	AGENTPTR * apP_Contents;
 
 	PlayersMsg(AGENTPTR * inputplayers);
 
-	virtual void Insert(ostream& fout);
+	virtual void Insert();//ostream& fout);
 
 };
 

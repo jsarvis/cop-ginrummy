@@ -14,12 +14,12 @@ namespace SimModels {
 
 class CardMsg: public Message {
 protected:
-	virtual void Put(ostream& fout);
+	virtual void Put();//ostream& fout);
 
 public:
 	Card * pC_Contents;
 	CardMsg(int Handler, string Description, Card * inputCard);
-	virtual void Insert(ostream& fout);
+	virtual void Insert();//ostream& fout);
 };
 
 }

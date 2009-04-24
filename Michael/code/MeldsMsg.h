@@ -14,12 +14,12 @@ namespace SimModels {
 
 class MeldsMsg: public Message {
 protected:
-	virtual void Put(ostream& fout);
+	virtual void Put();//ostream& fout);
 
 public:
 	Melds * pM_Contents;
 	MeldsMsg(int Handler, string Description, Melds * inputMelds);
-	virtual void Insert(ostream& fout);
+	virtual void Insert();//ostream& fout);
 };
 
 }

@@ -6,8 +6,8 @@
 
 #include "SimMgmt.h"
 
-//#include "Player.h"
-//#include "Dealer.h"
+#include "Player.h"
+#include "Dealer.h"
 #include "StockPile.h"
 
 using namespace std;
