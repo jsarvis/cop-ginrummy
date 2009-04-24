@@ -80,7 +80,7 @@ vector< vector<Card> > Melds::recGetMelds(vector<vector<Card> > a) {
 	
 	if(leftoverCards.size() < 3) return minDeadwood;
 	
-	sort(leftoverCards.begin(), leftoverCards.end());
+	//sort(leftoverCards.begin(), leftoverCards.end());
 	for(int i = 0; i < leftoverCards.size() - 2; i++) {
 		for(int j = i+1; j < leftoverCards.size() - 1; j++) {
 			for(int k = j+1; k < leftoverCards.size(); k++) {
