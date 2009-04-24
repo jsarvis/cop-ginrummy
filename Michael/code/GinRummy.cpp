@@ -69,8 +69,8 @@ void GinRummy::Initialize()
 		PlayersMsg *playersmessage = new PlayersMsg(apP_Players);
 		
 
-		playersmessage->setAgent( apP_Players[0]->NameOf(), apP_Players[0] );
-		playersmessage->setAgent( apP_Players[1]->NameOf(), apP_Players[1] );
+		//playersmessage->setAgent( apP_Players[0]->NameOf(), apP_Players[0] );
+		//playersmessage->setAgent( apP_Players[1]->NameOf(), apP_Players[1] );
 		
 		apP_Players[0]->Initialize( playersmessage );
 		apP_Players[1]->Initialize( playersmessage );
