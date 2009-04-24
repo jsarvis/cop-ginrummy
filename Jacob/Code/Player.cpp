@@ -486,7 +486,7 @@ namespace SimModels {
 
         }
         
-        if ( tempScoreHypothetical >= tempScoreCurrent ) {
+        if ( tempScoreHypothetical <= tempScoreCurrent ) {
              
             Message *selectDiscardPile = pD_Dealer->AcceptDrawDiscardPile();
 
