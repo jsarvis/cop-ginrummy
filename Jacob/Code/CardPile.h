@@ -17,7 +17,7 @@ public:
 
     virtual void Add(const Card & inserted);
 
-	Card Draw();
+	Card * Draw();
 
 protected:
 	vector<Card> vC_Pile;

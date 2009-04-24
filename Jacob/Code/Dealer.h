@@ -11,7 +11,7 @@
 #include "MeldsMsg.h"
 #include "Card.h"
 #include "CardMsg.h"
-//#include "Player.h"
+#include "Player.h"
 #include "StockPile.h"
 #include "DiscardPile.h"
 
@@ -22,10 +22,10 @@ namespace SimModels {
 
 
     //Foward declaration
-    class Player;
+    //class Player;
     class GinRummy;
 
-    enum SpeedSettingIndexDealer { Speed_Shuffle =0, Speed_Deal};
+    struct SpeedSettingIndexDealer {enum SpeedSettingIndexDealer1 { Speed_Shuffle =0, Speed_Deal};};
 
 class Dealer: public Player {
 private:

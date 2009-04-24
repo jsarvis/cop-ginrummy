@@ -36,7 +36,7 @@ namespace SimModels {
     void Dealer::Put(ostream& fout) {
 
         simOutMgr.pushMargin();
-        Player::Put();
+        Player::Put(fout);
         simOutMgr.advToMargin();
         fout << " Speed_Shuffle: " << SpeedSettings[SpeedSettingIndexDealer::Speed_Shuffle];
         simOutMgr.advToMargin();
@@ -46,7 +46,7 @@ namespace SimModels {
     }
 
     //public
-    Dealer::Dealer(ifstream& fin, Stockpile * deck, GinRummy * inputGameControl):Player(fin) {
+    Dealer::Dealer(ifstream& fin, StockPile * deck, GinRummy * inputGameControl):Player(fin) {
 
         Extract(fin);
 
@@ -99,7 +99,7 @@ namespace SimModels {
                  }
         case 13: doAcceptHandEmpty(); break;
         case 14: {
-					doAcceptQueryTopCard( ((Player*)theEventMgr.getSendr() );
+					doAcceptQueryTopCard( (Player*)theEventMgr.getSendr() );
 					break;
 				 }
         case 15: doAcceptShuffle(); break;
@@ -120,7 +120,7 @@ namespace SimModels {
                              string("Dealer::Extract(@1)"));
 
         // Parse data members
-        Get();
+        Get(fin);
 
         // Parse closing token
         fin >> token; 
@@ -134,7 +134,7 @@ namespace SimModels {
 
         simOutMgr.pushMargin();
         fout << "Dealer{ ";
-        Put();
+        Put(fout);
         simOutMgr.advToMargin();
         fout << "}Dealer ";
         simOutMgr.popMargin();
@@ -221,7 +221,7 @@ namespace SimModels {
 
         } else {
 
-            CardMsg *drawnCardMsg = pP_Requester->AcceptDrawnCard( &(pSP_StockPile->Draw()) );
+            CardMsg *drawnCardMsg = pP_Requester->AcceptDrawnCard( pSP_StockPile->Draw() );
 
             // Construct new Event
             Event e( time  , this , pP_Requester , drawnCardMsg );
@@ -237,7 +237,7 @@ namespace SimModels {
 
         int time = theEventMgr.clock();
 
-        CardMsg *drawnCardMsg = pP_Requester->AcceptDrawnCard( &(DP_Discard.Draw()) );
+        CardMsg *drawnCardMsg = pP_Requester->AcceptDrawnCard( DP_Discard.Draw() );
 
         // Construct new Event
         Event e( time  , this , pP_Requester , drawnCardMsg );
@@ -288,7 +288,7 @@ namespace SimModels {
             State = 0; //Initialized
 
             while (!DP_Discard.isEmpty()) {
-                pSP_StockPile->Add(DP_Discard.Draw());
+                pSP_StockPile->Add(*(DP_Discard.Draw()));
             }
 
             //TODO: signal GinRummy that game is over
@@ -326,12 +326,12 @@ namespace SimModels {
         for ( int i = 0; i < 10; i++ ) {
 
             // Construct new message
-            CardMsg *dealtCardMsg1 = pP_OtherPlayer->AcceptDealtCard( &(pSP_StockPile->Draw()) );
-            CardMsg *dealtCardMsg2 = pP_OtherPlayer->AcceptDealtCard( &(pSP_StockPile->Draw()) );
+            CardMsg *dealtCardMsg1 = pP_OtherPlayer->AcceptDealtCard( pSP_StockPile->Draw() );
+            CardMsg *dealtCardMsg2 = pP_OtherPlayer->AcceptDealtCard( pSP_StockPile->Draw() );
     
             // Construct new Event
-            Event e1( time  , this , pP_OtherPlayer , drawnCardMsg1 );
-            Event e2( time  , this , (Player*)this , drawnCardMsg2 );
+            Event e1( time  , this , pP_OtherPlayer , dealtCardMsg1 );
+            Event e2( time  , this , (Player*)this , dealtCardMsg2);
     
             // Post Events
             theEventMgr.postEvent(e1);
@@ -357,7 +357,7 @@ namespace SimModels {
 
         int time = theEventMgr.clock();
 
-        CardMsg *drawnCardMsg = pP_Requester->AcceptTopCard( DP_Discard.pC_TopCard );
+        CardMsg *drawnCardMsg = pP_Requester->AcceptTopCard( DP_Discard.getTopCard() );
 
         // Construct new Event
         Event e( time  , this , pP_Requester , drawnCardMsg );
@@ -366,8 +366,5 @@ namespace SimModels {
         theEventMgr.postEvent(e);
     }
 
-};
-
 }
 
-#endif

@@ -29,10 +29,6 @@ namespace SimModels {
 class Player: public Agent {
 private:
 
-	Player * pP_OtherPlayer;
-
-	Dealer * pD_Dealer;
-
 	vector<Card> vC_Hand;
 
 	int SpeedSettings[5];
@@ -48,6 +44,11 @@ private:
     int i_score;
 
 protected:
+
+    Player * pP_OtherPlayer;
+
+	Dealer * pD_Dealer;
+
 	virtual void Get(ifstream& fin) throw (TokenError);
 
 	virtual void Put(ostream& fout);

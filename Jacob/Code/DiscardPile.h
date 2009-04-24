@@ -14,7 +14,7 @@ namespace SimModels {
 
 class DiscardPile: public CardPile {
 public:
-	Card * pC_TopCard;
+	Card * getTopCard();
 
 	DiscardPile();
 
