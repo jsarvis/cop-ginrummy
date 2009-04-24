@@ -24,20 +24,20 @@ public:
 
 	Card();
 	Card(int a);
-	Card(int a, b);
+	Card(int a, int b);
 	Card(int a, string b);
 
 	string toString();
 
-	int getFaceValue();
+	int getFaceValue() const;
 
-	int getPointValue();
+	int getPointValue() const;
 
-	int getSuitIndex();
+	int getSuitIndex() const;
 
 	string getSuitString();
 
-	bool operator<(Card const& a, Card const& b);
+	friend bool operator<(Card const& a, Card const& b);
 
 	virtual void Insert(ostream& fout);
 

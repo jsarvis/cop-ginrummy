@@ -1,4 +1,6 @@
 #include "Dealer.h"
+#include "Player.h"
+#include "GinRummy.h"
 
 namespace SimModels {
 
@@ -17,7 +19,7 @@ namespace SimModels {
 
         // Parse Speed_Shuffle
         fin >> token;
-        SpeedSettings[SpeedSettingIndex::Speed_Shuffle] = atoi(token.c_str());  
+        SpeedSettings[SpeedSettingIndexDealer::Speed_Shuffle] = atoi(token.c_str());  
 
         // parse token "Speed_Deal"
         fin >> token;
@@ -27,7 +29,7 @@ namespace SimModels {
 
         // Parse Speed_Deal
         fin >> token;
-        SpeedSettings[SpeedSettingIndex::Speed_Deal] = atoi(token.c_str());  
+        SpeedSettings[SpeedSettingIndexDealer::Speed_Deal] = atoi(token.c_str());  
 
     }
 
@@ -36,15 +38,15 @@ namespace SimModels {
         simOutMgr.pushMargin();
         Player::Put();
         simOutMgr.advToMargin();
-        fout << " Speed_Shuffle: " << SpeedSettings[SpeedSettingIndex::Speed_Shuffle];
+        fout << " Speed_Shuffle: " << SpeedSettings[SpeedSettingIndexDealer::Speed_Shuffle];
         simOutMgr.advToMargin();
-        fout << " Speed_Deal: " << SpeedSettings[SpeedSettingIndex::Speed_Deal];
+        fout << " Speed_Deal: " << SpeedSettings[SpeedSettingIndexDealer::Speed_Deal];
         simOutMgr.popMargin();
 
     }
 
     //public
-    void Dealer::Dealer(ifstream& fin, Stockpile * deck, GinRummy * inputGameControl):Player(fin) {
+    Dealer::Dealer(ifstream& fin, Stockpile * deck, GinRummy * inputGameControl):Player(fin) {
 
         Extract(fin);
 
@@ -307,7 +309,7 @@ namespace SimModels {
         Message *shuffleCompleteMsg = AcceptShuffleComplete();
 
 		// Construct new Event
-		Event e( time + SpeedSettings[SpeedSettingIndex::Speed_Shuffle] , this , this , shuffleCompleteMsg );
+		Event e( time + SpeedSettings[SpeedSettingIndexDealer::Speed_Shuffle] , this , this , shuffleCompleteMsg );
 
 		// Post Event
 		theEventMgr.postEvent(e);
@@ -341,8 +343,8 @@ namespace SimModels {
         Message *dealCompleteMsg = pP_OtherPlayer->AcceptDealComplete();
 
 		// Construct new Event
-        Event e1( time + SpeedSettings[SpeedSettingIndex::Speed_Deal] , this , pP_OtherPlayer , dealCompleteMsg );
-        Event e2( time + SpeedSettings[SpeedSettingIndex::Speed_Deal] , this , (Player*)this , dealCompleteMsg );
+        Event e1( time + SpeedSettings[SpeedSettingIndexDealer::Speed_Deal] , this , pP_OtherPlayer , dealCompleteMsg );
+        Event e2( time + SpeedSettings[SpeedSettingIndexDealer::Speed_Deal] , this , (Player*)this , dealCompleteMsg );
 
         // Post Events
         theEventMgr.postEvent(e1);

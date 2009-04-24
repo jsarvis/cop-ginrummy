@@ -19,3 +19,4 @@ void AppError::appendMsg(string Msg){
 void AppError::appendOrg(string Org){
      origin = origin + ":" + Org;
 }//appendOrg
+

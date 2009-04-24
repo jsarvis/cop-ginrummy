@@ -6,12 +6,12 @@
 
 #include "SimMgmt.h"
 
-#include "GinRummy.h"
+//#include "GinRummy.h"
 #include "Melds.h"
 #include "MeldsMsg.h"
 #include "Card.h"
 #include "CardMsg.h"
-#include "Player.h"
+//#include "Player.h"
 #include "StockPile.h"
 #include "DiscardPile.h"
 
@@ -20,7 +20,12 @@ using namespace SimMgmt;
 
 namespace SimModels {
 
-    enum SpeedSettingIndex { Speed_Shuffle =0, Speed_Deal};
+
+    //Foward declaration
+    class Player;
+    class GinRummy;
+
+    enum SpeedSettingIndexDealer { Speed_Shuffle =0, Speed_Deal};
 
 class Dealer: public Player {
 private:
@@ -40,7 +45,7 @@ protected:
 	virtual void Put(ostream& fout);
 
 public:
-	void Dealer(ifstream& fin, Stockpile * deck, GinRummy * inputGameControl);
+	Dealer(ifstream& fin, StockPile * deck, GinRummy * inputGameControl);
 
 	void Initialize(Message * IncomingPlayersMsg);
 

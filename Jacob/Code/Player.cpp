@@ -1,6 +1,14 @@
 #include "Player.h"
+#include "Dealer.h"
+#include <algorithm>
 
 namespace SimModels {
+
+
+     bool ascending(Card const & a, Card const & b) { 
+        return (a.getFaceValue() < b.getFaceValue());
+    }
+
 
     //protected
     void Player::Get(ifstream& fin) throw (TokenError) {
@@ -107,7 +115,7 @@ namespace SimModels {
     }
 
     //public
-	void Player::Player(ifstream& fin):Agent() {
+	Player::Player(ifstream& fin):Agent() {
         
         Extract(fin);
 
@@ -119,11 +127,11 @@ namespace SimModels {
 
         // Find other player, IE the player that isnt the same as this
 		if (((PlayersMsg *)IncomingPlayersMsg)->apP_Contents[0] == this)
-            pP_OtherPlayer = ((PlayersMsg *)IncomingPlayersMsg)->apP_Contents[1];
-        else pP_OtherPlayer = ((PlayersMsg *)IncomingPlayersMsg)->apP_Contents[0];
+            pP_OtherPlayer = (Player*)(((PlayersMsg *)IncomingPlayersMsg)->apP_Contents[1]);
+        else pP_OtherPlayer = (Player*)(((PlayersMsg *)IncomingPlayersMsg)->apP_Contents[0]);
 
         //Dealer is always second in position
-        pD_Dealer = ((PlayersMsg *)IncomingPlayersMsg)->apP_Contents[1];
+        pD_Dealer = (Dealer*)(((PlayersMsg *)IncomingPlayersMsg)->apP_Contents[1]);
 
     }
 
@@ -166,7 +174,7 @@ namespace SimModels {
                              string("Player::Extract(@1)"));
         
         // Parse data members
-        Get();
+        Get(fin);
 
         // Parse closing token
         fin >> token; 
@@ -180,7 +188,7 @@ namespace SimModels {
 
         simOutMgr.pushMargin();
 		fout << "Player{ ";
-		Put();
+		Put(fout);
 		simOutMgr.advToMargin();
 		fout << "}Player ";
 		simOutMgr.popMargin();
@@ -242,7 +250,7 @@ namespace SimModels {
         //TODO / TEST: should this be (*iter).toString() instead of iter->toString() ??
         for( iter = finalDeadwood.begin(); iter != finalDeadwood.end(); iter++ ) {
 
-            i_score += iter.getPointValue();
+            i_score += iter->getPointValue();
 
         }
 
@@ -263,6 +271,7 @@ namespace SimModels {
     }
 
 	void Player::doAcceptDrawnCard(Card * inputCard) {
+        int time = theEventMgr.clock();
 
         ostream& simlog = simOutMgr.getStream();
         vector<Card>::iterator iter;
@@ -275,7 +284,7 @@ namespace SimModels {
         //TODO / TEST: should this be (*iter).toString() instead of iter->toString() ??
         for( iter = vC_Hand.begin(); iter != vC_Hand.end(); iter++ ) {
 
-            simlog << " " << iter.toString();
+            simlog << " " << iter->toString();
 
         }
         simlog << endl;
@@ -289,7 +298,7 @@ namespace SimModels {
 
         for( iter = currentDeadwood.begin(); iter != currentDeadwood.end(); iter++ ) {
 
-            tempScoreCurrent += iter.getPointValue();
+            tempScoreCurrent += iter->getPointValue();
 
         }
 
@@ -319,13 +328,13 @@ namespace SimModels {
         
             for( iter = vC_Hand.begin(); iter != vC_Hand.end(); iter++ ) {
      
-                if ( ( iter.getFaceValue() == currentDeadwood.back().getFaceValue() ) && ( iter.getSuitIndex() == currentDeadwood.back().getSuitIndex() ) ) {
+                if ( ( iter->getFaceValue() == currentDeadwood.back().getFaceValue() ) && ( iter->getSuitIndex() == currentDeadwood.back().getSuitIndex() ) ) {
 
-                    //TODO / TEST: replace iter with  (Card *)&(*iter)   ??
-                    tempCardMsg = pD_Dealer->AcceptReceiveDiscard(&iter);
+
+                    tempCardMsg = pD_Dealer->AcceptReceiveDiscard((Card*)&(*iter));
         
                     // Construct new Event
-            		Event e( time , this , pD_Dealer , tempCardMsg );
+            		Event e( time + SpeedSettings[SpeedSettingIndex::Speed_DecisionDiscard] + SpeedSettings[SpeedSettingIndex::Speed_Discard], this , pD_Dealer , tempCardMsg );
             
             		// Post Event
             		theEventMgr.postEvent(e);
@@ -342,7 +351,7 @@ namespace SimModels {
             //TODO / TEST: should this be (*iter).toString() instead of iter->toString() ??
             for( iter = vC_Hand.begin(); iter != vC_Hand.end(); iter++ ) {
     
-                simlog << " " << iter.toString();
+                simlog << " " << iter->toString();
     
             }
             simlog << endl << endl;
@@ -352,7 +361,7 @@ namespace SimModels {
             MeldsMsg *knockMelds = pP_OtherPlayer->AcceptKnock(&M_Melds);
 
             // Construct new Event
-    		Event e( time , this , pP_OtherPlayer , knockMelds );
+    		Event e( time  + SpeedSettings[SpeedSettingIndex::Speed_DecisionDiscard] + SpeedSettings[SpeedSettingIndex::Speed_Discard], this , pP_OtherPlayer , knockMelds );
     
     		// Post Event
     		theEventMgr.postEvent(e);
@@ -380,7 +389,7 @@ namespace SimModels {
         
         for( iter = vC_Hand.begin(); iter != vC_Hand.end(); iter++ ) {
  
-            simlog << " " << iter.toString();
+            simlog << " " << iter->toString();
 
         }
         simlog << endl;
@@ -406,7 +415,7 @@ namespace SimModels {
         //TODO / TEST: should this be (*iter).toString() instead of iter->toString() ??
         for( iter = vC_Hand.begin(); iter != vC_Hand.end(); iter++ ) {
 
-            simlog << " " << iter.toString();
+            simlog << " " << iter->toString();
 
         }
         simlog << endl << endl;
@@ -424,7 +433,7 @@ namespace SimModels {
         for( iter = vC_Hand.begin(); iter != vC_Hand.end(); iter++ ) {
  
             //TODO / TEST: replace iter with  (Card *)&(*iter)   ??
-            tempCardMsg = pD_Dealer->AcceptReceiveReturnedCard(&iter);
+            tempCardMsg = pD_Dealer->AcceptReceiveReturnedCard((Card *)&(*iter));
 
             // Construct new Event
     		Event e( time , this , pD_Dealer , tempCardMsg );
@@ -448,6 +457,8 @@ namespace SimModels {
 
 	void Player::doAcceptTopCard(Card * inputCard) {
 
+        int time = theEventMgr.clock();
+
         int tempScoreCurrent = 0;
         int tempScoreHypothetical = 0;
 
@@ -465,13 +476,13 @@ namespace SimModels {
         //TODO / TEST: should this be (*iter).toString() instead of iter->toString() ??
         for( iter = currentDeadwood.begin(); iter != currentDeadwood.end(); iter++ ) {
 
-            tempScoreCurrent += iter.getPointValue();
+            tempScoreCurrent += iter->getPointValue();
 
         }
         
         for( iter = hypotheticalDeadwood.begin(); iter != hypotheticalDeadwood.end(); iter++ ) {
 
-            tempScoreHypothetical += iter.getPointValue();
+            tempScoreHypothetical += iter->getPointValue();
 
         }
         
@@ -480,7 +491,7 @@ namespace SimModels {
             Message *selectDiscardPile = pD_Dealer->AcceptDrawDiscardPile();
 
             // Construct new Event
-    		Event e( time , this , pD_Dealer , selectDiscardPile );
+    		Event e( time + SpeedSettings[SpeedSettingIndex::Speed_DecisionPickup] + SpeedSettings[SpeedSettingIndex::Speed_Draw], this , pD_Dealer , selectDiscardPile );
     
     		// Post Event
     		theEventMgr.postEvent(e);
@@ -491,7 +502,7 @@ namespace SimModels {
             Message *selectStockPile = pD_Dealer->AcceptDrawStockPile();
 
             // Construct new Event
-    		Event e( time , this , pD_Dealer , selectStockPile );
+    		Event e( time + SpeedSettings[SpeedSettingIndex::Speed_DecisionPickup] + SpeedSettings[SpeedSettingIndex::Speed_Draw], this , pD_Dealer , selectStockPile );
     
     		// Post Event
     		theEventMgr.postEvent(e);
@@ -500,4 +511,6 @@ namespace SimModels {
         
     }
 }
+
+
 

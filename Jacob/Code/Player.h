@@ -10,16 +10,21 @@
 #include "MeldsMsg.h"
 #include "Card.h"
 #include "CardMsg.h"
-#include "Dealer.h"
+#include "PlayersMsg.h"
+//#include "Dealer.h"
 
 using namespace std;
 using namespace SimMgmt;
 
 namespace SimModels {
 
-    enum SpeedSettingIndex { Speed_InitialSort =0, Speed_Draw, Speed_Discard, Speed_DecisionPickup, Speed_DecisionDiscard};
-    enum StrategyIndex { Type =0};
-    enum StrategyType { Beginner =0, Advanced};
+    //Foward declaration
+    class Dealer;
+
+
+    struct SpeedSettingIndex {enum SpeedSettingIndex1 { Speed_InitialSort =0, Speed_Draw, Speed_Discard, Speed_DecisionPickup, Speed_DecisionDiscard}; }; 
+    struct StrategyIndex {enum StrategyIndex1 { Type =0};};
+    struct StrategyType {enum StrategyType1 { Beginner =0, Advanced};};
 
 class Player: public Agent {
 private:
@@ -48,7 +53,7 @@ protected:
 	virtual void Put(ostream& fout);
 
 public:
-	void Player(ifstream& fin);
+	Player(ifstream& fin);
 
 	void Initialize(Message * IncomingPlayersMsg);
 
@@ -88,11 +93,6 @@ private:
 	void doAcceptReturnHand();
 
 	void doAcceptTopCard(Card * inputCard);
-
-    bool ascending(Card const& a, Card const& b) { 
-        return (a.getFaceValue() < b.getFaceValue());
-    }
-
 
 };
 
