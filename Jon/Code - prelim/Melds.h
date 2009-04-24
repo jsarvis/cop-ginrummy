@@ -1,10 +1,8 @@
 #ifndef _MELDS
 #define _MELDS
 
-#include <algorithm>
-#include <cstdlib> 
+//#include <cstdlib> 
 #include<vector>
-#include <iostream>
 
 #include "Card.h"
 
