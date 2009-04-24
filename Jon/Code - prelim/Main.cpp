@@ -19,6 +19,7 @@ int main()
 	string symbols[4] = {"H", "D", "C", "S"};
 	vector<Card> deck;
 	vector<Card> hand;
+	vector<Card> hand2;
 	vector<Card> toDiscard;
 	
 	Melds testMeld;
@@ -30,16 +31,16 @@ int main()
 	deck = shuffle(deck);
 	
 	for(int k = 0; k < 11; k++) {
-		hand.push_back(deck[k]);
-		cout << "   D" << k << ": " << deck[k].toString() << endl;
-	
+		hand.push_back(deck[k]);	
+	}
+	for(int k = 11; k < 22; k++) {
+		hand2.push_back(deck[k]);
 	}
 	
 	sort(hand.begin(), hand.end());
 	cout << "Hand: " << endl;
 	for(int k = 0; k < hand.size(); k++) {
-		cout << "   C" << k << ": " << hand[k].getFaceValue();
-		cout << symbols[hand[k].getSuitIndex()] << endl;
+		cout << "   C" << k << ": " << hand[k].toString() << endl;
 	}
 	
 	toDiscard = testMeld.updateMelds(hand);
@@ -47,8 +48,21 @@ int main()
 	sort(toDiscard.begin(), toDiscard.end());
 	cout << "Discards: " << endl;
 	for(int k = 0; k < toDiscard.size(); k++) {
-		cout << "   C" << k << ": " << toDiscard[k].getFaceValue();
-		cout << symbols[toDiscard[k].getSuitIndex()] << endl;
+		cout << "   C" << k << ": " << toDiscard[k].toString() << endl;
+	}
+	
+	sort(hand2.begin(), hand2.end());
+	cout << "Hand2: " << endl;
+	for(int k = 0; k < hand2.size(); k++) {
+		cout << "   C" << k << ": " << hand2[k].toString() << endl;
+	}
+	
+	toDiscard = testMeld.layOff(hand2);
+	
+	sort(toDiscard.begin(), toDiscard.end());
+	cout << "Discards: " << endl;
+	for(int k = 0; k < toDiscard.size(); k++) {
+		cout << "   C" << k << ": " << toDiscard[k].toString() << endl;
 	}
 	
 	return 0;

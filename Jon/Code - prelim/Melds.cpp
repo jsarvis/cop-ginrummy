@@ -2,7 +2,7 @@
 
 
 Melds::Melds() {
-	
+	v_vC_individualMelds = new vector< vector<Card> >;
 }
 
 bool Melds::isMeld(vector<Card> a) {
@@ -132,8 +132,8 @@ vector<Card> Melds::updateMelds(vector<Card> a){
 	
 	bestMelds = recGetMelds(bestMelds);
 	
-	this.v_vC_individualMelds = bestMelds;
-	this.v_vC_individualMelds.pop_back();
+	*v_vC_individualMelds = bestMelds;
+	v_vC_individualMelds->pop_back();
 	
 	return bestMelds.back();
 }
@@ -141,7 +141,7 @@ vector<Card> Melds::updateMelds(vector<Card> a){
 vector<Card> Melds::layOff(vector<Card> a){
 	vector<vector<Card> > bestMelds;
 	
-	bestMelds = this.v_vC_individualMelds;
+	bestMelds = *v_vC_individualMelds;
 	bestMelds.push_back(a);
 	
 	bestMelds = recGetMelds(bestMelds);
