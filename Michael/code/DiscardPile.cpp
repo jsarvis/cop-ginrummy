@@ -11,14 +11,14 @@ namespace SimModels {
 
 	}
 
-	DiscardPile::getTopCard()
+	Card * DiscardPile::getTopCard()
 	{
 		Card* temp;
 		temp = (Card *)&(vC_Pile.back());
 		return temp;
 	}
 
-	DiscardPile::isEmpty()
+	bool DiscardPile::isEmpty()
 	{
 		return vC_Pile.empty();
 	}
