@@ -1,5 +1,6 @@
 #include "CardPile.h"
 
+namespace SimModels {
 // CardPile methods
 
 // constructor
@@ -21,4 +22,6 @@ Card * CardPile::Draw()
 	temp = vC_Pile.back();
 	vC_Pile.pop_back();
 	return temp;
+}
+
 }

@@ -1,5 +1,6 @@
 #include "GinRummy.h"
 
+namespace SimModels {
 // GinRummy methods
 
 // Constructor
@@ -149,4 +150,6 @@ void GinRummy::Insert()
 	simlog << "}GinRummy ";
 	simOutMgr.popMargin();
 	simOutMgr.advToMargin();
+}
+
 }

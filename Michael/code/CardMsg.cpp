@@ -1,5 +1,6 @@
 #include "CardMsg.h"
 
+namespace SimModels {
 // CardMsg Methods
 
 // constructor
@@ -35,4 +36,6 @@ void CardMsg::Put()
 	simOutMgr.advToMargin();
 	simlog << " Card: " << pC_Contents->toString();
 	simOutMgr.popMargin();
+}
+
 }

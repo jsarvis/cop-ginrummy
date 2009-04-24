@@ -1,5 +1,5 @@
 #include "PlayersMsg.h"
-
+namespace SimModels {
 //PlayersMsg methods
 
 // constructor
@@ -41,4 +41,5 @@ void PlayersMsg::Put()
     simlog << " agent[ 0 ] = Dealer: " << apP_Contents[1]->NameOf();
 	simOutMgr.popMargin();
     simOutMgr.popMargin();
+}
 }

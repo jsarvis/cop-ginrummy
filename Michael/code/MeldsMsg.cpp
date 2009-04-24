@@ -1,5 +1,5 @@
 #include "MeldsMsg.h"
-
+namespace SimModels {
 // MeldsMsg Methods
 
 // constructor
@@ -35,4 +35,6 @@ void MeldsMsg::Put()
 	simOutMgr.advToMargin();
 	simlog << " **Melds** ";
 	simOutMgr.popMargin();
+}
+
 }
