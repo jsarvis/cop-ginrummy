@@ -16,7 +16,7 @@ class CardPile {
 public:
 	CardPile();
 
-    virtual void Add(const Card & inserted);
+    void Add(const Card & inserted);
 
 	Card * Draw();
 
