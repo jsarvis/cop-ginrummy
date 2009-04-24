@@ -35,8 +35,7 @@ private:
 
     int i_SecondsPerTick;
 
-	//dynamic array of Agent*
-	AGENTPTR * apP_Players;
+	AGENTPTR apP_Players[2];
 
 	void * StatisticalData;
 

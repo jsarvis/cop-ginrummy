@@ -66,20 +66,20 @@ void GinRummy::Initialize()
 	ostream& simlog = simOutMgr.getStream();
 
 		// Construct new Players object
-		Players *players = new Players(2);
+		PlayersMsg *playersmessage = new PlayersMsg(2);
 		
 
-		players->setAgent( apP_Players[0]->NameOf(), apP_Players[0] );
-		players->setAgent( apP_Players[1]->NameOf(), apP_Players[1] );
+		playersmessage->setAgent( apP_Players[0]->NameOf(), apP_Players[0] );
+		playersmessage->setAgent( apP_Players[1]->NameOf(), apP_Players[1] );
 		
-		apP_Players[0]->Initialize( players );
-		apP_Players[1]->Initialize) players );
+		apP_Players[0]->Initialize( playersmessage );
+		apP_Players[1]->Initialize( playersmessage );
 
         simOutMgr.newLine();
-		simlog << *players;
+		simlog << *playersmessage;
         simOutMgr.newLine();
 
-		delete players;
+		delete playersmessage;
 }
 
 void GinRummy::Simulate()
