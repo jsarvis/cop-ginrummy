@@ -24,6 +24,7 @@ int main()
 	
 	Melds testMeld;
 	
+	
 	for(int k = 1; k < 53; k++) {
 		deck.push_back(Card(k));
 	}

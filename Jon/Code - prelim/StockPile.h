@@ -4,13 +4,13 @@
 #include <string>
 #include <vector>
 
-//#include "SimMgmt.h"
+#include "SimMgmt.h"
 #include "Card.h"
 
 using namespace std;
-//using namespace SimMgmt;
+using namespace SimMgmt;
 
-//namespace SimModels {
+namespace SimModels {
 
 	class StockPile: public CardPile {
 
@@ -21,12 +21,11 @@ using namespace std;
 		vector<Card> shuffle(vector<Card> a);
 		
 	protected:
-		vector<Card> vC_Pile;
 	
 	private:
 
 	};
 
-//}
+}
 #endif
 
