@@ -2,7 +2,7 @@
 
 
 Melds::Melds() {
-	//v_vC_individualMelds = new vector< vector<Card> >;
+	v_vC_individualMelds = vector< vector<Card> >;
 }
 
 bool Melds::isMeld(vector<Card> a) {
