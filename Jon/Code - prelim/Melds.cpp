@@ -5,6 +5,10 @@ Melds::Melds() {
 	v_vC_individualMelds = new vector< vector<Card> >;
 }
 
+Melds::~Melds() {
+	delete v_vC_individualMelds;
+}
+
 bool Melds::isMeld(vector<Card> a) {
 	bool trip = true;
 	bool straight = true;

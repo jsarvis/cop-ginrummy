@@ -1,19 +1,22 @@
-#ifndef _MELDS
-#define _MELDS
+#ifndef MELDS_H
+#define MELDS_H
 
 #include <algorithm>
 #include <cstdlib> 
 #include <vector>
 #include <iostream>
 
+#include "SimMgmt.h"
 #include "Card.h"
 
 using namespace std;
+using namespace SimMgmt;
 
 class Melds {
 public:
 	//Constructors
 	Melds();
+	~Melds();
 	vector<Card> updateMelds(vector<Card> a);
 	vector<Card> layOff(vector<Card> a);
 protected:
