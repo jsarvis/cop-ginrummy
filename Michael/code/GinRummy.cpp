@@ -93,30 +93,12 @@ void GinRummy::Simulate()
         Message *msg;
 		string   token;
 		ostream& simlog = simOutMgr.getStream();
-
-		struct StatData {
-			int minEvents;
-			double avgEvents;
-			int maxEvents;
-			int minTicks;
-			double avgTicks;
-			int maxTicks;
-			
-			int minPlayerTicks;
-			double avgPlayerTicks;
-			int maxPlayerTicks;
-			
-			int minDealerTicks;
-			double avgDealerTicks;
-			int maxDealerTicks;
-			
-			int playerWinCount;
-			int dealerWinCount;
-		};
-		
+		bool firstGame = true;
 		
 		for(int i = 0; i < i_NumberOfRounds; i++) {
-			StatisticalData = new struct StatData;
+			
+			
+			
 			
 			while( theEventMgr.moreEvents() )
 			{
@@ -139,7 +121,14 @@ void GinRummy::Simulate()
 				//lastEvent = e.getTime(); 
 				//numEvents++;
 			}
-		
+			if(firstGame) {
+				// Fill in all fields of StatisticalData with initial values
+				
+			} else {
+				
+				
+				
+			}
 		
 		}
 }
