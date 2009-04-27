@@ -36,7 +36,6 @@ namespace SimModels {
     void Dealer::Put(ostream& fout) {
 
         simOutMgr.pushMargin();
-        simOutMgr.advToMargin();
         Player::Put(fout);
         simOutMgr.advToMargin();
         fout << " Speed_Shuffle: " << SpeedSettings[SpeedSettingIndexDealer::Speed_Shuffle];

@@ -31,6 +31,7 @@ void PlayersMsg::Put()
 	ostream& simlog = simOutMgr.getStream();
 
 	simOutMgr.pushMargin();
+    simOutMgr.advToMargin();
 	Message::Put();
 	simOutMgr.advToMargin();
 	simlog << " Players: ";
@@ -38,7 +39,7 @@ void PlayersMsg::Put()
     simOutMgr.advToMargin();
     simlog << " agent[ 0 ] = Player: " << apP_Contents[0]->NameOf();
     simOutMgr.advToMargin();
-    simlog << " agent[ 0 ] = Dealer: " << apP_Contents[1]->NameOf();
+    simlog << " agent[ 1 ] = Dealer: " << apP_Contents[1]->NameOf();
 	simOutMgr.popMargin();
     simOutMgr.popMargin();
 }
