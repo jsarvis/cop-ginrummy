@@ -1,6 +1,6 @@
 GinRummy{
 	SecondsPerTick: 1
-	Rounds: 20
+	Rounds: 1
 	Player:
 		Player{
 			name: Fred
