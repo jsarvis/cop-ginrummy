@@ -46,7 +46,7 @@ namespace SimModels {
     }
 
     //public
-    Dealer::Dealer(ifstream& fin, StockPile * deck):Player(fin) {
+    Dealer::Dealer(ifstream& fin, StockPile * deck):Player() {
 
         Extract(fin);
 
