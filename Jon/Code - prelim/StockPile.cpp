@@ -23,7 +23,7 @@ namespace SimModels {
 		for(int k = (vC_Pile.size() - 1); k > 0; k--) {
 			int swapIndex = (rand() % k);
 			Card temp = vC_Pile[k];
-			vC_Pile[k] =vC_Pile a[swapIndex];
+			vC_Pile[k] = vC_Pile[swapIndex];
 			vC_Pile[swapIndex] = temp;
 		}
 	}
