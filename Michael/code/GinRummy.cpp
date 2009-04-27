@@ -107,18 +107,18 @@ void GinRummy::Simulate()
 			delete msg; 
 
 			// Update statistical data
-			lastEvent = e.getTime(); 
-			numEvents++;
+			//lastEvent = e.getTime(); 
+			//numEvents++;
 		}
-		//code to terminate all players
-		for( int i = 0; i < 2; i++)
-		{
-			apP_Players[i]->Dispatch(((apP_Players *)apP_Players[i])->AcceptTerminate());
-		}
+
 }
 
 void GinRummy::WrapUp()
 {
+
+	ostream& simlog = simOutMgr.getStream();
+
+
 	//JACOB - I started writing commented calculations but I really
 	// am not 100% certain where you want me to access all of this data
 	// from. I'll try to figure it out monday morn, but I figured you
@@ -248,13 +248,13 @@ void GinRummy::Insert()
 	// insert Player
 	simlog << "Player: ";
 	simOutMgr.advToMargin();
-	simlog << *((Player *)apP_Players[0];
+	simlog << *((Player *)apP_Players[0]);
 	simOutMgr.advToMargin();
 
 	// insert Dealer
 	simlog << "Dealer: ";
 	simOutMgr.advToMargin();
-	simlog << *((Dealer *)apP_Players[1];
+	simlog << *((Dealer *)apP_Players[1]);
 	simOutMgr.popMargin();
 	simOutMgr.advToMargin();
 
