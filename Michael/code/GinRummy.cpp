@@ -66,7 +66,7 @@ void GinRummy::Initialize()
 	ostream& simlog = simOutMgr.getStream();
 
 		// Construct new Players object
-		PlayersMsg *playersmessage = new PlayersMsg(apP_Players);
+		PlayersMsg *playersmessage = new PlayersMsg(0,"Initialize Players",apP_Players);
 		
 
 		//playersmessage->setAgent( apP_Players[0]->NameOf(), apP_Players[0] );
