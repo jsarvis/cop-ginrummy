@@ -114,6 +114,9 @@ namespace SimModels {
 
     }
 
+    Player::Player():Agent() {
+    }
+
     //public
 	Player::Player(ifstream& fin):Agent() {
         
@@ -308,12 +311,15 @@ namespace SimModels {
         if (currentDeadwood.size() == 1) {
             Knock = true;
             Discard = true;
+            i_score = -1;
         } else if ( currentDeadwood.size() == 0 ) {
             Knock = true;
             Discard = false;
+            i_score = -1;
         } else if ( tempScoreCurrent <= 10 ) {
             Knock = true;
             Discard = true;
+            i_score = tempScoreCurrent;
         } else {
             Knock = false;
             Discard = true;

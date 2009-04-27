@@ -53,6 +53,8 @@ protected:
 
 	virtual void Put(ostream& fout);
 
+    Player();
+
 public:
 	Player(ifstream& fin);
 
