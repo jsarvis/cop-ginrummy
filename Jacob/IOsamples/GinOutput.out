@@ -75,102 +75,102 @@ Game1{
 
 	TIME: 75 SENDER: Dealer RECVR: Fred  	Message{	Handler: 3
 	       	 						Description:  Card Dealt
-								Content: Spade 1
+								Content: S 1
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Devin  	Message{	Handler: 3
 		        						Description:  Card Dealt
-								Content: Spade 7
+								Content: S 7
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Fred  	Message{	Handler: 3
 	        							Description:  Card Dealt
-								Content: Spade 5
+								Content: S 5
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Devin  	Message{	Handler: 3
 	        							Description:  Card Dealt
-								Content: Heart 1
+								Content: H 1
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Fred  	Message{	Handler: 3
 	        							Description:  Card Dealt
-								Content: Diamond 4
+								Content: D 4
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Devin  	Message{	Handler: 3
 	        							Description:  Card Dealt
-								Content: Club 7
+								Content: C 7
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Fred  	Message{	Handler: 3
 	        							Description:  Card Dealt
-								Content: Club 8
+								Content: C 8
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Devin  	Message{	Handler: 3
 	        							Description:  Card Dealt
-								Content: Spade 6
+								Content: S 6
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Fred  	Message{	Handler: 3
 	        							Description:  Card Dealt
-								Content: Heart 4
+								Content: H 4
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Devin  	Message{	Handler: 3
 	        							Description:  Card Dealt
-								Content: Diamond 6
+								Content: D 6
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Fred  	Message{	Handler: 3
 	        							Description:  Card Dealt
-								Content: Spade Q
+								Content: S Q
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Devin  	Message{	Handler: 3
 	        							Description:  Card Dealt
-								Content: Spade 2
+								Content: S 2
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Fred  	Message{	Handler: 3
 	        							Description:  Card Dealt
-								Content: Spade 9
+								Content: S 9
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Devin  	Message{	Handler: 3
 	        							Description:  Card Dealt
-								Content: Heart 2
+								Content: H 2
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Fred  	Message{	Handler: 3
 	        							Description:  Card Dealt
-								Content: Diamond J
+								Content: D J
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Devin  	Message{	Handler: 3
 	        							Description:  Card Dealt
-								Content: Club 9
+								Content: C 9
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Fred  	Message{	Handler: 3
 	        							Description:  Card Dealt
-								Content: Club 4
+								Content: C 4
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Devin  	Message{	Handler: 3
 	        							Description:  Card Dealt
-								Content: Spade 3
+								Content: S 3
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Fred  	Message{	Handler: 3
 	        							Description:  Card Dealt
-								Content: Heart 8
+								Content: H 8
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Devin  	Message{	Handler: 3
 	        							Description:  Card Dealt
-								Content: Diamond 7
+								Content: D 7
 						}Message
 
 	TIME: 75 SENDER: Dealer RECVR: Devin  	Message{	Handler: 5
@@ -210,7 +210,7 @@ Fred: Sorted hand: S 1, C 4, D 4, H 4, S 5, H 8, C 8, S 9, D J, S Q
 
 	TIME: 99 SENDER: Dealer RECVR: Fred  	Message{	Handler: 7
 	        							Description:  Top Card
-								Content: Diamond 8
+								Content: D 8
 						}Message 
 
 	TIME: 101 SENDER: Fred RECVR: Dealer 	Message{	Handler: 8
@@ -219,7 +219,7 @@ Fred: Sorted hand: S 1, C 4, D 4, H 4, S 5, H 8, C 8, S 9, D J, S Q
 
 	TIME: 101 SENDER: Dealer RECVR: Fred 	Message{	Handler: 4
 	        							Description:  Card Drawn
-								Content: Heart 9
+								Content: H 9
 						}Message
 
 Fred: Sorted hand: S 1, C 4, D 4, H 4, S 5, C 8, H 8, H 9, S 9, D J, S Q
@@ -227,7 +227,7 @@ Fred: Sorted hand: C 4, D 4, H 4, S 5, C 8, H 8, H 9, S 9, D J, S Q
 
 	TIME: 107 SENDER: Fred  RECVR: Dealer 	Message{	Handler: 11
 	        							Description:  Card to discard
-								Content: Spade 1
+								Content: S 1
 						}Message
 
 	TIME: 107 SENDER: Fred RECVR: Devin 	Message{	Handler: 1
@@ -240,7 +240,7 @@ Fred: Sorted hand: C 4, D 4, H 4, S 5, C 8, H 8, H 9, S 9, D J, S Q
 
 	TIME: 111 SENDER: Dealer RECVR: Devin	Message{	Handler: 7
 	        							Description:  Top Card
-								Content: Spade 1
+								Content: S 1
 						}Message 
 
 	TIME: 113 SENDER: Devin RECVR: Dealer 	Message{	Handler: 9
@@ -249,7 +249,7 @@ Fred: Sorted hand: C 4, D 4, H 4, S 5, C 8, H 8, H 9, S 9, D J, S Q
 
 	TIME: 113 SENDER: Dealer RECVR: Devin 	Message{	Handler: 4
 	        							Description:  Card Drawn
-								Content: Spade 1
+								Content: S 1
 						}Message
 
 Devin: Sorted hand: S 1, H 1, H 2, S 2, S 3, S 6, D 6, D 7, S 7, C 7, C 9
@@ -257,7 +257,7 @@ Devin: Sorted hand: S 1, H 1, H 2, S 2, S 3, S 6, D 6, D 7, S 7, C 7
 
 	TIME: 121 SENDER: Devin RECVR: Dealer 	Message{	Handler: 11
 	        							Description:  Card to discard
-								Content: Club 9
+								Content: C 9
 						}Message
 
 	TIME: 121 SENDER: Devin RECVR: Fred 	Message{	Handler: 1
@@ -271,7 +271,7 @@ Fred: Knocking with hand: C 4, D 4, H 4, S 8, C 8, H 8, H 9, H 10, H J, H Q
 
 	TIME: 2000 SENDER: Fred  RECVR: Dealer 	Message{	Handler: 11
 	        							Description:  Card to discard
-								Content: Spade Q
+								Content: S Q
 						}Message
 
 Fred: Setting deadwood score to: 0
@@ -295,7 +295,7 @@ Devin: Setting deadwood score to: 6
 
 	TIME: 2000 SENDER: Devin RECVR: Dealer 	Message{	Handler: 12
 	        							Description:  Card to return
-								Content: Spade 1
+								Content: S 1
 						}Message
 *** For all cards ***
 	TIME: 2000 SENDER: Devin RECVR: Dealer 	Message{	Handler: 13
@@ -304,7 +304,7 @@ Devin: Setting deadwood score to: 6
 
 	TIME: 2000 SENDER: Fred RECVR: Dealer 	Message{	Handler: 12
 	        							Description:  Card to return
-								Content: Club 4
+								Content: C 4
 						}Message
 *** For all cards ***
 	TIME: 2000 SENDER: Fred RECVR: Dealer 	Message{	Handler: 13
