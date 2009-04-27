@@ -94,28 +94,53 @@ void GinRummy::Simulate()
 		string   token;
 		ostream& simlog = simOutMgr.getStream();
 
-		while( theEventMgr.moreEvents() )
-		{
-			//retrive next event and message
-			e   = theEventMgr.getNextEvent();
-            msg = e.getMsg();
-		
-			// Output to simlog
-			simOutMgr.newLine();
-			simlog << e;
-			simOutMgr.newLine();
-
-			// Dispatch
-			e.getRecvr()->Dispatch( msg );  
+		struct StatData {
+			int minEvents;
+			double avgEvents;
+			int maxEvents;
+			int minTicks;
+			double avgTicks;
+			int maxTicks;
 			
-            // destruct message
-			delete msg; 
-
-			// Update statistical data
-			//lastEvent = e.getTime(); 
-			//numEvents++;
+			int minPlayerTicks;
+			double avgPlayerTicks;
+			int maxPlayerTicks;
+			
+			int minDealerTicks;
+			double avgDealerTicks;
+			int maxDealerTicks;
+			
+			int playerWinCount;
+			int dealerWinCount;
 		}
+		
+		
+		for(int i = 0; i < i_NumberOfRounds; i++) {
+		
+			while( theEventMgr.moreEvents() )
+			{
+				//retrive next event and message
+				e   = theEventMgr.getNextEvent();
+				msg = e.getMsg();
+			
+				// Output to simlog
+				simOutMgr.newLine();
+				simlog << e;
+				simOutMgr.newLine();
 
+				// Dispatch
+				e.getRecvr()->Dispatch( msg );  
+				
+				// destruct message
+				delete msg; 
+
+				// Update statistical data
+				//lastEvent = e.getTime(); 
+				//numEvents++;
+			}
+		
+		
+		}
 }
 
 void GinRummy::WrapUp()
