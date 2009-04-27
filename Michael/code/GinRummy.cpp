@@ -55,7 +55,7 @@ GinRummy::GinRummy()
 		if ( token != "Dealer:" ) 
 		   throw AppError(string("Incorrect Token '" + token + "', excpected token 'Dealer:' !"),
 				string("GinRummy::GinRummy())"));
-		apP_Players[1] = new Dealer(fin, &SP_Deck, this);
+		apP_Players[1] = new Dealer(fin, &SP_Deck);
 		//apP_Players[1]->Extract();
 
 		// Parse closing token

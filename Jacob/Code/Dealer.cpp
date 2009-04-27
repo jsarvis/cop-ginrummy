@@ -46,7 +46,7 @@ namespace SimModels {
     }
 
     //public
-    Dealer::Dealer(ifstream& fin, StockPile * deck, GinRummy * inputGameControl):Player(fin) {
+    Dealer::Dealer(ifstream& fin, StockPile * deck):Player(fin) {
 
         Extract(fin);
 
@@ -290,9 +290,6 @@ namespace SimModels {
             while (!DP_Discard.isEmpty()) {
                 pSP_StockPile->Add(*(DP_Discard.Draw()));
             }
-
-            //TODO: signal GinRummy that game is over
-            //GameControl->signalGameOver();
 
         } else if ( State == 2 ) {
             State = 3; //Waiting for second hand empty

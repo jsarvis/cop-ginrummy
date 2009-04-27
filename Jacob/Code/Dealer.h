@@ -6,7 +6,6 @@
 
 #include "SimMgmt.h"
 
-//#include "GinRummy.h"
 #include "Melds.h"
 #include "MeldsMsg.h"
 #include "Card.h"
@@ -23,13 +22,11 @@ namespace SimModels {
 
     //Foward declaration
     //class Player;
-    class GinRummy;
 
     struct SpeedSettingIndexDealer {enum SpeedSettingIndexDealer1 { Speed_Shuffle =0, Speed_Deal};};
 
 class Dealer: public Player {
 private:
-	GinRummy * GameControl;
 
 	StockPile * pSP_StockPile;
 
@@ -45,7 +42,7 @@ protected:
 	virtual void Put(ostream& fout);
 
 public:
-	Dealer(ifstream& fin, StockPile * deck, GinRummy * inputGameControl);
+	Dealer(ifstream& fin, StockPile * deck);
 
 	void Initialize(Message * IncomingPlayersMsg);
 
