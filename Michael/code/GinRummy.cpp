@@ -280,21 +280,25 @@ void GinRummy::Insert()
 	// insert Player
 	simOutMgr.advToMargin();
 	simlog << "Player: ";
+	simOutMgr.pushMargin();
 	simOutMgr.advToMargin();
 	((Player *)apP_Players[0])->Insert(simlog);
-	
+	simOutMgr.popMargin();
 
 	// insert Dealer
 	simOutMgr.advToMargin();
 	simlog << "Dealer: ";
+	simOutMgr.pushMargin();
 	simOutMgr.advToMargin();
 	((Dealer *)apP_Players[1])->Insert(simlog);
+	simOutMgr.popMargin();
 	simOutMgr.popMargin();
 
 	// insert closing token
 	simOutMgr.advToMargin();
 	simlog << "}GinRummy ";
 	simOutMgr.popMargin();
+	simOutMgr.newLine();
 }
 
 }
