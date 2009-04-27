@@ -3,6 +3,11 @@
 namespace SimModels {
 // GinRummy methods
 
+
+GinRummy::~GinRummy()
+{
+
+}
 // Constructor
 GinRummy::GinRummy()
 {
