@@ -262,11 +262,12 @@ namespace SimModels {
 		
 		// Construct new message
         //TODO / TEST: Okay to have two pointers to same message in two different events?
-        Message *returnhandMsg = AcceptReturnHand();
+        Message *returnhandMsg1 = AcceptReturnHand();
+        Message *returnhandMsg2 = AcceptReturnHand();
 
 		// Construct new Event
-		Event e1( time  , this , this , returnhandMsg );
-        Event e2( time  , this , pP_OtherPlayer , returnhandMsg );
+		Event e1( time  , this , this , returnhandMsg1 );
+        Event e2( time  , this , pP_OtherPlayer , returnhandMsg2 );
 
 		// Post Events
 		theEventMgr.postEvent(e1);
@@ -396,7 +397,7 @@ namespace SimModels {
         
         for( iter = vC_Hand.begin(); iter != vC_Hand.end(); iter++ ) {
  
-            simlog << " " << iter->toString();
+            simlog << " " << iter->toString() << ",";
 
         }
         simlog << endl;
@@ -422,7 +423,7 @@ namespace SimModels {
         //TODO / TEST: should this be (*iter).toString() instead of iter->toString() ??
         for( iter = vC_Hand.begin(); iter != vC_Hand.end(); iter++ ) {
 
-            simlog << " " << iter->toString();
+            simlog << " " << iter->toString() << ",";
 
         }
         simlog << endl << endl;

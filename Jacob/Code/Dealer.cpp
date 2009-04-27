@@ -205,11 +205,12 @@ namespace SimModels {
 
     		// Construct new message
             //TODO / TEST: Okay to have two pointers to same message in two different events?
-            Message *returnhandMsg = pP_OtherPlayer->AcceptReturnHand();
+            Message *returnhandMsg1 = pP_OtherPlayer->AcceptReturnHand();
+            Message *returnhandMsg2 = pP_OtherPlayer->AcceptReturnHand();
     
     		// Construct new Event
-    		Event e1( time  , this , (Player*)this , returnhandMsg );
-            Event e2( time  , this , pP_OtherPlayer , returnhandMsg );
+    		Event e1( time  , this , (Player*)this , returnhandMsg1 );
+            Event e2( time  , this , pP_OtherPlayer , returnhandMsg2 );
     
     		// Post Events
     		theEventMgr.postEvent(e1);
@@ -335,11 +336,12 @@ namespace SimModels {
         }
 
         // Construct new message
-        Message *dealCompleteMsg = pP_OtherPlayer->AcceptDealComplete();
+        Message *dealCompleteMsg1 = pP_OtherPlayer->AcceptDealComplete();
+        Message *dealCompleteMsg2 = pP_OtherPlayer->AcceptDealComplete();
 
 		// Construct new Event
-        Event e1( time + SpeedSettings[SpeedSettingIndexDealer::Speed_Deal] , this , pP_OtherPlayer , dealCompleteMsg );
-        Event e2( time + SpeedSettings[SpeedSettingIndexDealer::Speed_Deal] , this , (Player*)this , dealCompleteMsg );
+        Event e1( time + SpeedSettings[SpeedSettingIndexDealer::Speed_Deal] , this , pP_OtherPlayer , dealCompleteMsg1 );
+        Event e2( time + SpeedSettings[SpeedSettingIndexDealer::Speed_Deal] , this , (Player*)this , dealCompleteMsg2 );
 
         // Post Events
         theEventMgr.postEvent(e1);
