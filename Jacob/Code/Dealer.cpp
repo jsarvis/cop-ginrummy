@@ -335,6 +335,8 @@ namespace SimModels {
 
         }
 
+        DP_Discard.Add(*(pSP_StockPile->Draw()));
+
         // Construct new message
         Message *dealCompleteMsg1 = pP_OtherPlayer->AcceptDealComplete();
         Message *dealCompleteMsg2 = pP_OtherPlayer->AcceptDealComplete();

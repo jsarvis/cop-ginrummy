@@ -284,12 +284,12 @@ namespace SimModels {
         vC_Hand.push_back(*inputCard);
         sort(vC_Hand.begin(),vC_Hand.end(),ascending);
 
-        simlog << NameOf() << ": Sorted hand:";
+        simlog << endl << NameOf() << ": Sorted hand:";
 
         //TODO / TEST: should this be (*iter).toString() instead of iter->toString() ??
         for( iter = vC_Hand.begin(); iter != vC_Hand.end(); iter++ ) {
 
-            simlog << " " << iter->toString();
+            simlog << " " << iter->toString() << ",";
 
         }
         simlog << endl;
@@ -338,14 +338,17 @@ namespace SimModels {
      
                 if ( ( iter->getFaceValue() == currentDeadwood.back().getFaceValue() ) && ( iter->getSuitIndex() == currentDeadwood.back().getSuitIndex() ) ) {
 
+                    Card * tempCard = new Card(iter->getFaceValue(),iter->getSuitIndex());
 
-                    tempCardMsg = pD_Dealer->AcceptReceiveDiscard((Card*)&(*iter));
+                    tempCardMsg = pD_Dealer->AcceptReceiveDiscard(tempCard);
         
                     // Construct new Event
             		Event e( time + SpeedSettings[SpeedSettingIndex::Speed_DecisionDiscard] + SpeedSettings[SpeedSettingIndex::Speed_Discard], this , pD_Dealer , tempCardMsg );
             
             		// Post Event
             		theEventMgr.postEvent(e);
+
+                    vC_Hand.erase(iter);
 
                     break;
                 }
@@ -359,7 +362,7 @@ namespace SimModels {
             //TODO / TEST: should this be (*iter).toString() instead of iter->toString() ??
             for( iter = vC_Hand.begin(); iter != vC_Hand.end(); iter++ ) {
     
-                simlog << " " << iter->toString();
+                simlog << " " << iter->toString() << ",";
     
             }
             simlog << endl << endl;
@@ -374,6 +377,14 @@ namespace SimModels {
     		// Post Event
     		theEventMgr.postEvent(e);
 
+        } else {
+            Message *nextTurnMsg = pP_OtherPlayer->AcceptYourTurn();
+    
+    		// Construct new Event
+    		Event e( time  + SpeedSettings[SpeedSettingIndex::Speed_DecisionDiscard] + SpeedSettings[SpeedSettingIndex::Speed_Discard] , this , pP_OtherPlayer , nextTurnMsg );
+    
+    		// Post Event
+    		theEventMgr.postEvent(e);
         }
 
     }
