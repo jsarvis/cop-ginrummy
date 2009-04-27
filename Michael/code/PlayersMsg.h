@@ -18,7 +18,7 @@ protected:
 public:
 	AGENTPTR * apP_Contents;
 
-	PlayersMsg(AGENTPTR * inputplayers);
+	PlayersMsg(int handler, string description, AGENTPTR* inputplayers);
 
 	virtual void Insert();//ostream& fout);
 
