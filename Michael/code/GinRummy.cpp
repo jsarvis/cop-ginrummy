@@ -112,11 +112,11 @@ void GinRummy::Simulate()
 			
 			int playerWinCount;
 			int dealerWinCount;
-		}
+		};
 		
 		
 		for(int i = 0; i < i_NumberOfRounds; i++) {
-		
+			StatisticalData = new struct StatData;
 			while( theEventMgr.moreEvents() )
 			{
 				//retrive next event and message
