@@ -119,6 +119,111 @@ void GinRummy::Simulate()
 
 void GinRummy::WrapUp()
 {
+	//JACOB - I started writing commented calculations but I really
+	// am not 100% certain where you want me to access all of this data
+	// from. I'll try to figure it out monday morn, but I figured you
+	// might already know making it easier to just talk to you.
+	int i_value;
+	int time;
+	double d_value;
+	int hour, min, sec;
+
+	
+
+	simlog << "Simulation Statistics:" << endl;
+	simlog << "Minimum number of events : "
+			<< i_value << endl; //15
+	simlog << "Average number of events : "
+			<< i_value << endl; //60
+	simlog << "Maximum number of events : "
+			<< i_value << endl; //140
+	simlog << "Minimum game length in ticks: "
+			<< i_value << endl; //72
+	simlog << "Average game length in ticks: "
+			<< i_value << endl; //1081
+	simlog << "Maximum game length in ticks: "
+			<< i_value << endl; //2712
+	
+	
+	//time = ticks * secPerTick;
+	//hour = time / (3600);
+	//min = ( time % (3600) ) / 60;
+	//sec = (time % 60);
+	simlog << "Minimum game length in time: " 
+			<< hour << ":" << min << ":" << sec << endl; //0:01:12
+			
+	//time = ticks * secPerTick;
+	//hour = time / (3600);
+	//min = ( time % (3600) ) / 60;
+	//sec = (time % 60);
+	simlog << "Average game length in time: " 
+			<< hour << ":" << min << ":" << sec << endl; //0:18:01
+	
+	//time = ticks * secPerTick;
+	//hour = time / (3600);
+	//min = ( time % (3600) ) / 60;
+	//sec = (time % 60);
+	simlog << "Maximum game length in time: " 
+			<< hour << ":" << min << ":" << sec << endl; //0:45:12
+	simlog << "Minimum winning game length of Player in ticks: "
+			<< i_value << endl; //72
+	simlog << "Average winning game length of Player in ticks: "
+			<< i_value << endl; //902
+	simlog << "Maximum winning game length of Player in ticks: "
+			<< i_value << endl; //2201
+	
+	//time = ticks * secPerTick;
+	//hour = time / (3600);
+	//min = ( time % (3600) ) / 60;
+	//sec = (time % 60);
+	simlog << "Minimum winning game length of Player in time: " 
+			<< hour << ":" << min << ":" << sec << endl; //0:01:12
+	
+	//time = ticks * secPerTick;
+	//hour = time / (3600);
+	//min = ( time % (3600) ) / 60;
+	//sec = (time % 60);
+	simlog << "Average winning game length of Player in time: " 
+			<< hour << ":" << min << ":" << sec << endl; //0:15:02
+	
+	//time = ticks * secPerTick;
+	//hour = time / (3600);
+	//min = ( time % (3600) ) / 60;
+	//sec = (time % 60);
+	simlog << "Maximum winning game length of Player in time: " 
+			<< hour << ":" << min << ":" << sec << endl; //0:36:41
+	simlog << "Minimum winning game length of Dealer in ticks: "
+			<< i_value << endl; //91
+	simlog << "Average winning game length of Dealer in ticks: "
+			<< i_value << endl; //1204
+	simlog << "Maximum winning game length of Dealer in ticks: "
+			<< i_value << endl; //2712
+	
+	//time = ticks * secPerTick;
+	//hour = time / (3600);
+	//min = ( time % (3600) ) / 60;
+	//sec = (time % 60);
+	simlog << "Minimum winning game length of Dealer in time: " 
+			<< hour << ":" << min << ":" << sec << endl; //0:01:31
+	
+	//time = ticks * secPerTick;
+	//hour = time / (3600);
+	//min = ( time % (3600) ) / 60;
+	//sec = (time % 60);
+	simlog << "Average winning game length of Dealer in time: " 
+			<< hour << ":" << min << ":" << sec << endl; //0:20:04
+	
+	//time = ticks * secPerTick;
+	//hour = time / (3600);
+	//min = ( time % (3600) ) / 60;
+	//sec = (time % 60);
+	simlog << "Maximum winning game length of Dealer in time: " 
+			<< hour << ":" << min << ":" << sec << endl; //0:45:12
+	
+	simlog << "Player wins per hour: " << d_value << endl; //3.991
+	simlog << "Dealer wins per hour: " << d_value << endl; //2.990
+	simlog << "Percentage Player wins: " << d_value << endl; //57.169
+	simlog << "Percentage Dealer wins: " << d_value << endl; // 42.831
 
 }
 
