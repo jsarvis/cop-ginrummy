@@ -52,8 +52,6 @@ namespace SimModels {
 
         pSP_StockPile = deck;
 
-        GameControl = inputGameControl;
-
         State = -1; //Not initialized
 
     }
