@@ -265,34 +265,36 @@ void GinRummy::Insert()
 	// opening token
     simOutMgr.newLine();
 	simOutMgr.pushMargin();
+	simOutMgr.advToMargin();
 	simlog << "GinRummy{ ";
     simOutMgr.pushMargin();
 
 	// insert SecondsPerTick
-	simlog << "SecondsPerTick: " << i_SecondsPerTick;
 	simOutMgr.advToMargin();
+	simlog << "SecondsPerTick: " << i_SecondsPerTick;
 
 	// insert Rounds
-	simlog << "Rounds: " << i_NumberOfRounds;
 	simOutMgr.advToMargin();
+	simlog << "Rounds: " << i_NumberOfRounds;
 
 	// insert Player
+	simOutMgr.advToMargin();
 	simlog << "Player: ";
 	simOutMgr.advToMargin();
-	simlog << *((Player *)apP_Players[0]);
-	simOutMgr.advToMargin();
+	((Player *)apP_Players[0])->Insert(simlog);
+	
 
 	// insert Dealer
+	simOutMgr.advToMargin();
 	simlog << "Dealer: ";
 	simOutMgr.advToMargin();
-	simlog << *((Dealer *)apP_Players[1]);
+	((Dealer *)apP_Players[1])->Insert(simlog);
 	simOutMgr.popMargin();
-	simOutMgr.advToMargin();
 
 	// insert closing token
+	simOutMgr.advToMargin();
 	simlog << "}GinRummy ";
 	simOutMgr.popMargin();
-	simOutMgr.advToMargin();
 }
 
 }
