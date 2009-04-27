@@ -12,7 +12,6 @@ CardMsg::CardMsg(int handler, string description, Card* inputCard)
 
 void CardMsg::Insert()
 {
-	int delta = 10;
 	ostream& simlog = simOutMgr.getStream();
 
 
