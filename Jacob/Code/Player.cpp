@@ -89,6 +89,7 @@ namespace SimModels {
 	void Player::Put(ostream& fout) {
 
         simOutMgr.pushMargin();
+        simOutMgr.advToMargin();
 		Agent::Put();
 		simOutMgr.advToMargin();
 		fout << " Speed_InitialSort: " << SpeedSettings[SpeedSettingIndex::Speed_InitialSort];
