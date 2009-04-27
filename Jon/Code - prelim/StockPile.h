@@ -22,7 +22,7 @@ namespace SimModels {
         bool hasTwo();
 		//~StockPile();
 		
-		vector<Card> Shuffle();
+		void Shuffle();
 		
 	protected:
 	

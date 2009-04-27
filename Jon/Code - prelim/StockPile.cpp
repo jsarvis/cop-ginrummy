@@ -18,7 +18,7 @@ namespace SimModels {
 		return (vC_Pile.size() > 1 );
 	}
 
-	vector<Card> StockPile::Shuffle(){
+	void StockPile::Shuffle(){
 		
 		for(int k = (vC_Pile.size() - 1); k > 0; k--) {
 			int swapIndex = (rand() % k);
