@@ -296,7 +296,7 @@ void GinRummy::WrapUp()
 	simlog << "Minimum winning game length of Player in time: " 
 			<< hour << ":" << min << ":" << sec << endl; //0:01:12
 	
-	time = (StatisticalData.totalPlayerTicks / playerWinCount) * i_SecondsPerTick;
+	time = (StatisticalData.totalPlayerTicks / StatisticalData.playerWinCount) * i_SecondsPerTick;
 	hour = time / (3600);
 	min = ( time % (3600) ) / 60;
 	sec = (time % 60);
@@ -325,7 +325,7 @@ void GinRummy::WrapUp()
 	simlog << "Minimum winning game length of Dealer in time: " 
 			<< hour << ":" << min << ":" << sec << endl; //0:01:31
 	
-	time = (StatisticalData.totalDealerTicks / dealerWinCount) * i_SecondsPerTick;
+	time = (StatisticalData.totalDealerTicks / StatisticalData.dealerWinCount) * i_SecondsPerTick;
 	hour = time / (3600);
 	min = ( time % (3600) ) / 60;
 	sec = (time % 60);
@@ -363,8 +363,8 @@ void GinRummy::WrapUp()
  */
 			
 	
-	simlog << "Player wins per hour: " << StatisticalData.playerWinCount / ( (totalTicks * i_SecondsPerTick) / 3600) << endl; //3.991
-	simlog << "Dealer wins per hour: " << StatisticalData.dealerWinCount / ( (totalTicks * i_SecondsPerTick) / 3600) << endl; //2.990
+	simlog << "Player wins per hour: " << StatisticalData.playerWinCount / ( (StatisticalData.totalTicks * i_SecondsPerTick) / 3600) << endl; //3.991
+	simlog << "Dealer wins per hour: " << StatisticalData.dealerWinCount / ( (StatisticalData.totalTicks * i_SecondsPerTick) / 3600) << endl; //2.990
 	simlog << "Percentage Player wins: " << (StatisticalData.playerWinCount / i_NumberOfRounds) << endl; //57.169
 	simlog << "Percentage Dealer wins: " << (StatisticalData.dealerWinCount / i_NumberOfRounds) << endl; // 42.831
 	simlog << "Percentage Draws: " << ((i_NumberOfRounds - (StatisticalData.dealerWinCount + StatisticalData.playerWinCount)) / i_NumberOfRounds) << endl; // 42.831
