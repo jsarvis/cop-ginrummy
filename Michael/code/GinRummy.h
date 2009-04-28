@@ -55,7 +55,7 @@ private:
 
 	AGENTPTR apP_Players[2];
 
-	void * StatisticalData;
+	struct StatData StatisticalData;
 
 	StockPile SP_Deck;
 
