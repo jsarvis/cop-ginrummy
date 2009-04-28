@@ -285,7 +285,7 @@ void GinRummy::WrapUp()
 	simlog << "Minimum winning game length of Player in ticks: "
 			<< StatisticalData.minPlayerTicks << endl; //72
 	simlog << "Average winning game length of Player in ticks: "
-			<< ((double)StatisticalData.totalPlayerTicks / (double)playerWinCount) << endl; //902
+			<< ((double)StatisticalData.totalPlayerTicks / (double)StatisticalData.playerWinCount) << endl; //902
 	simlog << "Maximum winning game length of Player in ticks: "
 			<< StatisticalData.maxPlayerTicks << endl; //2201
 	
@@ -314,7 +314,7 @@ void GinRummy::WrapUp()
 	simlog << "Minimum winning game length of Dealer in ticks: "
 			<< StatisticalData.minDealerTicks << endl; //91
 	simlog << "Average winning game length of Dealer in ticks: "
-			<< ((double)StatisticalData.totalDealerTicks / (double)dealerWinCount) << endl; //1204
+			<< ((double)StatisticalData.totalDealerTicks / (double)StatisticalData.dealerWinCount) << endl; //1204
 	simlog << "Maximum winning game length of Dealer in ticks: "
 			<< StatisticalData.maxDealerTicks << endl; //2712
 			
@@ -363,11 +363,11 @@ void GinRummy::WrapUp()
  */
 			
 	
-	simlog << "Player wins per hour: " << playerWinCount / ( (totalTicks * i_SecondsPerTick) / 3600) << endl; //3.991
-	simlog << "Dealer wins per hour: " << dealerWinCount / ( (totalTicks * i_SecondsPerTick) / 3600) << endl; //2.990
-	simlog << "Percentage Player wins: " << (playerWinCount / i_NumberOfRounds) << endl; //57.169
-	simlog << "Percentage Dealer wins: " << (dealerWinCount / i_NumberOfRounds) << endl; // 42.831
-	simlog << "Percentage Draws: " << ((i_NumberOfRounds - (dealerWinCount + playerWinCount)) / i_NumberOfRounds) << endl; // 42.831
+	simlog << "Player wins per hour: " << StatisticalData.playerWinCount / ( (totalTicks * i_SecondsPerTick) / 3600) << endl; //3.991
+	simlog << "Dealer wins per hour: " << StatisticalData.dealerWinCount / ( (totalTicks * i_SecondsPerTick) / 3600) << endl; //2.990
+	simlog << "Percentage Player wins: " << (StatisticalData.playerWinCount / i_NumberOfRounds) << endl; //57.169
+	simlog << "Percentage Dealer wins: " << (StatisticalData.dealerWinCount / i_NumberOfRounds) << endl; // 42.831
+	simlog << "Percentage Draws: " << ((i_NumberOfRounds - (StatisticalData.dealerWinCount + StatisticalData.playerWinCount)) / i_NumberOfRounds) << endl; // 42.831
 
 }
 
