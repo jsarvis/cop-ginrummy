@@ -229,6 +229,8 @@ namespace SimModels {
 
     //private
 	void Player::doAcceptYourTurn() {
+		
+		i_turnCount++;
 
         int time = theEventMgr.clock();
 		
@@ -318,14 +320,49 @@ namespace SimModels {
             Knock = true;
             Discard = false;
             i_score = -1;
-        } else if ( tempScoreCurrent <= 10 ) {
-            Knock = true;
-            Discard = true;
-            i_score = tempScoreCurrent;
-        } else {
-            Knock = false;
-            Discard = true;
-        }
+        } 
+        else if(Strategy[StrategyIndex::Type] == StrategyType::Beginner)
+		{
+			 if( tempScoreCurrent <= 10 ) { // if can knock, knock
+		       	     Knock = true;
+		       	     Discard = true;
+		       	     i_score = tempScoreCurrent;
+		     } else {
+	            Knock = false;
+	            Discard = true;
+        	}
+		}
+		
+		else if(Strategy[StrategyIndex::Type] == StrategyType::Advanced)
+		{
+		
+			if(tempScoreCurrent > 8) // if high knock value, go for lower knock value
+			{
+				if ( (tempScoreCurrent <= 10) && (i_turnCount > 13) ) {
+					
+				} else {
+					Knock = false;
+					Discard = true;
+				}
+			}
+			else if(tempScoreCurrent < 4) // if low knock value, knock immediately
+			{
+				Knock = true;
+				Discard = true;
+				i_score = tempScoreCurrent;
+			}
+			else if(i_turnCount < 8) // if middle knock value and not much cards drawn, knock immediately
+			{	
+				Knock = true;
+				Discard = true;
+				i_score = tempScoreCurrent;
+			}
+			else //if(stockpile.numcard() <=15) // if middle knock value and most cards drawn, go for lower knock value
+			{
+				Knock = false;
+				Discard = true;
+			}	
+		}
 
         //IF discarding
         if (Discard == true) { 
@@ -401,6 +438,7 @@ namespace SimModels {
         simOutMgr.advToMargin();
 		simlog << NameOf() << ": Resetting score" << endl;
         i_score = -1; //Assumed draw
+        i_turnCount = 0; //New game
 
         simlog << NameOf() << ": Unsorted hand:";
 

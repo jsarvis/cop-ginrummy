@@ -35,13 +35,13 @@ private:
 
 	int Strategy[1];
 
-	vector<Card> vC_CardMemory;
-
 	Melds M_Melds;
 
 	vector<Card> vC_DeadWood;
 
     int i_score;
+    
+    int i_turnCount;
 
 protected:
 
