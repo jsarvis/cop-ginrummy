@@ -17,18 +17,18 @@ namespace SimModels {
 
 struct StatData {
 	int minEvents;
-	double avgEvents;
+	int totalEvents;
 	int maxEvents;
 	int minTicks;
-	double avgTicks;
+	int totalTicks;
 	int maxTicks;
 	
 	int minPlayerTicks;
-	double avgPlayerTicks;
+	int totalPlayerTicks;
 	int maxPlayerTicks;
 	
 	int minDealerTicks;
-	double avgDealerTicks;
+	int totalDealerTicks;
 	int maxDealerTicks;
 	
 	int playerWinCount;
