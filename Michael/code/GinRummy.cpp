@@ -111,7 +111,9 @@ void GinRummy::Simulate()
 		bool firstDealerWin = true;
 		bool firstGame = true;
 		int numEvents;
-		int lastGameTickCount = 0;
+		int PlayerScore;
+		int DealerScore;
+		int gameTicks;
 		
 		for(int i = 0; i < i_NumberOfRounds; i++) {
 			
@@ -143,10 +145,9 @@ void GinRummy::Simulate()
 				numEvents++;
 			}
 			
-			int PlayerScore = ( ((Player*)apP_Players[0])->GetScore() );
-			int DealerScore = ( ((Player*)apP_Players[1])->GetScore() );
-			int gameTicks = theEventMgr.clock() - lastGameTickCount;
-			lastGameTickCount = theEventMgr.clock();
+			PlayerScore = ( ((Player*)apP_Players[0])->GetScore() );
+			DealerScore = ( ((Player*)apP_Players[1])->GetScore() );
+			gameTicks = theEventMgr.clock();
 				
 				// Fill in all fields of StatisticalData with initial values
 			if (firstGame) {
@@ -154,6 +155,7 @@ void GinRummy::Simulate()
 				StatisticalData.totalEvents = numEvents;
 				StatisticalData.maxEvents = numEvents;
 				StatisticalData.minTicks = gameTicks;
+				StatisticalData.totalTicks = gameTicks;
 				StatisticalData.maxTicks = gameTicks;
 				
 				StatisticalData.minPlayerTicks = 0;
@@ -180,6 +182,8 @@ void GinRummy::Simulate()
 					
 				if ( gameTicks < StatisticalData.minTicks )
 					StatisticalData.minTicks = gameTicks;
+
+				StatisticalData.totalTicks += gameTicks;
 					
 				if ( gameTicks > StatisticalData.maxTicks )
 					StatisticalData.maxTicks = gameTicks;
@@ -191,12 +195,16 @@ void GinRummy::Simulate()
 				StatisticalData.maxPlayerTicks = gameTicks;
 				
 				StatisticalData.playerWinCount = 1;
+
+				firstPlayerWin = false;
 			} else if (firstDealerWin &&  (PlayerScore > DealerScore) ) {
 				StatisticalData.minDealerTicks = gameTicks;
 				StatisticalData.totalDealerTicks = gameTicks;
 				StatisticalData.maxDealerTicks = gameTicks;
 				
 				StatisticalData.dealerWinCount = 1;
+
+				firstDealerWin = false;
 			} else if (PlayerScore < DealerScore) {
 				
 				if ( gameTicks < StatisticalData.minPlayerTicks )
@@ -229,7 +237,6 @@ void GinRummy::Simulate()
 		
 		}
 		
-		StatisticalData.totalTicks = theEventMgr.clock();
 }
 
 void GinRummy::WrapUp()
@@ -237,6 +244,8 @@ void GinRummy::WrapUp()
 
 	ostream& simlog = simOutMgr.getStream();
 
+	simlog.precision(3);
+	simlog.setf ( ios::right, ios::adjustfield );
 
 	//JACOB - I started writing commented calculations but I really
 	// am not 100% certain where you want me to access all of this data
@@ -258,34 +267,38 @@ void GinRummy::WrapUp()
 			<< ((double)StatisticalData.totalTicks / (double)i_NumberOfRounds) << endl; //1081
 	simlog << "Maximum game length in ticks: "
 			<< StatisticalData.maxTicks << endl; //2712
-	
-	
+
+
 	time = StatisticalData.minTicks * i_SecondsPerTick;
 	hour = time / (3600);
 	min = ( time % (3600) ) / 60;
 	sec = (time % 60);
 	simlog << "Minimum game length in time: " 
-			<< hour << ":" << min << ":" << sec << endl; //0:01:12
+			<< setfill ('0') << setw (2) << hour << ":" << setfill ('0') << setw (2) << min << ":" << setfill ('0') << setw (2) << sec << endl; //0:01:12
 			
 	time = (StatisticalData.totalTicks / i_NumberOfRounds) * i_SecondsPerTick;
 	hour = time / (3600);
 	min = ( time % (3600) ) / 60;
 	sec = (time % 60);
 	simlog << "Average game length in time: " 
-			<< hour << ":" << min << ":" << sec << endl; //0:18:01
+			<< setfill ('0') << setw (2) << hour << ":" << setfill ('0') << setw (2) << min << ":" << setfill ('0') << setw (2) << sec << endl; //0:18:01
 	
 	time = StatisticalData.maxTicks * i_SecondsPerTick;
 	hour = time / (3600);
 	min = ( time % (3600) ) / 60;
 	sec = (time % 60);
 	simlog << "Maximum game length in time: " 
-			<< hour << ":" << min << ":" << sec << endl; //0:45:12
+			<< setfill ('0') << setw (2) << hour << ":" << setfill ('0') << setw (2) << min << ":" << setfill ('0') << setw (2) << sec << endl; //0:45:12
 			
 			
 	simlog << "Minimum winning game length of Player in ticks: "
 			<< StatisticalData.minPlayerTicks << endl; //72
-	simlog << "Average winning game length of Player in ticks: "
-			<< ((double)StatisticalData.totalPlayerTicks / (double)StatisticalData.playerWinCount) << endl; //902
+	if ( StatisticalData.playerWinCount == 0 ) {
+		simlog << "Average winning game length of Player in ticks: 0" << endl;
+	} else {
+		simlog << "Average winning game length of Player in ticks: "
+				<< ((double)StatisticalData.totalPlayerTicks / (double)StatisticalData.playerWinCount) << endl; //902
+	}
 	simlog << "Maximum winning game length of Player in ticks: "
 			<< StatisticalData.maxPlayerTicks << endl; //2201
 	
@@ -294,27 +307,35 @@ void GinRummy::WrapUp()
 	min = ( time % (3600) ) / 60;
 	sec = (time % 60);
 	simlog << "Minimum winning game length of Player in time: " 
-			<< hour << ":" << min << ":" << sec << endl; //0:01:12
+			<< setfill ('0') << setw (2) << hour << ":" << setfill ('0') << setw (2) << min << ":" << setfill ('0') << setw (2) << sec << endl; //0:01:12
 	
-	time = (StatisticalData.totalPlayerTicks / StatisticalData.playerWinCount) * i_SecondsPerTick;
+	if ( StatisticalData.playerWinCount == 0 ) {
+		time = 0;
+	} else {
+		time = (StatisticalData.totalPlayerTicks / StatisticalData.playerWinCount) * i_SecondsPerTick;
+	}
 	hour = time / (3600);
 	min = ( time % (3600) ) / 60;
 	sec = (time % 60);
 	simlog << "Average winning game length of Player in time: " 
-			<< hour << ":" << min << ":" << sec << endl; //0:15:02
+			<< setfill ('0') << setw (2) << hour << ":" << setfill ('0') << setw (2) << min << ":" << setfill ('0') << setw (2) << sec << endl; //0:15:02
 	
 	time = StatisticalData.maxPlayerTicks * i_SecondsPerTick;
 	hour = time / (3600);
 	min = ( time % (3600) ) / 60;
 	sec = (time % 60);
 	simlog << "Maximum winning game length of Player in time: " 
-			<< hour << ":" << min << ":" << sec << endl; //0:36:41
+			<< setfill ('0') << setw (2) << hour << ":" << setfill ('0') << setw (2) << min << ":" << setfill ('0') << setw (2) << sec << endl; //0:36:41
 			
 			
 	simlog << "Minimum winning game length of Dealer in ticks: "
 			<< StatisticalData.minDealerTicks << endl; //91
-	simlog << "Average winning game length of Dealer in ticks: "
-			<< ((double)StatisticalData.totalDealerTicks / (double)StatisticalData.dealerWinCount) << endl; //1204
+	if ( StatisticalData.dealerWinCount == 0 ) {
+		simlog << "Average winning game length of Dealer in ticks: 0" << endl;
+	} else {
+		simlog << "Average winning game length of Dealer in ticks: "
+				<< ((double)StatisticalData.totalDealerTicks / (double)StatisticalData.dealerWinCount) << endl; //1204
+	}
 	simlog << "Maximum winning game length of Dealer in ticks: "
 			<< StatisticalData.maxDealerTicks << endl; //2712
 			
@@ -323,51 +344,57 @@ void GinRummy::WrapUp()
 	min = ( time % (3600) ) / 60;
 	sec = (time % 60);
 	simlog << "Minimum winning game length of Dealer in time: " 
-			<< hour << ":" << min << ":" << sec << endl; //0:01:31
+			<< setfill ('0') << setw (2) << hour << ":" << setfill ('0') << setw (2) << min << ":" << setfill ('0') << setw (2) << sec << endl; //0:01:31
 	
-	time = (StatisticalData.totalDealerTicks / StatisticalData.dealerWinCount) * i_SecondsPerTick;
+	if ( StatisticalData.dealerWinCount == 0 ) {
+		time = 0;
+	} else {
+		time = (StatisticalData.totalDealerTicks / StatisticalData.dealerWinCount) * i_SecondsPerTick;
+	}
 	hour = time / (3600);
 	min = ( time % (3600) ) / 60;
 	sec = (time % 60);
 	simlog << "Average winning game length of Dealer in time: " 
-			<< hour << ":" << min << ":" << sec << endl; //0:20:04
+			<< setfill ('0') << setw (2) << hour << ":" << setfill ('0') << setw (2) << min << ":" << setfill ('0') << setw (2) << sec << endl; //0:20:04
 	
 	time = StatisticalData.maxDealerTicks * i_SecondsPerTick;
 	hour = time / (3600);
 	min = ( time % (3600) ) / 60;
 	sec = (time % 60);
 	simlog << "Maximum winning game length of Dealer in time: " 
-			<< hour << ":" << min << ":" << sec << endl; //0:45:12
+			<< setfill ('0') << setw (2) << hour << ":" << setfill ('0') << setw (2) << min << ":" << setfill ('0') << setw (2) << sec << endl; //0:45:12
 			
+	hour = (StatisticalData.totalTicks * i_SecondsPerTick) / 3600;
+	if ( hour == 0 ) {
+
+		min =  ( (StatisticalData.totalTicks * i_SecondsPerTick) % (3600) ) / 60;
+
+		if ( min == 0 ) {
+			sec = (StatisticalData.totalTicks * i_SecondsPerTick) % (60);
 			
-						/*
- * struct StatData {
-	int minEvents;
-	int totalEvents;
-	int maxEvents;
-	int minTicks;
-	int totalTicks;
-	int maxTicks;
+			if ( sec == 0 ) {
+				simlog << "Player wins per sec: 0" << endl; 
+				simlog << "Dealer wins per sec: 0" << endl; 
+			} else {
+				simlog << "Player wins per sec: " << ((double)StatisticalData.playerWinCount / ( (double)sec)) << endl; //3.991
+				simlog << "Dealer wins per sec: " << ((double)StatisticalData.dealerWinCount / ( (double)sec)) << endl; //2.990
+			}
+		} else {
+			simlog << "Player wins per min: " << ((double)StatisticalData.playerWinCount / ( (double)min)) << endl; //3.991
+			simlog << "Dealer wins per min: " << ((double)StatisticalData.dealerWinCount / ( (double)min)) << endl; //2.990
+		}
+		
+	} else {
+
+		simlog << "Player wins per hour: " << ((double)StatisticalData.playerWinCount / ( (double)hour)) << endl; //3.991
+		simlog << "Dealer wins per hour: " << ((double)StatisticalData.dealerWinCount / ( (double)hour)) << endl; //2.990
+
+	}
+
+	simlog << "Percentage Player wins: " << ((double)StatisticalData.playerWinCount / (double)i_NumberOfRounds) << endl; //57.169
+	simlog << "Percentage Dealer wins: " << ((double)StatisticalData.dealerWinCount / (double)i_NumberOfRounds) << endl; // 42.831
+	simlog << "Percentage Draws: " << ((double)(i_NumberOfRounds - (StatisticalData.dealerWinCount + StatisticalData.playerWinCount)) / (double)i_NumberOfRounds) << endl; // 42.831
 	
-	int minPlayerTicks;
-	int totalPlayerTicks;
-	int maxPlayerTicks;
-	
-	int minDealerTicks;
-	int totalDealerTicks;
-	int maxDealerTicks;
-	
-	int playerWinCount;
-	int dealerWinCount;
-};
- */
-			
-	
-	simlog << "Player wins per hour: " << StatisticalData.playerWinCount / ( (StatisticalData.totalTicks * i_SecondsPerTick) / 3600) << endl; //3.991
-	simlog << "Dealer wins per hour: " << StatisticalData.dealerWinCount / ( (StatisticalData.totalTicks * i_SecondsPerTick) / 3600) << endl; //2.990
-	simlog << "Percentage Player wins: " << (StatisticalData.playerWinCount / i_NumberOfRounds) << endl; //57.169
-	simlog << "Percentage Dealer wins: " << (StatisticalData.dealerWinCount / i_NumberOfRounds) << endl; // 42.831
-	simlog << "Percentage Draws: " << ((i_NumberOfRounds - (StatisticalData.dealerWinCount + StatisticalData.playerWinCount)) / i_NumberOfRounds) << endl; // 42.831
 
 }
 

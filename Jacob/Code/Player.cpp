@@ -315,11 +315,11 @@ namespace SimModels {
         if (currentDeadwood.size() == 1) {
             Knock = true;
             Discard = true;
-            i_score = -1;
+            i_score = -2;
         } else if ( currentDeadwood.size() == 0 ) {
             Knock = true;
             Discard = false;
-            i_score = -1;
+            i_score = -2;
         } 
         else if(Strategy[StrategyIndex::Type] == StrategyType::Beginner)
 		{
