@@ -247,10 +247,6 @@ void GinRummy::WrapUp()
 	simlog.precision(3);
 	simlog.setf ( ios::right, ios::adjustfield );
 
-	//JACOB - I started writing commented calculations but I really
-	// am not 100% certain where you want me to access all of this data
-	// from. I'll try to figure it out monday morn, but I figured you
-	// might already know making it easier to just talk to you.
 	int time;
 	int hour, min, sec;
 
