@@ -1,0 +1,13 @@
+Card.cpp - 			57 + 	40 	= 97 	
+CardMsg.cpp - 		40 + 	26 	= 66
+CardPile.cpp - 		27 + 	28	= 55
+Dealer.cpp - 		368 + 	98	= 466
+DiscardPile.cpp - 	26 + 	26	= 52
+GinRummy.cpp - 		440 + 	67	= 507
+GinRummySim.cpp - 	41 + 		= 41
+Melds.cpp - 		157 + 	36	= 193
+MeldsMsg.cpp - 		40 + 	26	= 66
+Player.cpp - 		570 + 	104	= 674
+PlayersMsg.cpp - 	46 + 	28	= 74
+StockPile.cpp - 	31 + 	35	= 66
+
